@@ -1,19 +1,23 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import ThemeIcon from './ThemeIcon.astro';
 ---
 
 <header>
 	<h2>
 		{SITE_TITLE}
 	</h2>
-	<nav>
-		<HeaderLink href="/">Home</HeaderLink>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
-		<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
-		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
-	</nav>
+	<div class="nav-content">
+    <nav>
+      <HeaderLink href="/">Home</HeaderLink>
+      <HeaderLink href="/blog">Blog</HeaderLink>
+      <HeaderLink href="https://twitter.com/igorprvieira" target="_blank">Twitter</HeaderLink>
+      <HeaderLink href="https://github.com/igorvieira" target="_blank">GitHub</HeaderLink>
+      <HeaderLink href="https://www.youtube.com/channel/UCZ1cXK9h6_uZt14Jf3gNziQ" target="_blank">YouTube</HeaderLink>
+    </nav>
+    <ThemeIcon />
+  </div>
 </header>
 <style>
 	header {

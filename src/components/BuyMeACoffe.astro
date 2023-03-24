@@ -1,0 +1,23 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+---
+
+<button aria-label="buy me a coffee" class="buy-me-a-coffee">
+  <img
+    src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
+    alt="Buy me a coffee"
+  />
+  <>Buy me a coffee</>
+</button>
+<script>
+  import "../styles/global.css";
+
+  function openPage() {
+    window.open("https://www.buymeacoffee.com/igorprvieira", "_blank");
+  }
+
+  document
+    ?.querySelector(".buy-me-a-coffee")
+    ?.addEventListener("click", openPage);
+</script>
