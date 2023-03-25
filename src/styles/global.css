@@ -100,3 +100,16 @@ html.dark {
   width: 60px;
   height: 60px;
 }
+
+.social-content {
+  display: flex;
+  flex-flow: column;
+  padding: 0;
+  gap: 10px;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

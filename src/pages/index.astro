@@ -5,6 +5,8 @@ import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import BuyMeACoffe from "../components/BuyMeACoffe.astro";
 import BitcoinWallet from "../components/BitcoinWallet.astro";
+import pkg from "iconoir-react";
+const { Twitter, GitHub, YouTube, LinkedIn } = pkg;
 ---
 
 <!DOCTYPE html>
@@ -22,6 +24,33 @@ import BitcoinWallet from "../components/BitcoinWallet.astro";
         personal website, where I share my thoughts, save my projects and write
         about my experiences.
       </p>
+
+      <h2>My social networks</h2>
+      <ul class="social-content">
+        <li class="social-links">
+          <Twitter />
+          <a href="https://twitter.com/igorprvieira" target="_blank">Twitter</a>
+        </li>
+        <li class="social-links">
+          <GitHub />
+          <a href="https://github.com/igorvieira" target="_blank">GitHub</a>
+        </li>
+        <li class="social-links">
+          <YouTube />
+          <a
+            href="https://www.youtube.com/channel/UCZ1cXK9h6_uZt14Jf3gNziQ"
+            target="_blank">YouTube</a
+          >
+        </li>
+        <li class="social-links">
+          <LinkedIn />
+          <a
+            href="https://www.linkedin.com/in/igor-vieira-6b05a185/"
+            target="_blank">LinkedIn</a
+          >
+        </li>
+      </ul>
+
       <p>
         If you want to support me, consider buying me a coffee or donating to my
         Bitcoin Wallet.
