@@ -22,13 +22,15 @@ const posts = (await getCollection("blog")).sort(
       }
       ul li {
         display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
       }
       ul li :global(time) {
         flex: 0 0 130px;
         font-style: italic;
       }
       ul li a:visited {
-        color: #7a628e;
+        color: #b844b4;
       }
     </style>
   </head>
