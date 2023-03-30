@@ -1,11 +1,10 @@
 ---
 title: Vite Setup Config - Part I
 pubDate: "Mar 29 2023"
-description: "Vuejs"
+description: "Vite setup com Eslint, Prettier, Storybook, Styled-components, Jest e Playwright"
 category: Javascript
+heroImage: /vite-part1.png
 ---
-
-![Vite](/vite-part1.png)
 
 Bem, esse é um tutorial visando lembrar como configurar o Vite CLI e fazer funcionar com tudo o que uso atualmente no meu dia a dia (18/03/2023) passei um certo sufoco para fazer tudo bem feito, e não estou muito afim de repetir a dose de sufoco no futuro, então, vamos ao setup:
 
