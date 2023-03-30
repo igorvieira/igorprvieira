@@ -3,6 +3,9 @@
 > This is my space to share new ideas and generally record what I may or may not need in the future.
 
 [![build](https://github.com/igorvieira/igorprvieira/actions/workflows/astro.yml/badge.svg)](https://github.com/igorvieira/igorprvieira/actions/workflows/astro.yml)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+
 
 <img src="./public//my-blog.png" width="300" height="250">
 
