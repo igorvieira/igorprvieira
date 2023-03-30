@@ -16,7 +16,7 @@ yarn create vite
 
 Nisso é escolher o template para React, Typescript+SWC (Speedy Web Compiler - this in Rust!!) e depois disso é acessar o diretório ou a pasta do seu projeto e rodar um yarn install.
 
-A primeira configuração nossa, é somente do path relativo das nossas pastas, porta, process, preview e bundle.
+A primeira configuração nossa, é somente do path relativo das nossas pastas, porta, process e preview.
 
 Para port e preview, é somente necessário adicionar as keys no nosso vite.config.ts e mudar a default para as nossas configs:
 
@@ -65,7 +65,6 @@ Para isso precisamos adicionar uma nova biblioteca que é o @type/node e eu vou 
 Depois disso é somente importar o path no topo do arquivo e trocar o objeto aberto por process.env:
 
 ```typescript
-import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
@@ -101,7 +100,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      components: `${__dirname}/src/components/`,
+      styles: `${__dirname}/src/styles/`,
+      types: `${__dirname}/src/types/`,
+      utils: `${__dirname}/src/utils/`
     },
   },
   define: {
@@ -111,7 +113,7 @@ export default defineConfig({
 });
 ```
 
-Uma outra configuração precisa ser feita no nosso tsconfig.json adicionando nossso compileOptions apenas essas duas linhas, uma para setar a base do diretório e outra para mostrar o encaminhamento dos arquivos:
+Uma outra configuração precisa ser feita no nosso tsconfig.json apenas essas duas linhas, uma para setar a base do diretório e outra para mostrar o encaminhamento dos arquivos:
 
 ```typescript
 {
@@ -119,7 +121,7 @@ Uma outra configuração precisa ser feita no nosso tsconfig.json adicionando no
    // outras configs…
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+     "*": ["./src/*"]
     }
   },
   "include": ["src"],
@@ -147,17 +149,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 ```
 
 ```typescript
-import { Counter } from "./components/Counter";
+import { Counter } from "components/Counter";
 
 function App() {
-  return (
-    <div>
-      <h1>Vite + React</h1>
-      <div>
-        <Counter />
-      </div>
-    </div>
-  );
+  return  <Counter />;
 }
 
 export default App;
@@ -179,12 +174,13 @@ export const Counter = () => {
 
   return (
     <div>
+      <h1><span>{count}</span></h1>
       <button onClick={() => setCount((count) => count + 1)}>
-        count is: {count}
+        Increment
       </button>
     </div>
   );
 };
 ```
 
-Bem, por hora é isso! Até mais! =]
+Bem, por hora é isso! Até mais! o/
