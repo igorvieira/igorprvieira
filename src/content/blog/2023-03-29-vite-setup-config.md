@@ -103,7 +103,7 @@ export default defineConfig({
       components: `${__dirname}/src/components/`,
       styles: `${__dirname}/src/styles/`,
       types: `${__dirname}/src/types/`,
-      utils: `${__dirname}/src/utils/`
+      utils: `${__dirname}/src/utils/`,
     },
   },
   define: {
@@ -152,7 +152,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 import { Counter } from "components/Counter";
 
 function App() {
-  return  <Counter />;
+  return <Counter />;
 }
 
 export default App;
@@ -174,10 +174,10 @@ export const Counter = () => {
 
   return (
     <div>
-      <h1><span>{count}</span></h1>
-      <button onClick={() => setCount((count) => count + 1)}>
-        Increment
-      </button>
+      <h1>
+        Count: <span>{count}</span>
+      </h1>
+      <button onClick={() => setCount((count) => count + 1)}>Increment</button>
     </div>
   );
 };

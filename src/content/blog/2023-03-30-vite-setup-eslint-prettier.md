@@ -1,6 +1,6 @@
 ---
 title: Vite Setup Eslint e Prettier - Part 2
-pubDate: "Mar 29 2023"
+pubDate: "Mar 30 2023"
 description: "Como configurar o Eslint e Prettier?"
 category: Javascript
 heroImage: /vite-part2.png
