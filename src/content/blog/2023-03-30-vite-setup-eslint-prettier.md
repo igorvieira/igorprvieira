@@ -182,3 +182,5 @@ Ai você pode ver resultados assim:
 ![Vite2-1](/vite-part2-1.png)
 
 E eu acredito que é isso!
+
+Github: [Vite Setup](https://github.com/igorvieira/vite-setup)
