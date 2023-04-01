@@ -89,3 +89,5 @@ E ai é só rodar `yarn storybook` e encontraremos o nosso Counter:
 <img src='/vite-part3-4.png' width='100%'>
 
 Bem terminamos por aqui, próximo cápitulo nós iremos configurar o styled-components!
+
+Github: [Vite Setup](https://github.com/igorvieira/vite-setup)

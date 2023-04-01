@@ -1,5 +1,5 @@
 ---
-title: Vite Setup Config - Part I
+title: Vite Setup Config - Part 1
 pubDate: "Mar 29 2023"
 description: "Vite setup com Eslint, Prettier, Storybook, Styled-components, Jest e Playwright"
 category: Javascript
@@ -184,3 +184,5 @@ export const Counter = () => {
 ```
 
 Bem, por hora é isso! Até mais! o/
+
+Github: [Vite Setup](https://github.com/igorvieira/vite-setup)

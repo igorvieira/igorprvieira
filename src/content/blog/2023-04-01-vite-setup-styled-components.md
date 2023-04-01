@@ -259,3 +259,5 @@ E bem, se você rodar agora o seu storybook ele deve ficar assim:
 Creio que por hoje é somente isso! Próximo artigo iremos falar sobre Jest.
 
 Até mais!
+
+Github: [Vite Setup](https://github.com/igorvieira/vite-setup)

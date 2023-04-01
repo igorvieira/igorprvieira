@@ -1,7 +1,7 @@
 ---
 title: Vite Setup com Jest - Part 5
 pubDate: "Apr 02 2023"
-description: "Port que não Jest?"
+description: "Por que não Jest?"
 category: Javascript
 heroImage: /vite-part5.png
 ---
@@ -206,3 +206,5 @@ E ai é só rodar yarn test e correr para o abraço:
 <img src='/vite-part5-1.png' width='100%'>
 
 Espero que tudo tenha dado certo, até mais!
+
+Github: [Vite Setup](https://github.com/igorvieira/vite-setup)
