@@ -182,7 +182,7 @@ import { render, screen } from "utils/test-utils";
 import { Counter } from ".";
 
 describe("Counter", () => {
-  it("should render correctly", () => {
+  it("should increment when the button is clicked, () => {
     act(() => {
       render(<Counter />);
     });
