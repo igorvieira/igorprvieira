@@ -183,6 +183,7 @@ import { Counter } from ".";
 
 describe("Counter", () => {
   it("should increment when the button is clicked", () => {
+
     act(() => {
       render(<Counter />);
     });
