@@ -197,8 +197,6 @@ describe("Counter", () => {
     });
 
     expect(counter).toHaveTextContent("1");
-
-    screen.logTestingPlaygroundURL();
   });
 });
 ```
