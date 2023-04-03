@@ -211,6 +211,10 @@ processes = []
 
 [experimental]
   auto_rollback = true
+ 
+[mounts]
+  destination = "/pb/pb_data"
+  source = "pb_data"
 
 [[services]]
   http_checks = []
@@ -237,10 +241,6 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
-
-  [mounts]
-    destination = "/pb/pb_data"
-    source = "pb_data"
 ```
 
 
