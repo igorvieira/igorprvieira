@@ -67,6 +67,7 @@ serde = { version = "1.0.145", features = ["derive"] }
 serde_json = "1.0.86"
 env_logger = "0.10.0"
 sqlx = { version = "0.6.2", features = ["runtime-async-std-native-tls", "postgres", "chrono"] }
+uuid = { version = "1.3.0", features = ["serde", "v4"] }
 ```
 
 Depois disso é rodar o seguinte comando: 
@@ -182,7 +183,7 @@ mod services;
 
 use actix_web::{
     App,
-     HttpServer,
+    HttpServer,
 };
 
 #[actix_web::main]
