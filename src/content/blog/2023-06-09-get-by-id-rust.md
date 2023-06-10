@@ -1,6 +1,6 @@
 ---
-title: Rust API - Criando a rota de get by id com rust - Part IV
-pubDate: "Jun 08 2023"
+title: Rust API - Criando a rota de get by id com rust - Part V
+pubDate: "Jun 09 2023"
 description: "Rust"
 category: rust
 heroImage: /new_get_id_remove.jpg
