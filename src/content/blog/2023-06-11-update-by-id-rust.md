@@ -440,6 +440,4 @@ E concluimos:
 }
 ```
 
-<!-- Feliz por mim que conclui isso daqui kk e se você gostou, feliz por ti que leu até aqui, grande abraço e até mais =] -->
-
 Próximos passos, logs...que a vida sem rumo é triste kk Grande abraço e até mais =]
