@@ -4,7 +4,7 @@ pubDate: "Jun 10 2023"
 description: "Rust"
 category: rust
 heroImage: /new_delete_id_remove.jpg
----
+
 
 Igualmente fizemos em nosso get_task_by_id, iremos fazer basicamente o mesmo com a nossa função de delete, pois ela precisa deletar somente uma task por vez e precisamos chamar o nosso método delete do nosso actix_web
 
@@ -277,6 +277,8 @@ curl --request DELETE \
   --url http://localhost:8080/api/tasks/4b4bab9e-4b79-4db0-be8d-2d29c0eb5c1a
 ```
 
+
 E ai não teremos necessariamente um retorno, mas pode verificar que o id que você usou para poder deletar, não existe mais.
+
 
 E é creio que por hoje é só! =]
