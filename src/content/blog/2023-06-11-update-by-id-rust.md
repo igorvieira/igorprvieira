@@ -8,7 +8,7 @@ heroImage: /new_update_id.jpg
 
 Não vamos perder tempo, no nosso schema.rs, vamos escrever o UpdateSchema da nossa aplicação para trabalhar o nosso update o nosso vai se chamar UpdateTaskSchema:
 
-```
+```rust
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UpdateTaskSchema {
     pub title: Option<String>,
