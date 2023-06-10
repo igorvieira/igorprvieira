@@ -279,4 +279,4 @@ curl --request DELETE \
 
 E ai não teremos necessariamente um retorno, mas pode verificar que o id que você usou para poder deletar, não existe mais.
 
-E é creio que por hoje é só! =]
+E eu creio que por hoje é só! =]
