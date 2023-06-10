@@ -1,17 +1,18 @@
 ---
-title: Rust API - Criando a rota de get by id com rust - Part IV
-pubDate: "Jun 08 2023"
+title: Rust API - Criando a rota de delete by id com rust - Part VI
+pubDate: "Jun 10 2023"
 description: "Rust"
 category: rust
-heroImage: /new_get_id_remove.jpg
+heroImage: /new_delete_id_remove.jpg
 ---
 
-Primeiramente iremos lidar com o nosso arquivo de services, onde iremos importar o nosso Path, para fazer o recenhecimento a partir dele o id ou uuid no caso, que trabalharemos a nossa query de busca:
+Igualmente fizemos em nosso get_task_by_id, iremos fazer basicamente o mesmo com a nossa função de delete, pois ela precisa deletar somente uma task por vez e precisamos chamar o nosso método delete do nosso actix_web
 
 ```rust
 use actix_web::{
     get,
     post,
+    delete
     web::{
         Data,
         Json,
@@ -25,22 +26,22 @@ use actix_web::{
 };
 ```
 
-E iremos escrever abaixo a nossa função:
+E iremos escrever abaixo a nossa função, que se assemelha bastante com a nossa função de get by id:
 
 ```rust
-#[get("/tasks/{id}")]
-async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
+#[delete("/tasks/{id}")]
+async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
 
 }
 
 ```
 
-Dentro do escopo da nossa função, nós iremos começar a verificar a partir da nossa url o task_id, ou o uuid da nossa url:
+Na nossa função, nós iremos verificar a nossa url em busca do uuid da nossa url:
 
 ```rust
 
-#[get("/tasks/{id}")]
-async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
+#[delete("/tasks/{id}")]
+async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
   let task_id = path.into_inner();
 
 
@@ -48,39 +49,26 @@ async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Re
 
 ```
 
-Próximo ponto é fazer a nossa query e o tratamento de erro:
+Próximo ponto é fazer a nossa query e o tratamento de erro, observe que o return relacionado ao nosso ok return, é um NoContent, simplesmente finalizando o retorno da nossa request, é puramente isso.
 
 ```rust
-#[get("/tasks/{id}")]
-async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
-  let task_id = path.into_inner();
+#[delete("/tasks/{id}")]
+async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
+    let task_id = path.into_inner();
 
-  let query_result = sqlx
-        ::query_as!(TaskModel, "SELECT * FROM tasks WHERE id = $1", task_id)
-        .fetch_one(&data.db).await;
-
-    match query_result {
-        Ok(task) => {
-            let note_response =
-                serde_json::json!({
-                "status": "success",
-                "data": serde_json::json!({
-                    "task": task
-                })
-            });
-
-            HttpResponse::Ok().json(note_response)
-        }
-        Err(error) => {
-            return HttpResponse::InternalServerError().json(
-                serde_json::json!({"status": "error","message": format!("{:?}", error)})
+    match sqlx::query!("DELETE FROM tasks WHERE id = $1", task_id).execute(&data.db).await {
+        Ok(_) => { HttpResponse::NoContent().finish() }
+        Err(err) => {
+            let message = format!("Internal server error: {:?}", err);
+            return HttpResponse::NotFound().json(
+                serde_json::json!({"status": "fail","message": message})
             );
         }
     }
 }
 ```
 
-Por fim, adicionar ela junto a nossa config
+Por fim, adicionar nossa nova função junto a nossa config
 
 ```rust
 pub fn config(conf: &mut ServiceConfig) {
@@ -88,7 +76,8 @@ pub fn config(conf: &mut ServiceConfig) {
         .service(health_checker)
         .service(create_task)
         .service(get_all_tasks)
-        .service(get_task_by_id);
+        .service(get_task_by_id)
+        .service(delete_task_by_id);
 
     conf.service(scope);
 }
@@ -111,6 +100,7 @@ use crate::{
 use actix_web::{
     get,
     post,
+    delete,
     web::{
         Data,
         Json,
@@ -222,20 +212,37 @@ async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Re
     }
 }
 
+#[delete("/tasks/{id}")]
+async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
+    let task_id = path.into_inner();
+
+    match sqlx::query!("DELETE FROM tasks WHERE id = $1", task_id).execute(&data.db).await {
+        Ok(_) => { HttpResponse::NoContent().finish() }
+        Err(err) => {
+            let message = format!("Internal server error: {:?}", err);
+            return HttpResponse::NotFound().json(
+                serde_json::json!({"status": "fail","message": message})
+            );
+        }
+    }
+}
+
 
 pub fn config(conf: &mut ServiceConfig) {
     let scope = scope("/api")
         .service(health_checker)
         .service(create_task)
         .service(get_all_tasks)
-        .service(get_task_by_id);
+        .service(get_task_by_id)
+        .service(delete_task_by_id);
 
     conf.service(scope);
 }
 
+
 ```
 
-Para testar, nós iremos criar uma nova task:
+Para testar, nós iremos criar uma nova task (again):
 
 ```
 curl --request POST \
@@ -255,8 +262,8 @@ Ele deve me gerar essa task onde eu irei pegar o nosso id:
   "task": {
     "task": {
       "content": "content test",
-      "created_at": "2023-06-10T15:05:53.710564Z",
-      "id": "d6b52611-8117-43d3-a8f6-56732ac94bd5",
+      "created_at": "2023-06-10T15:41:15.681032Z",
+      "id": "4b4bab9e-4b79-4db0-be8d-2d29c0eb5c1a",
       "title": "title test2"
     }
   }
@@ -266,25 +273,10 @@ Ele deve me gerar essa task onde eu irei pegar o nosso id:
 E podemos testar da seguinte forma:
 
 ```
-curl --request GET \
-  --url http://localhost:8080/api/tasks/d6b52611-8117-43d3-a8f6-56732ac94bd5
+curl --request DELETE \
+  --url http://localhost:8080/api/tasks/4b4bab9e-4b79-4db0-be8d-2d29c0eb5c1a
 ```
 
-E ai temos o seguinte resultado:
+E ai não teremos necessariamente um retorno, mas pode verificar que o id que você usou para poder deletar, não existe mais.
 
-```
-{
-   "data":{
-      "task":{
-         "content":"content test",
-         "created_at":"2023-06-10T15:05:53.710564Z",
-         "id":"d6b52611-8117-43d3-a8f6-56732ac94bd5",
-         "title":"title test2"
-      }
-   },
-   "status":"success"
-}
-
-```
-
-E bem, por hoje é só!
+E é creio que por hoje é só! =]
