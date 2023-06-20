@@ -120,7 +120,7 @@ async fn edit_task_by_id(
                         TaskModel,
                         "UPDATE tasks SET title = $1, content = $2 WHERE id = $3 RETURNING *",
                         body.title.to_owned().unwrap_or(task.title),
-                        body.title.to_owned().unwrap_or(task.content),
+                        body.content.to_owned().unwrap_or(task.content),
                         task_id
                     )
                     .fetch_one(&data.db).await
@@ -336,7 +336,7 @@ async fn edit_task_by_id(
                         TaskModel,
                         "UPDATE tasks SET title = $1, content = $2 WHERE id = $3 RETURNING *",
                         body.title.to_owned().unwrap_or(task.title),
-                        body.title.to_owned().unwrap_or(task.content),
+                        body.content.to_owned().unwrap_or(task.content),
                         task_id
                     )
                     .fetch_one(&data.db).await
