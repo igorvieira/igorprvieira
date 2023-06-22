@@ -61,20 +61,23 @@ async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Re
 
     match query_result {
         Ok(task) => {
-            let note_response =
-                serde_json::json!({
+            let task_note = json!({
                 "status": "success",
-                "data": serde_json::json!({
-                    "task": task
-                })
+                "task": task
             });
 
-            HttpResponse::Ok().json(note_response)
+
+            return HttpResponse::Ok().json(task_note);
         }
+
         Err(error) => {
+
             return HttpResponse::InternalServerError().json(
-                serde_json::json!({"status": "error","message": format!("{:?}", error)})
-            );
+                json!({
+                    "status": "error",
+                    "message": format!("{:?}", error)
+                })
+            )
         }
     }
 }
@@ -144,18 +147,21 @@ async fn create_task(body: Json<CreateTaskSchema>, data: Data<AppState>) -> impl
             .fetch_one(&data.db)
             .await {
             Ok(task) => {
-                let note_response = serde_json::json!({
+                let task_note = json!({
                     "status": "success",
-                    "task": serde_json::json!({
-                        "task": task
-                    })
+                    "task": task
                 });
 
-                return HttpResponse::Ok().json(note_response);
+               return HttpResponse::Ok().json(task_note);
             }
+
             Err(error) => {
                 return HttpResponse::InternalServerError().json(
-                    serde_json::json!({"status": "error","message": format!("{:?}", error)}));
+                    json!({
+                        "status": "error",
+                        "message": format!("{:?}", error)
+                    })
+                )
             }
         }
 }
@@ -175,20 +181,24 @@ pub async fn get_all_tasks(opts: Query<FilterOptions>, data: Data<AppState>) -> 
             )
             .fetch_all(&data.db)
             .await {
-                Ok(tasks) => {
-                    let json_response =
-                        serde_json::json!({
-                            "status": "success",
-                            "result": tasks.len(),
-                            "tasks": tasks
-                        });
+                Ok(task) => {
+                    let task_note = json!({
+                        "status": "success",
+                        "task": task
+                    });
 
-                    HttpResponse::Ok().json(json_response)
+
+                  return HttpResponse::Ok().json(task_note);
                 }
+
                 Err(error) => {
+
                     return HttpResponse::InternalServerError().json(
-                        serde_json::json!({"status": "error","message": format!("{:?}", error)})
-                    );
+                        json!({
+                            "status": "error",
+                            "message": format!("{:?}", error)
+                        })
+                    )
                 }
             }
 }
@@ -204,20 +214,23 @@ async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Re
 
     match query_result {
         Ok(task) => {
-            let note_response =
-                serde_json::json!({
+            let task_note = json!({
                 "status": "success",
-                "data": serde_json::json!({
-                    "task": task
-                })
+                "task": task
             });
 
-            HttpResponse::Ok().json(note_response)
+
+            return HttpResponse::Ok().json(task_note);
         }
+
         Err(error) => {
+
             return HttpResponse::InternalServerError().json(
-                serde_json::json!({"status": "error","message": format!("{:?}", error)})
-            );
+                json!({
+                    "status": "error",
+                    "message": format!("{:?}", error)
+                })
+            )
         }
     }
 }
@@ -253,12 +266,10 @@ Ele deve me gerar essa task onde eu irei pegar o nosso id:
 {
   "status": "success",
   "task": {
-    "task": {
-      "content": "content test",
-      "created_at": "2023-06-10T15:05:53.710564Z",
-      "id": "d6b52611-8117-43d3-a8f6-56732ac94bd5",
-      "title": "title test2"
-    }
+    "content": "content test",
+    "created_at": "2023-06-10T15:05:53.710564Z",
+    "id": "d6b52611-8117-43d3-a8f6-56732ac94bd5",
+    "title": "title test2"
   }
 }
 ```
@@ -274,17 +285,14 @@ E ai temos o seguinte resultado:
 
 ```
 {
-   "data":{
-      "task":{
-         "content":"content test",
-         "created_at":"2023-06-10T15:05:53.710564Z",
-         "id":"d6b52611-8117-43d3-a8f6-56732ac94bd5",
-         "title":"title test2"
-      }
-   },
+    "task":{
+        "content":"content test",
+        "created_at":"2023-06-10T15:05:53.710564Z",
+        "id":"d6b52611-8117-43d3-a8f6-56732ac94bd5",
+        "title":"title test2"
+    }
    "status":"success"
 }
-
 ```
 
 E bem, por hoje é só!
