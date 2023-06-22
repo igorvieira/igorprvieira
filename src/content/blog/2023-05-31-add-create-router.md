@@ -176,18 +176,23 @@ match
       .fetch_one(&data.db)
       .await {
         Ok(task) => {
-            let note_response = serde_json::json!({
+            let note_response = json!({
                 "status": "success",
-                "task": serde_json::json!({
-                    "task": task
+                "task": json!({
+                    "task": task,
                 })
             });
 
             return HttpResponse::Ok().json(note_response);
         }
         Err(error) => {
-          return HttpResponse::InternalServerError().json(
-              serde_json::json!({"status": "error","message": format!("{:?}", error)}));
+
+            return HttpResponse::InternalServerError().json(
+                json!({
+                    "status": "error",
+                    "message": format!("{:?}", error)
+                })
+            )
         }
       }
 ```
@@ -233,20 +238,25 @@ async fn create_task(
             )
             .fetch_one(&data.db)
             .await {
-            Ok(task) => {
-                let note_response = serde_json::json!({
-                    "status": "success",
-                    "task": serde_json::json!({
-                        "task": task
-                    })
-                });
+              Ok(task) => {
+                    let note_response = json!({
+                        "status": "success",
+                        "task": json!({
+                            "task": task,
+                        })
+                    });
 
-                return HttpResponse::Ok().json(note_response);
-            }
-            Err(error) => {
-                return HttpResponse::InternalServerError().json(
-                  serde_json::json!({"status": "error","message": format!("{:?}", error)}));
-            }
+                    return HttpResponse::Ok().json(note_response);
+                }
+                Err(error) => {
+
+                    return HttpResponse::InternalServerError().json(
+                        json!({
+                            "status": "error",
+                            "message": format!("{:?}", error)
+                        })
+                    )
+                }
         }
 }
 
