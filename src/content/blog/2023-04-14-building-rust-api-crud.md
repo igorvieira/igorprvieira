@@ -108,8 +108,12 @@ use serde_json::json;
 
 #[get("/healthchecker")]
 async fn health_checker() -> impl Responder {
-    const MESSAGE: &str = "Health check API is up and running smoothly.";
-    HttpResponse::Ok().json(json!({"status": "success", "message": MESSAGE}))
+    const MESSAGE: &str = "Health check: API is up and running smoothly.";
+
+     HttpResponse::Ok().json(json!({
+        "status": "success",
+        "message": MESSAGE
+    }))
 }
 
 pub fn config(conf: &mut web::ServiceConfig) {
@@ -192,8 +196,12 @@ use serde_json::json;
 
 #[get("/healthchecker")]
 async fn health_checker() -> impl Responder {
-    const MESSAGE: &str = "Health check API is up and running smoothly.";
-    HttpResponse::Ok().json(json!({"status": "success", "message": MESSAGE}))
+    const MESSAGE: &str = "Health check: API is up and running smoothly.";
+
+     HttpResponse::Ok().json(json!({
+        "status": "success",
+        "message": MESSAGE
+    }))
 }
 
 pub fn config(conf: &mut web::ServiceConfig) {
@@ -206,11 +214,21 @@ pub fn config(conf: &mut web::ServiceConfig) {
 E se você rodar a nossa aplicação com o `cargo run`, ela ficará assim:
 http://localhost:8080/api/healthchecker
 
+Se quiser o CURL:
+
+```bash
+curl --request GET \
+  --url http://localhost:8080/api/healthchecker \
+  --header 'Content-Type: application/json'
+```
+
+Retorno:
+
 ```json
 {
-  "message": "Health check API is up and running smoothly.",
+  "message": "Health check: API is up and running smoothly.",
   "status": "success"
 }
 ```
 
-Próximo passo!
+Até mais! =]
