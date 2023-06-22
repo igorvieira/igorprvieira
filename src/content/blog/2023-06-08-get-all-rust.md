@@ -81,19 +81,21 @@ SELECT com um tratamento da mensagem e do nosso erro:
       .fetch_all(&data.db)
       .await {
           Ok(tasks) => {
-              let json_response =
-                  serde_json::json!({
-                  "status": "success",
-                  "result": tasks.len(),
-                  "tasks": tasks
-              });
+            let json_response = json!({
+                "status": "success",
+                "result":  tasks.len(),
+                "tasks": tasks
+            });
 
-              HttpResponse::Ok().json(json_response)
+            return HttpResponse::Ok().json(json_response);
           }
           Err(error) => {
               return HttpResponse::InternalServerError().json(
-                  serde_json::json!({"status": "error","message": format!("{:?}", error)})
-              );
+                  json!({
+                      "status": "error",
+                      "message": format!("{:?}", error)
+                  })
+              )
           }
     }
 ```
@@ -117,19 +119,21 @@ pub async fn get_all_tasks(opts: Query<FilterOptions>, data: Data<AppState>) -> 
             .fetch_all(&data.db)
             .await {
                 Ok(tasks) => {
-                    let json_response =
-                        serde_json::json!({
-                            "status": "success",
-                            "result": tasks.len(),
-                            "tasks": tasks
-                        });
+                  let json_response = json!({
+                      "status": "success",
+                      "result":  tasks.len(),
+                      "tasks": tasks
+                  });
 
-                    HttpResponse::Ok().json(json_response)
+                  return HttpResponse::Ok().json(json_response);
                 }
                 Err(error) => {
                     return HttpResponse::InternalServerError().json(
-                        serde_json::json!({"status": "error","message": format!("{:?}", error)})
-                    );
+                        json!({
+                            "status": "error",
+                            "message": format!("{:?}", error)
+                        })
+                    )
                 }
             }
 }
@@ -219,19 +223,22 @@ async fn create_task(body: Json<CreateTaskSchema>, data: Data<AppState>) -> impl
             )
             .fetch_one(&data.db)
             .await {
-            Ok(task) => {
-                let note_response = serde_json::json!({
-                    "status": "success",
-                    "task": serde_json::json!({
-                        "task": task
-                    })
-                });
+            Ok(tasks) => {
+              let json_response = json!({
+                  "status": "success",
+                  "result":  tasks.len(),
+                  "tasks": tasks
+              });
 
-                return HttpResponse::Ok().json(note_response);
+              return HttpResponse::Ok().json(json_response);
             }
             Err(error) => {
                 return HttpResponse::InternalServerError().json(
-                    serde_json::json!({"status": "error","message": format!("{:?}", error)}));
+                    json!({
+                        "status": "error",
+                        "message": format!("{:?}", error)
+                    })
+                )
             }
         }
 }
@@ -252,19 +259,21 @@ pub async fn get_all_tasks(opts: Query<FilterOptions>, data: Data<AppState>) -> 
             .fetch_all(&data.db)
             .await {
                 Ok(tasks) => {
-                    let json_response =
-                        serde_json::json!({
-                            "status": "success",
-                            "result": tasks.len(),
-                            "tasks": tasks
-                        });
+                  let json_response = json!({
+                      "status": "success",
+                      "result":  tasks.len(),
+                      "tasks": tasks
+                  });
 
-                    HttpResponse::Ok().json(json_response)
+                  return HttpResponse::Ok().json(json_response);
                 }
                 Err(error) => {
                     return HttpResponse::InternalServerError().json(
-                        serde_json::json!({"status": "error","message": format!("{:?}", error)})
-                    );
+                        json!({
+                            "status": "error",
+                            "message": format!("{:?}", error)
+                        })
+                    )
                 }
             }
 }
