@@ -116,116 +116,166 @@ use serde_json::json;
 
 #[get("/healthchecker")]
 async fn health_checker() -> impl Responder {
-    const MESSAGE: &str = "Health check API is up and running smoothly.";
-    HttpResponse::Ok().json(json!({"status": "success", "message": MESSAGE }))
+    const MESSAGE: &str = "Health check: API is up and running smoothly.";
+
+    HttpResponse::Ok().json(json!({
+        "status": "success",
+        "message": MESSAGE
+    }))
 }
 
 #[post("/task")]
-async fn create_task(body: Json<CreateTaskSchema>, data: Data<AppState>) -> impl Responder {
+async fn create_task(
+    body: Json<CreateTaskSchema>,
+    data: Data<AppState>
+) -> impl Responder {
+
     match
-        sqlx
-            ::query_as!(
-                TaskModel,
-                "INSERT INTO tasks (title, content) VALUES ($1, $2)
-                RETURNING * ",
-                body.title.to_string(),
-                body.content.to_string()
-            )
-            .fetch_one(&data.db)
-            .await {
+        sqlx::query_as!(
+            TaskModel,
+            "INSERT INTO tasks (title, content) VALUES ($1, $2)
+            RETURNING * ",
+            body.title.to_string(),
+            body.content.to_string()
+        )
+        .fetch_one(&data.db)
+        .await {
             Ok(task) => {
-                let note_response = serde_json::json!({
+                let note_response = json!({
                     "status": "success",
-                    "task": serde_json::json!({
-                        "task": task
+                    "task": json!({
+                        "task": task,
                     })
                 });
 
                 return HttpResponse::Ok().json(note_response);
             }
             Err(error) => {
+
                 return HttpResponse::InternalServerError().json(
-                    serde_json::json!({"status": "error","message": format!("{:?}", error)}));
+                    json!({
+                        "status": "error",
+                        "message": format!("{:?}", error)
+                    })
+                )
             }
+
         }
+
 }
 
+
 #[get("/tasks")]
-pub async fn get_all_tasks(opts: Query<FilterOptions>, data: Data<AppState>) -> impl Responder {
+async fn get_all_tasks(
+    opts: Query<FilterOptions>,
+    data: Data<AppState>
+
+) -> impl Responder {
     let limit = opts.limit.unwrap_or(10);
-    let offset = (opts.page.unwrap_or(1) - 1) * limit;
+    let offset = (opts.page.unwrap_or(1)- 1) * limit;
+
 
     match
-        sqlx
-            ::query_as!(
-                TaskModel,
-                "SELECT * FROM tasks ORDER by id LIMIT $1 OFFSET $2",
-                limit as i32,
-                offset as i32
-            )
-            .fetch_all(&data.db)
-            .await {
-                Ok(tasks) => {
-                    let json_response =
-                        serde_json::json!({
-                            "status": "success",
-                            "result": tasks.len(),
-                            "tasks": tasks
-                        });
+        sqlx::query_as!(
+        TaskModel,
+            "SELECT * FROM tasks ORDER by id LIMIT $1 OFFSET $2",
+            limit as i32,
+            offset as i32,
+        )
+        .fetch_all(&data.db)
+        .await {
+            Ok(tasks) => {
+                let json_response = json!({
+                    "status": "success",
+                    "result":  tasks.len(),
+                    "tasks": tasks
+                });
 
-                    HttpResponse::Ok().json(json_response)
-                }
-                Err(error) => {
-                    return HttpResponse::InternalServerError().json(
-                        serde_json::json!({"status": "error","message": format!("{:?}", error)})
-                    );
-                }
+                return HttpResponse::Ok().json(json_response);
             }
+            Err(error) => {
+
+                return HttpResponse::InternalServerError().json(
+                    json!({
+                        "status": "error",
+                        "message": format!("{:?}", error)
+                    })
+                )
+            }
+        }
+
+
 }
 
 
 #[get("/tasks/{id}")]
-async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
-  let task_id = path.into_inner();
+async fn get_task_by_id(
+    path: Path<Uuid>,
+    data: Data<AppState>
+) -> impl Responder {
+    let task_id = path.into_inner();
 
-  let query_result = sqlx
-        ::query_as!(TaskModel, "SELECT * FROM tasks WHERE id = $1", task_id)
-        .fetch_one(&data.db).await;
-
-    match query_result {
-        Ok(task) => {
-            let note_response =
-                serde_json::json!({
-                "status": "success",
-                "data": serde_json::json!({
+    match
+        sqlx::query_as!(
+            TaskModel,
+            "SELECT * FROM tasks WHERE id = $1", task_id
+        )
+        .fetch_one(&data.db)
+        .await {
+            Ok(task) => {
+                let task_note = json!({
+                    "status": "success",
                     "task": task
-                })
-            });
+                });
 
-            HttpResponse::Ok().json(note_response)
+
+               return HttpResponse::Ok().json(task_note);
+            }
+
+            Err(error) => {
+
+                return HttpResponse::InternalServerError().json(
+                    json!({
+                        "status": "error",
+                        "message": format!("{:?}", error)
+                    })
+                )
+            }
+
+
         }
-        Err(error) => {
-            return HttpResponse::InternalServerError().json(
-                serde_json::json!({"status": "error","message": format!("{:?}", error)})
-            );
-        }
-    }
+
+
 }
 
 #[delete("/tasks/{id}")]
-async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Responder {
+async fn delete_task_by_id(
+    path: Path<Uuid>,
+    data: Data<AppState>
+) -> impl Responder {
     let task_id = path.into_inner();
 
-    match sqlx::query!("DELETE FROM tasks WHERE id = $1", task_id).execute(&data.db).await {
-        Ok(_) => { HttpResponse::NoContent().finish() }
-        Err(err) => {
-            let message = format!("Internal server error: {:?}", err);
-            return HttpResponse::NotFound().json(
-                serde_json::json!({"status": "fail","message": message})
-            );
+    match
+        sqlx::query_as!(
+            TaskModel,
+            "DELETE FROM tasks WHERE id = $1", task_id
+        )
+        .execute(&data.db)
+        .await {
+            Ok(_) => {
+                return HttpResponse::NoContent().finish();
+            }
+
+            Err(error) => {
+
+                return HttpResponse::InternalServerError().json(
+                    json!({
+                        "status": "error",
+                        "message": format!("{:?}", error)
+                    })
+                )
+            }
         }
-    }
-}
 
 
 pub fn config(conf: &mut ServiceConfig) {
