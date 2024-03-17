@@ -16,9 +16,19 @@ a {
   color: #121213;
   text-decoration: none;
 }
+
+.dark a {
+  color: #e2e9f6;
+}
+
 nav a {
   margin-right: 10px;
 }
+
+.dark nav a {
+  color: #e2e9f6;
+}
+
 textarea {
   width: 100%;
   font-size: 16px;
@@ -66,10 +76,6 @@ html.dark {
 
 .dark .nav-links a {
   color: #fff;
-}
-
-.dark a {
-  color: #e2e9f6;
 }
 
 .nav-content {
