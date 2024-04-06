@@ -116,6 +116,12 @@ pub struct TaskModel {
 
 Aqui vamos ter a definição de como será a nossa estrutura junto ao nosso banco de dados, você pode ver que temos para os nossos ids um uuid, title como string, content como string e usamos o NaiveDateTime importado do nosso chrono.
 
+Bem, antes de continuarmos precisaremos instalar o sqlx-cli para os próximos passos:
+
+```bash
+cargo install sqlx-cli
+```
+
 Nesse momento, nós precisamos criar as nossas tables no nosso banco de dados, e a quanto a isso iremos nos utilizar do sqlx:
 
 ```bash
