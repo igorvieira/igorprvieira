@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  font-family: Verdana, sans-serif;
+  font-family: Menlo, monospace;
   margin: auto;
   padding: 20px;
   max-width: 65ch;
