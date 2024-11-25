@@ -1850,10 +1850,10 @@ human-signals@^5.0.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-5.0.0.tgz#42665a284f9ae0dade3ba41ebc37eb4b852f3a28"
   integrity sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==
 
-iconoir-react@^2.1.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/iconoir-react/-/iconoir-react-2.5.0.tgz#45643264494683759053a96abf30ded48b602041"
-  integrity sha512-fRH67yqXwrgSwOfxj8elt/+xoUwHAEkH1fIs0SdHpnc4UjE2rsIJdOPk3QFayNk+qrzhI505/oWzXs5e3K1AqQ==
+iconoir-react@7.10.0:
+  version "7.10.0"
+  resolved "https://registry.yarnpkg.com/iconoir-react/-/iconoir-react-7.10.0.tgz#c6016be1b9b966788780d931dc4359436e6e7226"
+  integrity sha512-mrWM0rbV/1o8hcntkc+dmMTts0B6rdkymLb4pxTrbZYPXYVamg42WphK9sp8ZYGzuEFIO40xBSsrwbQ7FW6cXg==
 
 ieee754@^1.1.13, ieee754@^1.2.1:
   version "1.2.1"

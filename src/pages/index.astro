@@ -5,8 +5,8 @@ import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import BuyMeACoffe from "../components/BuyMeACoffe.astro";
 import BitcoinWallet from "../components/BitcoinWallet.astro";
-import pkg from "iconoir-react";
-const { Twitter, GitHub, YouTube, LinkedIn } = pkg;
+import { Github, Youtube, Linkedin, X} from "iconoir-react";
+
 ---
 
 <!DOCTYPE html>
@@ -19,8 +19,7 @@ const { Twitter, GitHub, YouTube, LinkedIn } = pkg;
     <main>
       <h1>Hey, Mate! 🍋</h1>
       <p>
-        My name is Igor Vieira and I'm a Software Developer from Brazil. I'm
-        passionate about technology and discovering new things. This is my
+        My name is Igor Vieira and I'm a Software Developer from Brazil. This is my
         personal website, where I share my thoughts, save my projects and write
         about my experiences.
       </p>
@@ -28,24 +27,24 @@ const { Twitter, GitHub, YouTube, LinkedIn } = pkg;
       <h2>My social networks</h2>
       <ul class="social-content">
         <li class="social-links">
-          <GitHub />
+          <Github />
           <a href="https://github.com/igorvieira" target="_blank">GitHub</a>
         </li>
         <li class="social-links">
-          <YouTube />
+          <Youtube />
           <a
             href="https://www.youtube.com/channel/UCZ1cXK9h6_uZt14Jf3gNziQ"
             target="_blank">YouTube</a
           >
         </li>
         <li class="social-links">
-          <Twitter />
+          <X />
           <a href="https://x.com/igorprvieira" target="_blank">
-            X
+            ¯\_(ツ)_/¯
           </a>
         </li>
         <li class="social-links">
-          <LinkedIn />
+          <Linkedin />
           <a
             href="https://www.linkedin.com/in/igor-vieira-6b05a185/"
             target="_blank">LinkedIn</a
@@ -60,6 +59,7 @@ const { Twitter, GitHub, YouTube, LinkedIn } = pkg;
 
       <section class="donation">
         <BitcoinWallet />
+        <BuyMeACoffe />
       </section>
     </main>
     <Footer />
