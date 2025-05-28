@@ -9,7 +9,7 @@ export async function get(context) {
     description: `${SITE_DESCRIPTION}`,
     site: context.site,
     image:
-      "https://asset.cloudinary.com/dje6m1lab/3de130278029a8c490d538952cf5bcd7",
+      "https://res.cloudinary.com/dje6m1lab/image/upload/fl_preserve_transparency/v1748400386/LGqg2kBR_400x400_dnljod.jpg",
     items: posts.map((post) => ({
       ...post.data,
       link: `/blog/${post.slug}/`,
