@@ -1,0 +1,23 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+---
+
+<button aria-label="buy me a coffee" class="solo-project">
+  <img
+    src="https://res.cloudinary.com/dje6m1lab/image/upload/v1745970240/solo_vdht4s.webp"
+    alt="Solo Project"
+  />
+  <div class="">Solo - HTTP Client ⚡</div>
+</button>
+<script>
+  import "../styles/global.css";
+
+  function openPage() {
+    window.open("https://github.com/sreq-inc/solo", "_blank");
+  }
+
+  document
+    ?.querySelector(".solo-project")
+    ?.addEventListener("click", openPage);
+</script>

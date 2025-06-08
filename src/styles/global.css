@@ -11,7 +11,9 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   line-height: 1.5;
+  font-size: 14px;
 }
+
 a {
   color: #121213;
   text-decoration: none;
@@ -33,27 +35,34 @@ textarea {
   width: 100%;
   font-size: 16px;
 }
+
 input {
   font-size: 16px;
 }
+
 content {
   line-height: 1.6;
 }
+
 table {
   width: 100%;
 }
+
 img {
   max-width: 100%;
   height: auto;
 }
+
 code {
   padding: 2px 5px;
   background-color: #c282db;
 }
+
 pre {
   padding: 1rem;
 }
-pre > code {
+
+pre>code {
   all: unset;
 }
 
@@ -76,6 +85,11 @@ html.dark {
 
 .dark .nav-links a {
   color: #fff;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .nav-content {
@@ -120,7 +134,7 @@ html.dark {
   border: 2px solid white;
 }
 
-.social-content {
+.content-list {
   display: flex;
   flex-flow: column;
   padding: 0;
@@ -131,4 +145,13 @@ html.dark {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.projects {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.project-link {
+  text-decoration: underline;
 }
