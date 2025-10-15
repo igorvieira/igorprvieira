@@ -4,16 +4,55 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import Disqus from "../components/Disqus.astro";
+import { SITE_URL, AUTHOR_NAME, AUTHOR_TWITTER } from "../consts";
+import { getAbsoluteImageUrl } from "../utils/imageExtractor";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & {
+  slug?: string;
+  readingTime?: number;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, slug, readingTime } = Astro.props;
+
+// Get absolute image URL for meta tags
+const imageUrl = heroImage ? getAbsoluteImageUrl(heroImage, SITE_URL) : getAbsoluteImageUrl("/placeholder-blog.svg", SITE_URL);
+
+// Generate canonical URL
+const canonicalURL = slug ? `${SITE_URL}/blog/${slug}/` : Astro.url.toString();
+
+// Structured Data (JSON-LD) for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": imageUrl,
+  "datePublished": pubDate.toISOString(),
+  "dateModified": updatedDate ? updatedDate.toISOString() : pubDate.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": AUTHOR_NAME,
+    "url": SITE_URL
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": AUTHOR_NAME,
+    "url": SITE_URL
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL
+  }
+};
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={imageUrl} />
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
     <style>
       .title {
         font-size: 2em;
@@ -30,6 +69,35 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
       .article-content {
         margin-bottom: 150px;
       }
+
+      .hero-image {
+        width: 100%;
+        max-width: 720px;
+        height: auto;
+        aspect-ratio: 2 / 1;
+        object-fit: cover;
+        border-radius: 3px;
+        margin-bottom: 1.5rem;
+      }
+
+      .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .reading-time {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .reading-time::before {
+        content: "📖";
+      }
     </style>
   </head>
 
@@ -37,9 +105,22 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     <Header />
     <main>
       <article class="article-content">
-        {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-        <h1>{title}</h1>
-        <FormattedDate date={pubDate} />
+        {heroImage && (
+          <img
+            class="hero-image"
+            src={heroImage}
+            alt={title}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <h1 class="title">{title}</h1>
+        <div class="post-meta">
+          <FormattedDate date={pubDate} />
+          {readingTime && (
+             <div>- {readingTime} min read</div>
+          )}
+        </div>
         {
           updatedDate && (
             <div class="last-updated-on">
