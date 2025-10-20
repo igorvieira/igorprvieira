@@ -1,5 +1,5 @@
 ---
-title: "Testes e2e para verificar a nossa aplicação - Part VII "
+title: "E2E Tests to Verify Our Application - Part VII "
 pubDate: "Jul 18, 2017"
 description: "Vuejs Application"
 category: Javascript, Vuejs
@@ -7,16 +7,16 @@ category: Javascript, Vuejs
 
 ![checklist](https://github.com/IgorVieira/igorvieira.github.io/blob/master/_images/checklist.jpg?raw=true)
 
-Hoje vamos falar a respeito de teste e2e, a ideia é poder entregar uma aplicação no qual você pode testar ela
-de ponta a ponta, e poder falar no final que nossa aplicação está funcionando perfeitamente, e
-poder entregar de fato aquilo que foi projetado da forma que foi projetado.
+Today we're going to talk about e2e testing. The idea is to be able to deliver an application where you can test it
+end to end, and be able to say in the end that our application is working perfectly, and
+be able to actually deliver what was designed the way it was designed.
 
-Vamos abrir a nossa aplicação e precisamos realizar algumas alterações, e indo direto no nossa parte e2e, base
-desse post, no nossos specs, vamos ter somente uma suite de teste, só que dessa vez queremos realizar dois testes
-um para ver adicionar uma nova tarefa e outra para poder editar uma tarefa.
+Let's open our application and we need to make some changes. Going straight to our e2e part, the basis
+of this post, in our specs, we're going to have only one test suite, but this time we want to perform two tests:
+one to add a new task and another to edit a task.
 
-E podemos excluir o que temos por default, nosso objetivo é criar um novo, e mas tão simples quanto, esse será
-o nome dele, firstTaskSpec.js
+And we can delete what we have by default. Our goal is to create a new one, and just as simple. This will be
+its name: firstTaskSpec.js
 
 ```
 module.exports = {
@@ -37,11 +37,11 @@ module.exports = {
   };
 ```
 
-O que definimos aqui é, temos uma sequencia de atividades que vão sendo realizadas , é como se tivessemos um roteiro
-e ele vai seguindo o roteiro de cada uma das nossas ações, but ... antes de continuarmos, temos que fazer mais três alterações
-temos que alterar nosso form, observe o nosso `.setValue('input[name=activity_input]', 'Make a coffee')`, ele está buscando
-uma tag input no qual o seu name é acitivity_input, assim como nosso outro .setValue, tem um name tentando buscar o que é o
-seu checkbox_input, ambos precisam ser alterados em nossa home, é isso que iremos fazer:
+What we defined here is that we have a sequence of activities that are being performed. It's as if we had a script
+and it follows the script of each of our actions. But... before we continue, we have to make three more changes.
+We have to change our form. Look at our `.setValue('input[name=activity_input]', 'Make a coffee')` - it's looking for
+an input tag where its name is activity_input, just like our other .setValue has a name trying to find what
+its checkbox_input is. Both need to be changed in our home. This is what we'll do:
 
 ```
 <div class="row">
@@ -62,7 +62,7 @@ seu checkbox_input, ambos precisam ser alterados em nossa home, é isso que irem
 </div>
 ```
 
-Semelhantemente teremos que fazer alterações em info.vue, visto que vamos ter um spec para ele também.
+Similarly, we'll have to make changes to info.vue, since we're going to have a spec for it too.
 
 ```
 <form class="form-horizontal well" @submit.prevent="updateTask()" >
@@ -78,13 +78,13 @@ Semelhantemente teremos que fazer alterações em info.vue, visto que vamos ter 
 </form>
 ```
 
-E são somente essas as alterações, para podermos testar as funcionalidade de update, feito você pode rodar um primeiro test:
+And these are the only changes. To be able to test the update functionality, once done you can run a first test:
 
 ```
 sudo npm run test
 ```
 
-Se o status para assetions foi completo, vamos para o nosso segundo teste:
+If the status for assertions was complete, let's go to our second test:
 
 secondTaskSpec.js
 
@@ -111,4 +111,4 @@ module.exports = {
 
 ```
 
-A ideia desse é clicar no primeiro edit_task e alterar a view e alterar o input dessa task para `Make a omelete!` e é isso, submeter e alterar, nada de mais, bem acho que por hoje é só, um post simples sobre algo bem tranquilo de se abordar, mais uma vez, obrigado =]
+The idea of this one is to click on the first edit_task and change the view and change the input of this task to `Make a omelete!` and that's it - submit and change, nothing more. Well, I think that's it for today, a simple post about something very easy to approach. Once again, thank you =]

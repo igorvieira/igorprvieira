@@ -1,5 +1,5 @@
 ---
-title: "Perto do fim - Part IV "
+title: "Nearing the End - Part IV "
 pubDate: "Jun 15, 2017"
 description: "Vuejs application"
 category: Javascript, Vuejs
@@ -7,7 +7,7 @@ category: Javascript, Vuejs
 
 ![ohyeah](https://github.com/IgorVieira/igorvieira.github.io/blob/master/_images/ohyeah.jpg?raw=true)
 
-Okay, vamos continuar o nosso projeto, a ideia é que daqui em diante possamos criar mais dois dos nossos quatro métodos, já criamos um para listar e outro para poder criar novas tasks e um que também realiza updates, que será usado mais a frente, o que iremos fazer agora é criar um método para poder remover uma task na nossa lista, para isso vamos alterar a nossa função de remover em nosso Home.vue e precisamos modificar a nossa service para deletar a task, vamos a nossa service:
+Okay, let's continue with our project. The idea is that from here on we can create two more of our four methods. We've already created one to list and another to create new tasks, plus one that also performs updates, which will be used later. What we're going to do now is create a method to remove a task from our list. For this, we'll modify our remove function in Home.vue and we need to modify our service to delete the task. Let's go to our service:
 
 TaskService.js:
 
@@ -19,7 +19,7 @@ export default class TaskService{
         this._resource = resource('api/tasks{/id}')
     }
 
-    /** Métodos anteriores **/
+    /** Previous methods **/
 
     deleteTask(id){
         return this._resource
@@ -31,7 +31,7 @@ export default class TaskService{
 }
 ```
 
-Abaixo do método de saveTask()
+Below the saveTask() method
 
 ```
 removeTask(taskItem){
@@ -47,16 +47,16 @@ removeTask(taskItem){
 }
 ```
 
-Bem, o removeTask, recebe o nosso objeto, depois fazemos a chamada da nossa service através do this, a nossa service chama o método deleteTask(id), na qual passamos o nosso objeto com a chave da nossa id,como isso retorna uma promise, a nossa task vai ser removida, porém existe um problema, a nossa lista não vai ser atualizada no nosso front, pois só retornamos a promise vazia, o que fazemos é usar do bom e velho javascript, primeiro pegamos o valor da posição do nosso item junto ao array, depois pegamos o nosso array, e passamos junto ao splice removendo o item referente naquela posição, e é isso que essas duas linhas presentes na função fazem:
+Well, the removeTask receives our object, then we call our service through this. Our service calls the deleteTask(id) method, in which we pass our object with the id key. Since this returns a promise, our task will be removed, but there's a problem: our list won't be updated on the front end because we only return an empty promise. What we do is use good old JavaScript: first we get the position value of our item in the array, then we get our array and pass it to splice, removing the item at that position. That's what these two lines in the function do:
 
 ```
 const taskRemove = this.tasks.indexOf(taskItem)
 this.tasks.splice(taskRemove,1 ),
 ```
 
-Pronto, remover já foi, se quiser faça o teste, crie um item e o remova.
+Done, remove is finished. If you want, test it out: create an item and remove it.
 
-E assim ficará o nosso Home.vue:
+And this is how our Home.vue will look:
 
 ```
 <template>
@@ -82,13 +82,13 @@ E assim ficará o nosso Home.vue:
                                 <hr>
                                        <button class="btn">
                                         <span class="glyphicon                                                  glyphicon-pencil" aria-hidden="true"></span>
-                                        Editar
+                                        Edit
                                        </button>
 
                                     <a @click="removeTask(task)">
                                         <button class="btn">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                        Remover
+                                        Remove
                                        </button>
                                     </a>
                             </div>
@@ -172,7 +172,7 @@ export default {
     .then(tasks => {
         const item = _.map(tasks, item => item);
         this.tasks = item;
-    }, err => console.log(`Erro na listagem da nossa aplicação ${err}`));
+    }, err => console.log(`Error listing our application ${err}`));
 
 
 
@@ -198,20 +198,20 @@ export default {
 </style>
 ```
 
-Nota: Eu fiz uma pequena modificação em style, bem simples, para separar as tasks e para remover os bullets, e é isso.
+Note: I made a small modification to the style, quite simple, to separate the tasks and remove the bullets, and that's it.
 
-Para continuarmos temos que fazer algumas pequenas alterações em duas partes, em routes, pois vamos precisar de mais uma view para podermos editar a nossa task, e precisamos adicionar um `<router-link></router-link>` que é uma tag para poder ir para essa route, que é uma nova view e precisamos de um método para poder receber o valor passado pelo nosso route-link e para que possamos trabalhar com ele, então a ordem é seguinte:
+To continue, we need to make some small changes in two parts: in routes, because we'll need another view to edit our task, and we need to add a `<router-link></router-link>` which is a tag to navigate to that route, which is a new view. We also need a method to receive the value passed by our route-link so we can work with it. So the order is as follows:
 
 - routes
 - Info.vue
-- Alterar Home.vue
-- Criar método para poder
-  receber o valor de uma única task
-- E testar update nessa nova view
+- Modify Home.vue
+- Create method to receive
+  the value of a single task
+- And test update in this new view
 
-Lista feita, vamos agir:
+List done, let's act:
 
-Em routes.js vamos fazer a seguinte alteração, adicionar mais um caminho de onde é a nossa outra view, Info.vue:
+In routes.js we're going to make the following change: add one more path for where our other view is, Info.vue:
 
 ```
 import Info from './components/info/Info.vue'
@@ -226,7 +226,7 @@ export const routes = [
 ]
 ```
 
-Vamos fazer mais uma alteração, criar o nosso novo componente, Info.vue:
+Let's make another change: create our new component, Info.vue:
 
 ```
 ├── App.vue
@@ -244,7 +244,7 @@ Vamos fazer mais uma alteração, criar o nosso novo componente, Info.vue:
 └── routes.js
 ```
 
-A nossa view de Info.vue ficara da seguinte forma:
+Our Info.vue view will look like this:
 
 ```
 <template>
@@ -253,14 +253,14 @@ A nossa view de Info.vue ficara da seguinte forma:
         <div class="col-md-4">
            <form class="form-horizontal well" @submit.prevent="updateTask()" >
                 <div class="form-group">
-                    <label for="" >Nome da Atividade:</label>
+                    <label for="" >Activity Name:</label>
                     <input type="text" class="form-control" v-model="task.activity">
                 </div>
                 <div class="form-group">
-                    <label for="" >Status da atividade:</label>
+                    <label for="" >Activity Status:</label>
                     <input type="checkbox" v-model="task.done">
                 </div>
-                <input type="submit" value="Salvar" class="btn btn-success">
+                <input type="submit" value="Save" class="btn btn-success">
            </form>
 
         </div>
@@ -319,7 +319,7 @@ textarea{
 
 ```
 
-Eu tomei a liberdade e criei mais uma class dentro do domain task, que se chama Task.js, o que ela estabelece para mim? Ela só cria um constructor que recebe e volta os valores que pela mesma são passados, somente isso:
+I took the liberty of creating one more class inside the domain task, called Task.js. What does it do for me? It just creates a constructor that receives and returns the values that are passed through it, that's all:
 
 ```
 export default class Task{
@@ -333,7 +333,7 @@ export default class Task{
 }
 ```
 
-Vamos fazer uma pequena alteração na nossa Home.vue, no botão de editar, para que ele nos passe o valor da id para nossa próxima rota.
+Let's make a small change to our Home.vue, in the edit button, so that it passes the id value to our next route.
 
 ```
 <router-link :to="{ name: 'info', params: { id : task._id }}">
@@ -345,7 +345,7 @@ Vamos fazer uma pequena alteração na nossa Home.vue, no botão de editar, para
 </router-link>
 ```
 
-Se você reparou, no nosso router.js, nós indicamos a qual componente aquele router vai renderizar na view, e podemos passar um nome que é atribuido a nossa view que será renderizada, e o melhor podemos indicar isso no name, igual tem no Home, `name:'info'`, outra coisa é que como indicamos que o path poderia receber uma id, no nosso params, também podemos indicar que ele recebe um id como parâmetro, e é o que podemos utilizar para realizarmos o nosso trabalho através do id da task, e assim passar o valor da mesma para a outra view e para podermos realizar update da mesma já renderizada.
+If you noticed, in our router.js, we indicate which component that router will render in the view, and we can pass a name that is assigned to our view that will be rendered. Better yet, we can indicate this in the name, like in Home, `name:'info'`. Another thing is that since we indicated that the path could receive an id, in our params, we can also indicate that it receives an id as a parameter, and this is what we can use to do our work through the task id, and thus pass its value to the other view and be able to update it once it's already rendered.
 
 Home.vue:
 
@@ -374,14 +374,14 @@ Home.vue:
                                     <router-link :to="{ name: 'info', params: { id : task._id }}">
                                        <button class="btn">
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                        Editar
+                                        Edit
                                        </button>
 
                                     </router-link>
                                     <a @click="removeTask(task)">
                                         <button class="btn">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                        Remover
+                                        Remove
                                        </button>
                                     </a>
                             </div>
@@ -465,7 +465,7 @@ export default {
     .then(tasks => {
         const item = _.map(tasks, item => item);
         this.tasks = item;
-    }, err => console.log(`Erro na listagem da nossa aplicação ${err}`));
+    }, err => console.log(`Error listing our application ${err}`));
 
 
 
@@ -491,7 +491,7 @@ export default {
 </style>
 ```
 
-Agora vamos trabalhar o nosso serviço para que ele possa pegar o valor que foi passado como parâmetro, então vamos voltar ao TaskService.js:
+Now let's work on our service so it can get the value that was passed as a parameter, so let's go back to TaskService.js:
 
 ```
 
@@ -501,7 +501,7 @@ export default class TaskService{
         this._resource = resource('api/tasks{/id}')
     }
 
-    /** Métodos anteriores **/
+    /** Previous methods **/
 
     getTaskById(id) {
         return this._resource
@@ -512,7 +512,7 @@ export default class TaskService{
 }
 ```
 
-Depois vamos fazer uma alterações no nosso Info.vue, uma em nosso data, outro em nosso created, e em nossos método para ter mais uma função de update, primeiro o nosso created!
+Then we're going to make some changes to our Info.vue, one in our data, another in our created, and in our methods to have one more update function. First, our created!
 
 ```
 <script>
@@ -540,7 +540,7 @@ export default {
                 .then(res =>  {
                     return this.task = res
                 }, err => {
-                    console.log(`Erro pegar a task pela a id ${err}`)
+                    console.log(`Error getting task by id ${err}`)
                 })
         }
     },
@@ -558,7 +558,7 @@ export default {
 
 ```
 
-Okay, fizemos uma alteração dizendo que caso tenha uma id eu passo a mesma para o nosso método, e retorno o objeto para a minha task, só que tem um porém, como eu vou receber essa id?, então vamos a nossa alteração no data:
+Okay, we made a change saying that if there's an id, I pass it to our method and return the object to my task. But there's a catch: how am I going to receive this id? So let's go to our change in data:
 
 ```
 data() {
@@ -570,29 +570,27 @@ data() {
 },
 ```
 
-Como passamos no router uma id, eu recebo pelo nosso params, que contém o valor da id, e usamos isso no nosso created(), que ao receber um valor da id, faz a busca do nosso objeto, que uma task que vai ser passada a nossa model, e ai vem o conceito da data binding com o Vue,
-vamos a uma observação na nossa template de Info.vue:
+Since we pass an id in the router, I receive it through our params, which contains the id value, and we use this in our created(). When it receives an id value, it searches for our object, which is a task that will be passed to our model, and here comes the concept of data binding with Vue. Let's look at an observation in our Info.vue template:
 
 ```
 <form class="form-horizontal well" @submit.prevent="updateTask()" >
     <div class="form-group">
-        <label for="" >Nome da Atividade:</label>
+        <label for="" >Activity Name:</label>
         <input type="text" class="form-control" v-model="task.activity">
     </div>
     <div class="form-group">
-        <label for="" >Status da atividade:</label>
+        <label for="" >Activity Status:</label>
         <input type="checkbox" v-model="task.done">
     </div>
-    <input type="submit" value="Salvar" class="btn btn-success">
+    <input type="submit" value="Save" class="btn btn-success">
 </form>
 ```
 
-Como criamos uma class Task que tem um constructor que recebe dois valores, a activity e done,
-nós podemos trabalhar passando esses valores para a nossa model e receber as mesmas através do nosso método de busca, é algo bem legal, e se assemelha muito com o jeito Angular de realizar as coisas.
+Since we created a Task class that has a constructor that receives two values, activity and done, we can work by passing these values to our model and receive them through our search method. It's pretty cool, and it's very similar to the Angular way of doing things.
 
-Continuando...
+Continuing...
 
-Se você observou bem, eu já tenho ali no meu form uma função, `updateTask()`, vamos criar essa mesma dentro do método, já que ela é bem semelhante ao nosso método de save, só vamos básicamente passar o id e receber o valor para atualizarmos a nossa view, e é isso:
+If you looked closely, I already have a function there in my form, `updateTask()`. Let's create it inside methods, since it's very similar to our save method. We'll basically just pass the id and receive the value to update our view, and that's it:
 
 ```
 methods:{
@@ -607,9 +605,9 @@ methods:{
 
 ```
 
-E agora, vamos testar, se tudo foi seguido, a gente já conseguiu atualizar a nossa tarefa, e é isso!
+And now, let's test it. If everything was followed correctly, we've already managed to update our task, and that's it!
 
-Veja o Info.vue completo:
+See the complete Info.vue:
 
 ```
 <template>
@@ -618,14 +616,14 @@ Veja o Info.vue completo:
         <div class="col-md-4">
            <form class="form-horizontal well" @submit.prevent="updateTask()" >
                 <div class="form-group">
-                    <label for="" >Nome da Atividade:</label>
+                    <label for="" >Activity Name:</label>
                     <input type="text" class="form-control" v-model="task.activity">
                 </div>
                 <div class="form-group">
-                    <label for="" >Status da atividade:</label>
+                    <label for="" >Activity Status:</label>
                     <input type="checkbox" v-model="task.done">
                 </div>
-                <input type="submit" value="Salvar" class="btn btn-success">
+                <input type="submit" value="Save" class="btn btn-success">
            </form>
 
         </div>
@@ -656,7 +654,7 @@ export default {
                 .then(res =>  {
                     return this.task = res
                 }, err => {
-                    console.log(`Erro pegar a task pela a id ${err}`)
+                    console.log(`Error getting task by id ${err}`)
                 })
         }
     },
@@ -667,8 +665,8 @@ export default {
                 this.service
                 .saveTask(this.task)
                 .then(() => {
-                    console.log('Atualizado com sucesso!');
-                },err => console.log(`Erro em atualizar task ${err}`))
+                    console.log('Updated successfully!');
+                },err => console.log(`Error updating task ${err}`))
         }
     }
 
@@ -697,4 +695,4 @@ textarea{
 
 ```
 
-Bem, acho que por hoje é só, ainda vamos fazer algumas pequenas alterações, mas o básico já fizemos, e nos próximos passos, vamos trabalhar nossa aplicação com Firebase, algo bem simples, mas legal, e vamos por último escrever a nossa sequência para o nosso teste e2e, e é isso, mais dois posts, e acho que concluímos, mais uma vez obrigado, e até mais =]
+Well, I think that's it for today. We still have some small changes to make, but we've done the basics. In the next steps, we'll work on our application with Firebase, something quite simple but cool, and finally we'll write our sequence for our e2e test. That's it, two more posts and I think we'll be done. Thanks again, and see you later =]

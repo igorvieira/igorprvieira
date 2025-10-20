@@ -1,14 +1,14 @@
 ---
-title: Vite Setup com Playwright - Part 6
+title: Vite Setup with Playwright - Part 6
 pubDate: "Apr 03 2023"
-description: "Playwright 😎"
+description: "Playwright"
 category: Javascript
 heroImage: /vite-part6.png
 ---
 
 Playwright
 
-Com playwright começamos pelo yarn create dele:
+With playwright we start with its yarn create:
 
 ```bash
   yarn create playwright
@@ -20,20 +20,20 @@ Workflow como false:
 
 <img src='/vite-part6-2.png' width='100%'>
 
-E ele deve instalar nas dev dependências o playwright e deve salvar ai os plugins para o eslint também
+And it should install playwright in the dev dependencies and should also save the plugins for eslint there
 
-E eu mudei algumas coisas no nosso package.json script, adicionando os testes e2e e quebrando em dois a forma de build:
+And I changed some things in our package.json script, adding e2e tests and splitting the build form in two:
 
 ```json
 {
-  //outros scripts acima
+  //other scripts above
   "test:playwright": "playwright test --headed --config=playwright.config.ts --project=chromium",
   "test:playwright:helper": "npx playwright codegen http://localhost:3000"
-  //outros scripts abaixo
+  //other scripts below
 }
 ```
 
-E no playwright eu só defini as portas onde ele deve rodar:
+And in playwright I only defined the ports where it should run:
 
 ```json
   baseURL: "http://localhost:3000",
@@ -50,14 +50,14 @@ E no playwright eu só defini as portas onde ele deve rodar:
  }
 ```
 
-Deletei também a pasta de test-examplos e no folder e2e eu criei esse arquivo `counter.spec.ts`:
+I also deleted the test-examples folder and in the e2e folder I created this file `counter.spec.ts`:
 
 ```shell
 └── e2e
   └── counter.spec.ts
 ```
 
-E o nosso counter deve ficar assim:
+And our counter should look like this:
 
 ```typescript
 import { test, expect } from "@playwright/test";
@@ -76,9 +76,9 @@ test("get started link", async ({ page }) => {
 
 <img src='/vite-part6-3.png' width='100%'>
 
-Bem, nesse momento tudo deve rodar bem, contudo eu quero só deixar um pouco mais organizado
-para que você possa rodar em um ambiente de produção em um CI/CD de verdade e vamos criar
-as seguintes pastas:
+Well, at this point everything should run well, however I just want to leave it a bit more organized
+so you can run it in a production environment in a real CI/CD and let's create
+the following folders:
 
 ```shell
 └── e2e
@@ -90,7 +90,7 @@ as seguintes pastas:
   └── vite.config.ts
 ```
 
-O primeiro arquivo é para gerenciar os nossos folders e fazer ser lido os mesmos, que é o tsconfig.json:
+The first file is to manage our folders and make them be read, which is tsconfig.json:
 
 ```json
 {
@@ -125,7 +125,7 @@ O primeiro arquivo é para gerenciar os nossos folders e fazer ser lido os mesmo
 }
 ```
 
-O segundo é só uma instancia do playwright para rodarmos bem a nossa aplicação:
+The second is just an instance of playwright to run our application properly:
 
 ```typescript
 import type { PlaywrightTestConfig } from "@playwright/test";
@@ -137,7 +137,7 @@ export default {
 } as PlaywrightTestConfig;
 ```
 
-E agora só vamos organizar o nosso counter para poder lidar os diversos caminhos de testes e o counter.spec para rodar os nossos testes, e para isso vamos passar os dados pelo nosso construtor e sempre instanciando em nossos testes:
+And now we'll just organize our counter to be able to handle the various test paths and counter.spec to run our tests, and for this we'll pass the data through our constructor and always instantiating in our tests:
 
 counter.ts:
 
@@ -185,6 +185,6 @@ test("get started link", async ({ page }) => {
 });
 ```
 
-E bem, fechamos aqui a nosso setup, espero que tenham curtido e qualquer coisa segue aqui o link do repositório:
+And well, we're done with our setup here, I hope you enjoyed it and here's the repository link:
 
 Github: [Vite Setup](https://github.com/igorvieira/vite-setup)

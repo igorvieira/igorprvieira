@@ -1,17 +1,17 @@
 ---
-title: Vite Setup com Jest - Part 5
+title: Vite Setup with Jest - Part 5
 pubDate: "Apr 02 2023"
-description: "Por que não Jest?"
+description: "Why not Jest?"
 category: Javascript
 heroImage: /vite-part5.png
 ---
 
-Eu não sei até onde isso é altamente recomendável, já que existem projetos como vitest, mas por uma questão de opção pessoal eu preferi ter o jest no meu repertório de ferramentas.
+I don't know how highly recommended this is, since there are projects like vitest, but as a matter of personal choice I preferred to have jest in my toolkit.
 
-No nosso `tsconfig.json` eu simplemente irei adicionar o nosso include:
+In our `tsconfig.json` I'll simply add our include:
 
 ```json
-  // outras configs
+  // other configs
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
@@ -21,7 +21,7 @@ No nosso `tsconfig.json` eu simplemente irei adicionar o nosso include:
   "references": [{ "path": "./tsconfig.node.json" }]
 ```
 
-adicionei um arquivo na raiz do projeto chamado jest.config.js
+I added a file at the project root called jest.config.js
 
 ```typescript
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
 };
 ```
 
-E adicionei algumas libraries do próprio jest ao nosso package.json:
+And I added some libraries from jest itself to our package.json:
 
 ```json
  "@babel/preset-env": "^7.20.2",
@@ -62,13 +62,13 @@ E adicionei algumas libraries do próprio jest ao nosso package.json:
   "jest-styled-components": "^7.1.1",
 ```
 
-E na parte de scripts eu adicionei esse comando aqui:
+And in the scripts part I added this command here:
 
 ```json
 "test": "jest --maxWorkers=50%  --coverage=false",
 ```
 
-Na raiz do nosso projeto, vamos criar um folder .jest com um arquivo `setup.ts`:
+At the root of our project, let's create a .jest folder with a `setup.ts` file:
 
 ```shell
 └── .jest
@@ -80,7 +80,7 @@ import "@testing-library/jest-dom";
 import "jest-styled-components";
 ```
 
-E por questões de compatibilidade eu adicionei esse .babelrc na raiz do nosso projeto:
+And for compatibility reasons I added this .babelrc at the root of our project:
 
 ```json
 {
@@ -116,7 +116,7 @@ E por questões de compatibilidade eu adicionei esse .babelrc na raiz do nosso p
 }
 ```
 
-E para os nosso testes eu criei um wrapper para poder rodar os mesmos juntos ao nosso ThemeProvider:
+And for our tests I created a wrapper to be able to run them together with our ThemeProvider:
 
 ```shell
 └── src
@@ -142,9 +142,9 @@ export * from "@testing-library/react";
 export { customRender as render };
 ```
 
-Bem, agora vamos trabalhar em cima do nosso componente testável
+Well, now let's work on our testable component
 
-No Counter vamos mudar a forma do component que será assim:
+In Counter we'll change the component form which will be like this:
 
 ```typescript
 import { useState } from "react";
@@ -165,7 +165,7 @@ export const Counter = () => {
 };
 ```
 
-E criaremos o seguinte test para o noss Counter:
+And we'll create the following test for our Counter:
 
 ```shell
 └── src
@@ -202,10 +202,10 @@ describe("Counter", () => {
 });
 ```
 
-E ai é só rodar yarn test e correr para o abraço:
+And then just run yarn test and you're all set:
 
 <img src='/vite-part5-1.png' width='100%'>
 
-Espero que tudo tenha dado certo, até mais!
+I hope everything went well, see you later!
 
 Github: [Vite Setup](https://github.com/igorvieira/vite-setup)

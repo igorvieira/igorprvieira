@@ -1,15 +1,15 @@
 ---
 pubDate: "Nov 22, 2016"
 title: "NodeJS(ES2015) + Heroku  "
-description: "Como realizar deploy de uma aplicação em Nodejs"
+description: "How to deploy a Node.js application"
 ---
 
-Primeiro, “por que Heroku? ” A ideia na verdade é partir de algo mais simples e que todos possam utilizar, como eu creio que essa plataforma é realmente mais pratica, então ela se torna perfeita para a nossa abordagem, em termos relacionados a trabalho em si, o Heroku fica um pouco mais caro, um pouco, porém ela compensa pela sua praticidade, no fim você tem uma cloud que te atende bem, te fornece add-ons que são uteis para os seus projetos, além de ser possível obter SSL free! O que é muito bom, de toda forma Heroku é ótimo tanto para projetos mais simples como o que vamos fazer agora, como para projetos mais elaborados, projetos reais, e com isso vamos para uma outra questão, como criar uma aplicação em Nodejs com Es2015 que funcione perfeitamente com Heroku?! =]
+First, "why Heroku?" The idea is actually to start with something simpler that everyone can use. Since I believe this platform is really more practical, it becomes perfect for our approach. In terms related to work itself, Heroku is a bit more expensive, a bit, but it compensates for its practicality. In the end, you have a cloud that serves you well, provides you with add-ons that are useful for your projects, and you can even get free SSL! Which is very good. In any case, Heroku is great both for simpler projects like what we're going to do now, and for more elaborate projects, real projects. And with that, let's go to another question: how to create a Node.js application with ES2015 that works perfectly with Heroku?! =]
 
-Eu havia pesquisado diversas soluções para isso, principalmente por conta de alguns projetos que eu recebi e os quais eram construídos em NodeJs e Angular, e atualmente (22/11/2016)  se você for olhar a documentação do heroku, o Getting Starter de como buildar um projeto com Nodejs, ele até tem um repositório e instruções de como fazer, porém com uma sintaxe que não corresponde totalmente ao Es2015, e querendo ou não, JS em ES6 fica mais legível, mais prático e facilita de diversas formas no desenvolvimento da sua aplicação, tanto pela adoção do let e a sua forma comportamental em relação ao escopo, a nova forma de construção de functions, a organização das suas estruturas de classes entre outras coisas mais que contribuem para a manutenção do seu código.
+I had researched several solutions for this, mainly because of some projects I received which were built in NodeJS and Angular, and currently (11/22/2016) if you look at Heroku's documentation, the Getting Started on how to build a project with Node.js, it even has a repository and instructions on how to do it, but with a syntax that doesn't fully correspond to ES2015. And whether you like it or not, JS in ES6 is more readable, more practical and facilitates in various ways the development of your application, both by adopting let and its behavioral form in relation to scope, the new way of building functions, the organization of your class structures among other things that contribute to the maintenance of your code.
 
-Enfim, vamos ao código!
-Nosso projeto terá os seguintes arquivos:
+Anyway, let's get to the code!
+Our project will have the following files:
 
 ```
 .
@@ -20,51 +20,51 @@ Nosso projeto terá os seguintes arquivos:
 
 ```
 
-Para começar, vamos setar o nosso package.json e para agilizar vamos digitar o seguinte comando:
+To start, let's set up our package.json and to speed things up let's type the following command:
 npm init -y
-E agora vamos adicionar os módulos ao package.json, que são básicos para fazer um deploy desse projeto e rodar o npm install
+And now let's add the modules to package.json, which are basic to deploy this project and run npm install
 
 ```
 
- "dependencies": {
-    "babel": "^6.5.2",
-    "babel-cli": "^6.14.0",
-    "babel-preset-es2015": "^6.13.2",
-    "express": "^4.14.0"
-  }
+ "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.13.2",
+    "express": "^4.14.0"
+  }
 
 ```
 
-Feito isso, vamos para o nosso próximo arquivo, o app.js, com ele vamos fazer algumas mudanças em torno de sintaxe, até então, em versões mais antigas do Nodejs você fazia requisições de módulos através de requires, por exemplo:
+Once done, let's move to our next file, app.js. With it we'll make some syntax changes. Until now, in older versions of Node.js you made module requests through requires, for example:
 
 ```
 var express = require('express')
 ```
 
-No Es2015, a chamada dos módulos são feitos através de imports:
+In ES2015, module calls are done through imports:
 
 ```
 import express from 'express'
 ```
 
-Então vamos ficar com o import em nosso arquivo para chamar o modulo do express:
+So let's stick with import in our file to call the express module:
 
 ```
 # app.js
-# Importação de módulos
+# Module import
 import express from 'express'
 
 ```
 
-Em meio a isso, uma outra mudança é a forma de composição, você até então criava uma variável app na qual recebia express e assim fazia uso das funções que derivam do express, algo semelhante a isso:
+In the midst of this, another change is the form of composition. You used to create an app variable which received express and thus made use of the functions that derive from express, something similar to this:
 
 ```
-var express =  require('express')
+var express =  require('express')
 var app = express()
 
 ```
 
-O ruim dessa abordagem e que a mesma tinha que ser exportada dentro de um module.exports, na verdade um return de todos os middlawares ou functions em um bloco único, por exemplo passar app.set(''port) para poder rodar  a aplicação em produção ou em desenvolvimento, o código até então ficava assim:
+The bad thing about this approach is that it had to be exported within a module.exports, actually a return of all middlewares or functions in a single block, for example passing app.set('port) to be able to run the application in production or development. The code so far looked like this:
 
 ```
 
@@ -72,8 +72,8 @@ var express = require('express')
 var app = express()
 module.export = function(){
 
-# aqui você colocaria principalmente os seus middlewares
-# e no fim retornava somente o app carregando tudo
+# here you would mainly put your middlewares
+# and in the end just return the app loading everything
 
 app.set('port', (process.env.PORT || 3000));
 return app
@@ -82,7 +82,7 @@ return app
 
 ```
 
-Agora com Es6 fica ainda mais simples:
+Now with ES6 it's even simpler:
 
 ```
 import express from 'express'
@@ -95,27 +95,27 @@ export default app
 
 ```
 
-Particularmente, penso que dessa forma o código fica mais legível, exatamente por ele ser simples como ele é, mas para um início, o simples de um básico bem feito reflete muito no desenvolvimento de aplicações mais elaboradas.
+Personally, I think this way the code is more readable, exactly because it is as simple as it is. But for a start, the simplicity of a well-done basic reflects a lot in the development of more elaborate applications.
 
-Outra mudança significativa e a forma de se escrever funções de request e response, você pode escrever elas utilizando arrow functions
-Por exemplo:
+Another significant change is the way to write request and response functions. You can write them using arrow functions.
+For example:
 
 ```
 app.route(' / ').get((req, res) => res.end('Hello World'))
 
 ```
 
-Fica mais simples escrever functions assim do que a próxima forma que se encontra a baixo, a leitura é mais fluida, principalmente pela versatilidade de poder nesse caso, escrever a mesma função em uma linha, ao menos isso te traz a sensação de entendimento sobre o que essa função realmente faz, coisa que fica estranho caso você tente concatenar em uma linha a mesma função em es5.
+It's simpler to write functions like this than the next form found below. The reading is more fluid, especially for the versatility of being able in this case, to write the same function in one line. At least this gives you the feeling of understanding about what this function really does, which is strange if you try to concatenate the same function in one line in ES5.
 
 ```
 
-app.route(' / ').get( function(req, res){
-      res.end('Hello World')
+app.route(' / ').get( function(req, res){
+      res.end('Hello World')
 })
 
 ```
 
-Tudo em es5 tem a seguinte cara:
+Everything in ES5 looks like this:
 
 ```
 
@@ -124,8 +124,8 @@ var express = require('express')
 var app = express()
 module.export = function(){
 
-app.route(' / ').get( function(req, res){
-      res.end('Hello World')
+app.route(' / ').get( function(req, res){
+      res.end('Hello World')
 })
 
 app.set('port', (process.env.PORT || 3000));
@@ -135,7 +135,7 @@ return app
 
 ```
 
-Agora em Es6 o nosso código fica assim:
+Now in ES6 our code looks like this:
 
 ```
 
@@ -151,16 +151,16 @@ export default app
 
 ```
 
-O que vimos é o ganho de legibilidade e simplicidade, legibilidade é a palavra-chave nisso tudo, pois em termos de manutenibilidade, essas pequenas mudanças ajudam consideravelmente em projetos de grande escala, na verdade ainda é possível separar e montar uma arquitetura com pequenos módulos para facilitar a organização da nossa aplicação, pois querendo ou não, quando se tem uma aplicação muito grande, não é interessante ter por exemplo, funções de routes em um arquivo que seta os módulos básicos para o funcionamento da aplicação como um todo.
-Continuando ...
+What we see is the gain in readability and simplicity. Readability is the key word in all this, because in terms of maintainability, these small changes help considerably in large-scale projects. In fact, it's still possible to separate and build an architecture with small modules to facilitate the organization of our application, because whether you like it or not, when you have a very large application, it's not interesting to have, for example, route functions in a file that sets the basic modules for the application to function as a whole.
+Continuing...
 
-Próximo arquivo é o server.js, na verdade é o mais simples já que compreendemos as pequenas modificações que dão um belo açúcar sintático e facilitam a leitura do nosso código, bem, primeiro vamos importar o modulo app que contém a nossa configuração para um server básico e a nossa rota principal.
+The next file is server.js. Actually it's the simplest since we understand the small modifications that give a nice syntactic sugar and facilitate the reading of our code. Well, first let's import the app module that contains our configuration for a basic server and our main route.
 
 ```
 import app from './app'
 ```
 
-Depois vamos adicionar ao nosso server o protocolo de requisição http, que é um modulo nativo node que cria de fato o nosso server, e no fim os nossos imports ficam assim:
+Then let's add to our server the http request protocol, which is a native Node module that actually creates our server, and in the end our imports look like this:
 
 ```
 import app from "./app"
@@ -168,18 +168,18 @@ import http from "http"
 
 ```
 
-Feito isso, vamos criar o nosso servidor de fato:
+Once done, let's actually create our server:
 
 ```
 import app from "./app"
 import http from "http"
 
 http.createServer(app.get('port')).listen(port, ()=>{
-  console.log('server is running:'+ port)
+  console.log('server is running:'+ port)
 })
 ```
 
-Só para melhorar isso tudo, vamos criar uma nova constante para port:
+Just to improve this all, let's create a new constant for port:
 
 ```
 import app from "./app"
@@ -188,41 +188,41 @@ import http from "http"
 const port = app.get('port')
 
 http.createServer(app).listen(port, ()=>{
-  console.log('server is running:'+ port)
+  console.log('server is running:'+ port)
 })
 ```
 
-Vamos a mais um arquivo .babelrc, ele e um arquivo para carregamento de plugins, no caso teremos o nosso plugin para podermos escrever em es2015:
+Let's go to one more file .babelrc. It's a file for loading plugins. In this case we'll have our plugin so we can write in ES2015:
 
 ```
 / * .babelrc */
 {
-  "presets": ["es2015"]
+  "presets": ["es2015"]
 }
 ```
 
-Ok, estamos quase terminando...quase kkk
-Agora, se você rodar o código, digitar simplesmente, ```node server````, ele vai dar o seguinte erro:
+Ok, we're almost done...almost haha
+Now, if you run the code, simply type ```node server```, it will give the following error:
 
 ```
 (function (exports, require, module, __filename, __dirname) { import app from "./app"
-                                                              ^^^^^^
+                                                              ^^^^^^
 SyntaxError: Unexpected token import
 ```
 
-Porque não funciona? Por que o node não tem todas a features de es2015 em seu core, então vamos ter que voltar ao nosso package.json e fazer uma pequena modificação ao nosso escopo de scripts, e vamos escrever o nosso start dessa forma, usando o babel-node para rodar o nosso server:
+Why doesn't it work? Because Node doesn't have all the ES2015 features in its core, so we'll have to go back to our package.json and make a small modification to our scripts scope, and we'll write our start this way, using babel-node to run our server:
 
 ```
 
- "scripts": {
-       "start": "./node_modules/.bin/babel-node server.js",
-       "test": "echo \"Error: no test specified\" && exit 1"
-  }
+ "scripts": {
+       "start": "./node_modules/.bin/babel-node server.js",
+       "test": "echo \"Error: no test specified\" && exit 1"
+  }
 
 ```
 
-Agora se você digitar o comando npm start, ele vai levantar o server localmente e assim você verá o Hello World da nossa aplicação.
-Até agora nossos arquivos estão assim:
+Now if you type the npm start command, it will start the server locally and you'll see the Hello World from our application.
+So far our files look like this:
 
 ```
 
@@ -230,7 +230,7 @@ Até agora nossos arquivos estão assim:
 
 import express from 'express';
 const. app = express();
-app.route('/') .get((req, res)=>res.end('Hello World'))
+app.route('/') .get((req, res)=>res.end('Hello World'))
 app.set('port', (process.env.PORT || 3000))
 
 
@@ -244,7 +244,7 @@ import app from "./app"
 import http from "http"
 const port = app.get('port')
 http.createServer(app).listen(port, ()=>{
-  console.log('server is running:'+ port)
+  console.log('server is running:'+ port)
 })
 
 
@@ -252,30 +252,30 @@ http.createServer(app).listen(port, ()=>{
 
 
 {
-  "name": "node-heroku",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/babel-node server.js"
-  },
-  "dependencies": {
-    "babel": "^6.5.2",
-    "babel-cli": "^6.14.0",
-    "babel-preset-es2015": "^6.13.2",
-    "express": "^4.14.0"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "name": "node-heroku",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/babel-node server.js"
+  },
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.13.2",
+    "express": "^4.14.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
 
 
 ```
 
-Pronto, agora vamos para o gran finale! O Deploy =]
-Vamos adicionar o Procfile em nosso repositório, e só um arquivo sem extensão chamado Procfile.
+Ready, now let's go to the grand finale! The Deploy =]
+Let's add the Procfile to our repository. It's just a file without extension called Procfile.
 
 ```
 
@@ -286,17 +286,17 @@ web: ./node modules/.bin/babel-node server.js
 
 ```
 
-Esse arquivo faz com você rode o server da mesma forma que você fez no package.json, mas dessa vez ele irá inicializar nossa aplicação no heroku, é um arquivo muito importante.
+This file makes you run the server the same way you did in package.json, but this time it will initialize our application on Heroku. It's a very important file.
 
-Agora para upar todos os nossos arquivos vamos ter que inicializar o git, pois o heroku funciona também por git, na real é a melhor forma de upar o seu repositório e vamos fazer o básico:
-
-```
-
-git init /* para inicializar a pasta do git no repositório */
+Now to upload all our files we'll have to initialize git, because Heroku also works through git. Actually, it's the best way to upload your repository and let's do the basics:
 
 ```
 
-Feito isso, para não importar tudo, não custa nada adicionar um simples arquivo .gitignore para não upar node_modules para o heroku.
+git init /* to initialize the git folder in the repository */
+
+```
+
+Once done, to not import everything, it doesn't hurt to add a simple .gitignore file to not upload node_modules to Heroku.
 
 ```
 
@@ -307,7 +307,7 @@ Feito isso, para não importar tudo, não custa nada adicionar um simples arqui
 
 ```
 
-E vamos commitar tudo.
+And let's commit everything.
 
 ```
 git add .
@@ -315,47 +315,47 @@ git commit -m "initial commit"
 
 ```
 
-Bem, para  realizar o deploy você precisa ter uma conta no [ Heroku](https://www.heroku.com/)  e precisa baixar o cliente do [Heroku Toolbelt](https://devcenter.heroku.com/articles/heroku-command-line)
-Após instalar o Heroku toolbelt e ter criado a sua conta, você entrara no repositório onde está o nosso código e digitar o seguinte comando:
+Well, to perform the deploy you need to have an account on [Heroku](https://www.heroku.com/) and need to download the [Heroku Toolbelt](https://devcenter.heroku.com/articles/heroku-command-line) client.
+After installing Heroku toolbelt and creating your account, you'll enter the repository where our code is and type the following command:
 
 ```
 heroku login
-Ele vai pedir a sua conta do heroku :
-Enter  your Heroku credentials.
+It will ask for your Heroku account:
+Enter  your Heroku credentials.
 Email: igor.p.r.vieira@gmail.com
-Password (typing will be hidden): 
+Password (typing will be hidden):
 ```
 
-Já devidamente autenticado, vamos para nosso próximo e último passo, criar a nossa aplicação no Heroku, você pode digitar o comando a seguir para criar uma url automaticamente ou pode criar uma url para você manualmente:
+Already properly authenticated, let's go to our next and last step, create our application on Heroku. You can type the following command to create a URL automatically or you can create a URL for yourself manually:
 
 ```
 
-#  URL Automática
+#  Automatic URL
 
 
 heroku create
 
 
-# URL Especifica
+# Specific URL
 
 
-heroku create meu-app-nodejs /*nome da minha aplicacao*/
+heroku create meu-app-nodejs /*my application name*/
 
 ```
 
-Após ter criado o nosso app no Heroku e como já comitamos o nosso repositório e só rodar o comando para deploy pelo próprio git.
+After creating our app on Heroku and since we already committed our repository, just run the command to deploy through git itself.
 
 ```
 git push heroku master
 
 ```
 
-Em seguida você vai ver o link para acessar a sua aplicação
+Then you'll see the link to access your application.
 
-No meu caso:
+In my case:
 https://my-app-nodejs.herokuapp.com/
 
-E por fim o nosso Hello World!
-E é isso, foi longo, o código fonte está abaixo, qualquer dúvida deixe seu comentário, vlw, obrigado e até mais! =]
+And finally our Hello World!
+And that's it, it was long. The source code is below. Any questions, leave your comment. Thanks and see you later! =]
 
-Código fonte: [Github!](https://github.com/IgorVieira/my-app-nodejs)
+Source code: [Github!](https://github.com/IgorVieira/my-app-nodejs)

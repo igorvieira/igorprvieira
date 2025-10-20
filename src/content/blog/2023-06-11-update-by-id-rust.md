@@ -1,12 +1,12 @@
 ---
-title: Rust API - Criando a rota de update by id com rust - Part VII
+title: Rust API - Creating the Update by ID Route with Rust - Part VII
 pubDate: "Jun 11 2023"
 description: "Rust"
 category: rust
 heroImage: /new_update_id.jpg
 ---
 
-Não vamos perder tempo, no nosso schema.rs, vamos escrever o UpdateSchema da nossa aplicação para trabalhar o nosso update o nosso vai se chamar UpdateTaskSchema:
+Let's not waste time. In our schema.rs, let's write the UpdateSchema of our application to work on our update. Ours will be called UpdateTaskSchema:
 
 ```rust
 #[derive(Serialize, Deserialize, Debug)]
@@ -16,7 +16,7 @@ pub struct UpdateTaskSchema {
 }
 ```
 
-Na nossa service, vamos importar pelo nosso actix_web o método `path` junto ao nosso actix_web:
+In our service, let's import the `patch` method from our actix_web:
 
 ```rust
 use actix_web::{
@@ -37,7 +37,7 @@ use actix_web::{
 };
 ```
 
-E vamos começar a desenvolver o nosso `update_task_by_id`:
+And let's start developing our `update_task_by_id`:
 
 ```rust
 #[patch("/tasks/{id}")]
@@ -50,7 +50,7 @@ async fn update_task_by_id(
 }
 ```
 
-Observe que nosso path a gente está em busca do nosso uuid, porém agora temos um body com um dado novo a ser atualizado.
+Note that in our path we're looking for our uuid, but now we have a body with new data to be updated.
 
 ```rust
 
@@ -66,9 +66,9 @@ async fn update_task_by_id(
 
 ```
 
-Próximo ponto é fazer a nossa query e o tratamento de erro, o que vai ser um pouco diferente frente ao que fizemos até então, pois primeiro precisamos fazer uma busca por id e depois fazer um update por id frente ao nosso content ou title.
+Next point is to make our query and error handling, which will be a bit different from what we've done so far, as we first need to search by id and then do an update by id for our content or title.
 
-Então o primeiro passo, criar o nosso select:
+So the first step, create our select:
 
 ```rust
 #[patch("/tasks/{id}")]
@@ -85,7 +85,7 @@ async fn update_task_by_id(
             .fetch_one(&data.db).await
     {
         Ok(task) => {
-          //...calma que vamos voltar aqui
+          //...hold on, we'll come back here
         }
         Err(err) => {
             let message = format!("Internal server error: {:?}", err);
@@ -97,7 +97,7 @@ async fn update_task_by_id(
 }
 ```
 
-E agora, vamos trabalhar o retorno da nossa aplicação fazendo o update de fato, seja de title ou do nosso content:
+And now, let's work on the return of our application by actually doing the update, whether of title or our content:
 
 ```rust
 #[patch("/tasks/{id}")]
@@ -154,7 +154,7 @@ async fn update_task_by_id(
 }
 ```
 
-Por fim, adicionar nossa nova função de update junto a nossa config
+Finally, add our new update function to our config:
 
 ```rust
 pub fn config(conf: &mut ServiceConfig) {
@@ -170,7 +170,7 @@ pub fn config(conf: &mut ServiceConfig) {
 }
 ```
 
-O nosso arquivo no final fica assim:
+Our file in the end looks like this:
 
 ```
   src/services.rs
@@ -443,7 +443,7 @@ pub fn config(conf:  &mut ServiceConfig) {
 
 ```
 
-Para testar, nós iremos criar uma nova task (again):
+To test, we'll create a new task (again):
 
 ```
 curl --request POST \
@@ -455,7 +455,7 @@ curl --request POST \
 }'
 ```
 
-Ele deve me gerar essa task onde eu irei pegar o nosso id:
+It should generate this task where I'll grab our id:
 
 ```json
 {
@@ -471,7 +471,7 @@ Ele deve me gerar essa task onde eu irei pegar o nosso id:
 }
 ```
 
-E vamos através do id, atualizar o body:
+And let's update the body through the id:
 
 ```
 curl --request PATCH \
@@ -483,7 +483,7 @@ curl --request PATCH \
 }'
 ```
 
-E concluimos:
+And we're done:
 
 ```
 {
@@ -499,4 +499,4 @@ E concluimos:
 }
 ```
 
-Próximos passos, logs...que a vida sem rumo é triste kk Grande abraço e até mais =]
+Next steps, logs...because life without direction is sad haha. Big hug and see you later =]

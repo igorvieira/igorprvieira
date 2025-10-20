@@ -1,19 +1,19 @@
 ---
-title: Vite Setup com Styled-Components - Part 4
+title: Vite Setup with Styled-Components - Part 4
 pubDate: "Apr 01 2023"
 description: "Styled-components!"
 category: Javascript
 heroImage: /vite-part4.png
 ---
 
-Esse daqui se você quiser dar skip, pode, eu só vou fazer porque prefiro muito mais styled components a outras coisas como Tailwind…(please don't!). Para começar vamos só adicionar ao nosso projeto o styled-components.
+You can skip this one if you want, I'm only doing it because I prefer styled components much more than other things like Tailwind...(please don't!). To start, let's just add styled-components to our project.
 
 ```shell
   yarn add styled-components && yarn add @types/styled-components -D
 ```
 
-Vamos criar uma pasta da raiz de src chamada styles e vamos adicionar dois arquivos:
-O resets.ts e o theme.ts.
+Let's create a folder from the src root called styles and add two files:
+resets.ts and theme.ts.
 
 ```
 └── styles
@@ -21,7 +21,7 @@ O resets.ts e o theme.ts.
   └── theme.ts
 ```
 
-No reset teremos esses estilos aqui que deixarão resetados algumas coisas que de fato serão a base para o nosso css.
+In reset we'll have these styles here that will reset some things that will actually be the base for our css.
 
 resets.ts:
 
@@ -56,7 +56,7 @@ const ResetStyles = createGlobalStyle`
 export default ResetStyles;
 ```
 
-E no arquivo de theme vamos deixar dessa forma:
+And in the theme file let's leave it this way:
 
 ```typescript
 export default {
@@ -71,7 +71,7 @@ export default {
 };
 ```
 
-Na nossa main vamos precisar chamar o Provider do StyledComponent para que todo o nosso projeto possa receber/ter acesso ao arquivo de theme que criamos:
+In our main we'll need to call the StyledComponent Provider so that our entire project can receive/have access to the theme file we created:
 
 ```typescript
 import React from "react";
@@ -93,7 +93,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 );
 ```
 
-Depois disso, vamos criar um outro folder na raiz de src chamado types, onde iremos declarar os tipos para poderem ser vistos e acessados em todo o nosso projeto e nele declarar o seguinte tipo: styled-components.d.ts
+After that, let's create another folder at the src root called types, where we'll declare the types so they can be seen and accessed throughout our entire project and in it declare the following type: styled-components.d.ts
 
 ```
 └── types
@@ -111,7 +111,7 @@ declare module "styled-components" {
 }
 ```
 
-Após isso nós iremos criar um component chamado Content que será usado somente para dar ao nosso App.js algumas zonas de respiro com alguns paddings. E vamos ter apenas dois files dentro do nosso component:
+After that, we'll create a component called Content that will only be used to give our App.js some breathing room with some paddings. And we'll have only two files inside our component:
 
 ```
 └── components
@@ -132,7 +132,7 @@ export const Wrapper = styled.main`
 `;
 ```
 
-se você olhar bem, theme está sendo passado pelo nosso provider e sendo recebido no nosso wrapper e assim garantimos o valor do nosso padding.
+if you look carefully, theme is being passed by our provider and being received in our wrapper and thus we guarantee the value of our padding.
 
 index.tsx:
 
@@ -144,7 +144,7 @@ export const Content = ({ children }: { children: React.ReactNode }) => {
 };
 ```
 
-No nosso Counter component iremos fazer outras novas mudanças
+In our Counter component we'll make some new changes
 
 styles.tsx:
 
@@ -180,7 +180,7 @@ export const Counter = () => {
 };
 ```
 
-E por fim, eu fiz mais algumas mudanças no nosso App.js e ele ficou assim:
+And finally, I made some more changes to our App.js and it looked like this:
 
 ```typescript
 import { Content } from "components/Content";
@@ -197,7 +197,7 @@ function App() {
 export default App;
 ```
 
-Agora, para não quebrar o nosso storybook, precisamos fazer um wrapper dele no `preview.cjs`, o qual vamos precisar renomear para `preview.jsx`:
+Now, to not break our storybook, we need to make a wrapper for it in `preview.cjs`, which we'll need to rename to `preview.jsx`:
 
 ```typescript
 import { ThemeProvider } from "styled-components";
@@ -219,7 +219,7 @@ export const decorators = [
 ];
 ```
 
-E um último detalhe, no nosso vite config, nós iremos adicionar uma flag para evitar optimziações grandes e desnecessárias ao nosso projeto:
+And one last detail, in our vite config, we'll add a flag to avoid large and unnecessary optimizations to our project:
 
 ```typescript
 import react from "@vitejs/plugin-react-swc";
@@ -252,12 +252,12 @@ export default defineConfig({
 });
 ```
 
-E bem, se você rodar agora o seu storybook ele deve ficar assim:
+And well, if you run your storybook now it should look like this:
 
 <img src='/vite-part4-1.png' width='100%'>
 
-Creio que por hoje é somente isso! Próximo artigo iremos falar sobre Jest.
+I think that's all for today! Next article we'll talk about Jest.
 
-Até mais!
+See you later!
 
 Github: [Vite Setup](https://github.com/igorvieira/vite-setup)

@@ -6,27 +6,27 @@ category: rust
 heroImage: /ferris.png
 ---
 
-Bem, o intuito aqui não é fazer um Hello World, mas fazer um CRUD bem feito com Rust ajudando ter uma base para uma aplicação web com a linguagem e suas ferramentas, não é falar sobre os conceitos básicos da linguagem (mutabilidade, borrow, ownership e etc), mas dar aplicabilidade a ela, nos conceitos básicos tem essa playlist aqui:
+Well, the goal here is not to make a Hello World, but to build a well-structured CRUD with Rust, helping to establish a foundation for a web application with the language and its tools. This is not about discussing the basic concepts of the language (mutability, borrow, ownership, etc.), but rather about applying them practically. For basic concepts, check out this playlist:
 
 [![Rust lang video](https://img.youtube.com/vi/ZnXfWtb_tg4/0.jpg)](https://www.youtube.com/watch?v=ZnXfWtb_tg4&list=PLt1jJ0_RPJxLiNl2byCur7oT3jXaRkQ6H&index=1)
 
-Dito isso, eu quero fazer uma simples API em Rust onde você ter o mínimo de conhecimento sobre como fazer. Para começar é importante que você tenha o Cargo. Cargo é uma ferramenta em Rust que irá nos ajudar a desenvolver a nossa aplicação, ao menos a estrutura dela e onde depois iremos adicionar as nossas libs para poder construir a nossa aplicação:
+That said, I want to build a simple API in Rust where you can have the minimum knowledge about how to do it. To start, it's important that you have Cargo. Cargo is a tool in Rust that will help us develop our application, at least its structure, and where we'll later add our libraries to build our application.
 
-Para instalar é só você se direcionar para esse site aqui:
+To install it, just go to this website:
 
 <a herf="https://doc.rust-lang.org/cargo/getting-started/installation.html">https://doc.rust-lang.org/cargo/getting-started/installation.html</a>
 
-Lá é só você seguir os baby steps para poder instalar o cargo na sua máquina
+There you just need to follow the baby steps to install cargo on your machine.
 
-Note: Um ponto, tu precisa do rust instalado para instalar o cargo, pode ser óbvio, mas é bom ressaltar o óbvio.
+Note: One important point - you need to have Rust installed to install cargo. It may be obvious, but it's worth stating the obvious.
 
-Vamos lá eu vou começar rodando o comando:
+Let's go, I'll start by running the command:
 
 ```rust
 cargo new rust-api
 ```
 
-Num primeiro momento eu quero só mostrar a estrutura que temos:
+First, I just want to show the structure we have:
 
 ```
 └── rust-api
@@ -37,11 +37,11 @@ Num primeiro momento eu quero só mostrar a estrutura que temos:
   └── Cargo.lock
 ```
 
-Ela é bem simples, se você olhar são poucos folders, o target é um arquivo de binários, src é onde ficará a nossa aplicação e temos o Cargo.toml onde nós temos a definição da nossas libs, um package.json do mundo rust e o Cargo.lock que é onde temos a definição das nossas dependências.
+It's quite simple - if you look, there are few folders. The target is a binary file, src is where our application will be, and we have Cargo.toml where we have the definition of our libraries, similar to package.json in the Rust world, and Cargo.lock which is where we have the definition of our dependencies.
 
-Bem, nessa aplicação iremos usar algumas libs como actix para a nossa parte de requisições http, sqlx para fazer a nossa parte de query junto ao postgres (Ele não é um ORM!), serde para json parse, chrono para datação, dotenv para ler variáveis locais da nossa aplicação e env_logger para log.
+Well, in this application we'll use some libraries like actix for our HTTP request part, sqlx to handle our query part with postgres (It's not an ORM!), serde for JSON parsing, chrono for dates, dotenv to read local variables of our application, and env_logger for logging.
 
-Nosso arquivo Cargo.toml vai ficar assim:
+Our Cargo.toml file will look like this:
 
 ```rust
 [package]
@@ -63,15 +63,15 @@ sqlx = { version = "0.6.2", features = ["runtime-async-std-native-tls", "postgre
 uuid = { version = "1.3.0", features = ["serde", "v4"] }
 ```
 
-Depois disso é rodar o seguinte comando:
+After that, run the following command:
 
 ```bash
 cargo build
 ```
 
-para começar vamos criar mais um arquivo dentro de src chamado services.rs e por hora vamos deixar por lá, dentro do arquivo main.rs nós iremos começar a escrever a nossa aplicação
+To start, let's create one more file inside src called services.rs and for now let's leave it there. Inside the main.rs file we'll start writing our application.
 
-primeiro eu vou começar a importar algumas coisas que serão necessárias na nossa aplicação
+First, I'll start importing some things that will be necessary in our application:
 
 ```rust
 use actix_web::{
@@ -85,9 +85,9 @@ fn main() {
 
 ```
 
-Repare que importamos o App onde nós iremos criar a instância da nossa aplicação e o HttpServer onde nós iremos subir a nossa estrutura,
+Note that we imported App where we'll create the instance of our application and HttpServer where we'll start our structure.
 
-Primeiro vamos apagar tudo que tem dentro da função, e acima da nossa main vamos declarar que a mesma será uma actix main web application.
+First, let's delete everything inside the function, and above our main we'll declare that it will be an actix main web application.
 
 ```rust
 #[actix_web::main]
@@ -96,11 +96,11 @@ async fn main() -> std::io::Result<()> {
 }
 ```
 
-Repare que aqui fazemos o uso de uma async function, se você vem do javascript sabe que essa chamada nos ajuda a ter maior sincronicidade em um conjunto de funções assíncronas, assim garantindo a chamada correta dentro das nossas execuções, um outro ponto é que logo em seguida temos a chamada da `std::io::Result` para a execução e retorno da nossa main
+Note that here we use an async function. If you come from JavaScript, you know that this call helps us have greater synchronicity in a set of asynchronous functions, thus ensuring the correct call within our executions. Another point is that right after we have the `std::io::Result` call for the execution and return of our main.
 
-Nós agora vamos para o nosso arquivo services.rs.
+Now let's go to our services.rs file.
 
-No nosso arquivo nós iremos definir o nosso healthchecker para saber se a nossa aplicação está rodando da forma correta:
+In our file we'll define our healthchecker to know if our application is running correctly:
 
 ```rust
 use actix_web::{ get, web, HttpResponse, Responder };
@@ -124,17 +124,17 @@ pub fn config(conf: &mut web::ServiceConfig) {
 
 ```
 
-o código no final é bem simples, fizemos a chamada do método get do actix, junto com o método web para poder criar a nossa função é realizar um escopo por onde a nossa aplicação irá passar e será exportada de forma pública para a nossa main e temos a nossa função healt_checker que é uma resposta do nosso HttpResponse no formato json para o nosso usuário e nisso somente devolvemos a mensagem que a API está funcionando e uma mensagem de sucesso.
+The final code is quite simple. We called the get method from actix, along with the web method to create our function and establish a scope through which our application will pass and will be exported publicly to our main. We have our health_checker function which is a response from our HttpResponse in JSON format to our user, and in it we only return the message that the API is working and a success message.
 
-Voltando para o nosso arquivo main, nós iremos chamar dentro da nossa aplicação o nosso services.rs
+Going back to our main file, we'll call our services.rs within our application:
 
 ```rust
 mod services;
 
-// todo código abaixo
+// all code below
 ```
 
-o arquivo todo por hora está assim e iremos trabalhar dentro da nossa função main:
+The entire file for now looks like this and we'll work inside our main function:
 
 ```rust
 mod services;
@@ -149,7 +149,7 @@ async fn main() -> std::io::Result<()> {
 }
 ```
 
-dentro dela ficará assim:
+Inside it will look like this:
 
 ```rust
 #[actix_web::main]
@@ -165,7 +165,7 @@ async fn main() -> std::io::Result<()> {
 }
 ```
 
-o arquivo todo de main ficará assim:
+The entire main file will look like this:
 
 ```rust
 mod services;
@@ -188,7 +188,7 @@ async fn main() -> std::io::Result<()> {
 }
 ```
 
-e esse é o nosso service.rs em caso de dúvidas:
+And this is our service.rs in case of doubts:
 
 ```rust
 use actix_web::{ get, web, HttpResponse, Responder };
@@ -211,10 +211,10 @@ pub fn config(conf: &mut web::ServiceConfig) {
 }
 ```
 
-E se você rodar a nossa aplicação com o `cargo run`, ela ficará assim:
+And if you run our application with `cargo run`, it will be like this:
 http://localhost:8080/api/healthchecker
 
-Se quiser o CURL:
+If you want the CURL:
 
 ```bash
 curl --request GET \
@@ -222,7 +222,7 @@ curl --request GET \
   --header 'Content-Type: application/json'
 ```
 
-Retorno:
+Return:
 
 ```json
 {
@@ -231,4 +231,4 @@ Retorno:
 }
 ```
 
-Até mais! =]
+See you later! =]

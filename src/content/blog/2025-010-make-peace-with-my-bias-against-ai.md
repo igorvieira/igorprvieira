@@ -2,6 +2,7 @@
 title: Make Peace with My Bias Against AI
 pubDate: "Oct 14 2025"
 description: ""
+heroImage: "https://plus.unsplash.com/premium_photo-1674931348749-d22ce850b4cb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2340"
 category: saas, ai, rust, learn
 ---
 

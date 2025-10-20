@@ -1,5 +1,5 @@
 ---
-title: Como fazer deploy do pocketbase com Fly.io
+title: How to deploy pocketbase with Fly.io
 pubDate: "Apr 04 2023"
 description: "Pocketbase"
 category: pocketbase
@@ -7,21 +7,21 @@ heroImage: /pocketbase.png
 ---
 
 
-## Começando com Pocketbase
+## Getting started with Pocketbase
 
-Eu atualmente estou mudando algumas coisas que utilizo firebase para um pocketbase, já que é um projeto open source, no qual você pode fazer utilização de um Dockerfile e realizar o build em algum outro serviço que se faça uso do docker, o que é uma grande vantagem nesse aspecto.
-
-
-Um ponto interessante, você pode fazer até mesmo a config de integrar o pocketbase em um bucket da AWS e assim salvar as suas imagens em outro serviço, sei fazer isso nesse momento? Não, mas está ai rsrs quem sabe a gente não faz algo do tipo?  `¯\_(ツ)_/¯`. 
+I'm currently migrating some things I use firebase for to pocketbase, since it's an open source project, in which you can make use of a Dockerfile and build on some other service that uses docker, which is a big advantage in this aspect.
 
 
-Bem, para começarmos, eu irei criar um novo folder:
+An interesting point, you can even configure integrating pocketbase in an AWS bucket and thus save your images on another service. Do I know how to do this right now? No, but it's there haha who knows, maybe we'll do something like that?  `¯\_(ツ)_/¯`.
+
+
+Well, to get started, I'll create a new folder:
 
 ```bash
 mkdir pocketbase
 ```
  
-E onde também iremos criar um Dockerfile contento essa estrutura:
+And where we'll also create a Dockerfile containing this structure:
 
 ```docker
 FROM alpine:latest
@@ -45,20 +45,20 @@ CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080"]
 
 
 
-Depois fazemos o build:
+Then we do the build:
 
 ```bash
   docker build -t pocketbase .
 ```
 
 
-E depois rodamos o container localmente:
+And then we run the container locally:
 
 ```bash
  docker run -it --rm -p 8080:8080 pocketbase
 ```
 
-E ele deve rodar tanto a API quanto a UI dele
+And it should run both its API and UI
 
 ```bash
 > Server started at: http://0.0.0.0:8080
@@ -66,17 +66,17 @@ E ele deve rodar tanto a API quanto a UI dele
 - Admin UI: http://0.0.0.0:8080/_/
 ```
 
-No segundo link você consegue abrir no seu browser o nosso admin:
+On the second link you can open our admin in your browser:
 
 <img src='/pocketbase-1.png' width="100%"/>
 
 
-## Baby steps com Fly.io
+## Baby steps with Fly.io
 
 <img src='/fly.io.png' />
 
 
-Bem, eu criei a minha conta no Fly.io que é um seviço de cloud em que podemos manter a nossa aplicação disponível a demais outras pessoas, e nesse momento se faz necessário ter o cli dele, atualmente ele está disponível da seguinte forma:
+Well, I created my account on Fly.io which is a cloud service where we can keep our application available to other people, and at this moment it's necessary to have its cli, currently it's available as follows:
 
 ``` bash
 # Windows:
@@ -89,14 +89,14 @@ brew install flyctl
 curl -L https://fly.io/install.sh | sh
 ```
 
-Após isso é realizar a autenticação com esse comando:
+After that, authenticate with this command:
  
 ```bash
 fly auth login
 ```
 
 
-E dentro do nosso repositório eu irei rodar o comando de fly launch que deve rodar as seguintes perguntas:
+And inside our repository I'll run the fly launch command which should run the following questions:
 
 
 ```bash
@@ -107,7 +107,7 @@ Detected a Dockerfile app
 ? Choose an app name (leave blank to generate one):
 ```
 
-Vamos colocar o nome de `pocketbase-content`
+Let's name it `pocketbase-content`
 
 
 ```bash
@@ -129,7 +129,7 @@ Vamos colocar o nome de `pocketbase-content`
   Madrid, Spain (mad)
 ```
 
-Escolhi o servidor do Rio como o mais próximo de mim e coloquei não para as três perguntas seguintes:
+I chose the Rio server as the closest to me and put no for the next three questions:
 
 ```bash
 ? Would you like to set up a Postgresql database now? No
@@ -139,7 +139,7 @@ Wrote config file fly.toml
 Your app is ready! Deploy with `flyctl deploy`
 ```
 
-Note que ele já escreveu o fly.toml que é o nosso arquivo para configuração de deploy
+Note that it already wrote the fly.toml which is our file for deploy configuration
 
 ```bash
 
@@ -188,7 +188,7 @@ processes = []
 
 
 
-No final dele devemos colocar esse seguinte conjunto
+At the end of it we should put this following set
 
 ```bash
  [mounts]
@@ -196,7 +196,7 @@ No final dele devemos colocar esse seguinte conjunto
   source = "pb_data"
 ```
 
-E o arquivo inteiro ficará assim:
+And the entire file will look like this:
 
 ```bash
 # fly.toml file generated for pocketbase-content on 2023-04-02T13:46:47-03:00
@@ -244,7 +244,7 @@ processes = []
 ```
 
 
-Depois é só rodar o comando de launch para montar o nosso pb_data:
+Then just run the launch command to mount our pb_data:
 
 
 ```bash
@@ -270,28 +270,28 @@ Created at: 02 Apr 23 16:55 UTC
 
 ```
 
-Note que é importante ser o mesmo local que escolhemos quando criamos o app!
+Note that it's important to be the same location we chose when we created the app!
 
-Depois de ter criado o volume pb_data lá em cima, é só fazer o deploy da aplicação:
+After creating the pb_data volume above, just deploy the application:
 
 ```bash
 fly deploy
 ```
 
-E aí é acessar a nossa url:
+And then access our url:
 
 https://pocketbase-content.fly.dev/_/?installer#
 
 
-Criar a sua conta
+Create your account
 
 
 <img src='/pocketbase-2.png' />
 
-E é isso: 
+And that's it:
 
 
 <img src='/pocketbase-3.png' />
 
-Espero que tenha ajudado! Até mais! =]
+Hope this helped! See you later! =]
 

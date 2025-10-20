@@ -1,12 +1,12 @@
 ---
-title: Rust API - Adicionando rota de criação de tasks - Part III
+title: Rust API - Adding Task Creation Route - Part III
 pubDate: "May 31 2023"
 description: "Rust"
 category: rust
 heroImage: /new_task.jpg
 ---
 
-O próximo passo é trabalhar a nossa main, faremos o impot da nosso schema e da nossa model, e iremos chamar a nossa lib web que será usada no set do Data da nossa aplicação, por hora só iremos chamá-la, também iremos chamar o nosso dotenv para leitura do nosso .env que tem todas as nossas secrets de banco de dados sem mostrar de fato os dados do nosso banco no código, depois iremos chamar a nossa lib para leitura da base de dados, o sqlx onde iremos importar o nosso PgPoolOptions, Pool e Postgres struct e assim criar a nossa structure de estados do banco de dados que será passada para as nossas services.
+The next step is to work on our main. We'll import our schema and our model, and we'll call our web lib that will be used in setting the Data of our application. For now we'll just call it, we'll also call our dotenv to read our .env which has all our database secrets without actually showing the database data in the code. Then we'll call our lib to read the database, sqlx where we'll import our PgPoolOptions, Pool and Postgres struct and thus create our database state structure that will be passed to our services.
 
 ```rust
 mod services;
@@ -28,7 +28,7 @@ pub struct AppState {
 
 ```
 
-Dentro da nossa função main nós iremos chamar o dotenv para ler as nossas secrets .env
+Inside our main function we'll call dotenv to read our .env secrets:
 
 ```rust
 #[actix_web::main]
@@ -37,7 +37,7 @@ async fn main() -> std::io::Result<()> {
 
 ```
 
-Logo abaixo nós iremos fazer a conexão com o nosso database e definir o nosso pool de conexões para garantir que possamos fazer a execução de uma transação e utilizá-la em algum dado momento
+Right below we'll make the connection to our database and define our connection pool to ensure we can execute a transaction and use it at some point:
 
 ```rust
 #[actix_web::main]
@@ -59,7 +59,7 @@ async fn main() -> std::io::Result<()> {
 
 ```
 
-Repare que fazemos uma leitura no primeiro momento da url do nosso database, após isso criamos uma variável onde nós abrimos o nosso pool de conexões e através da chamada do nosso match criamos uma forma de tratamento de erro e confirmação da mensagem de abertura e retorno da nossa conexão.
+Note that we first read the URL of our database, after that we create a variable where we open our connection pool and through calling our match we create a way to handle errors and confirm the opening message and return of our connection.
 
 ```rust
 Ok(pool) => {
@@ -72,7 +72,7 @@ Err(error) => {
 }
 ```
 
-Após isso nós iremos chamar dentro do nosso HttpServer o nosso banco de dados:
+After that we'll call our database inside our HttpServer:
 
 ```rust
 HttpServer::new(move || {
@@ -84,7 +84,7 @@ HttpServer::new(move || {
     .run().await
 ```
 
-Note que aqui, nós fazemos a chamada ao nosso banco de dados dentro do nosso app_data, abrindo uma nova instância passando a nossa struct do AppState e depois chamamos o nosso configure para trazer o que será nosso service config em services, vamos ver logo em seguida, no mais o arquivo como um todo fica assim:
+Note that here, we make the call to our database inside our app_data, opening a new instance passing our AppState struct and then we call our configure to bring what will be our service config in services, we'll see it right after. Overall, the file as a whole looks like this:
 
 ```rust
 mod services;
@@ -134,7 +134,7 @@ async fn main() -> std::io::Result<()> {
 
 ```
 
-Dentro da nossa service nós iremos criar uma nova function que se chamará create_task, nessa função iremos passar um body e chamar o banco para processar a nossa query, para isso vamos fazer alguns imports iniciais.
+Inside our service we'll create a new function called create_task. In this function we'll pass a body and call the database to process our query. To do this, let's make some initial imports.
 
 ```rust
 use crate::{
@@ -148,9 +148,9 @@ use actix_web::{ get, post, web::{ Data, Json, scope, ServiceConfig }, HttpRespo
 use serde_json::json;
 ```
 
-Note que eu chamei do nosso schema o CreatTaskSchema que será usado para validar o nosso body, chamei a model para ser usada no nosso insert, no nosso actix eu chamei além do método get, temos agora o método http post, o Data para as nossas instâncias via banco de dados, o AppState para compartilhar o estado do nosso db e o nosso ServiceConfig que resolvi trazer direto e facilitar a leitura da nossa função pública de config.
+Note that I called from our schema the CreateTaskSchema that will be used to validate our body, I called the model to be used in our insert. In our actix, besides the get method, we now have the HTTP post method, Data for our instances via database, AppState to share the state of our db, and our ServiceConfig which I decided to bring directly to facilitate reading of our public config function.
 
-Em nossa função create_task, teremos os parâmetros da seguinte forma:
+In our create_task function, we'll have the parameters as follows:
 
 ```rust
 #[post("/task")]
@@ -161,7 +161,7 @@ async fn create_task(
 
 ```
 
-E no corpo do nosso Responder teremos a chamada do match para trabalhar o retorno do nosso insert como o tratamento de erro dele.
+And in the body of our Responder we'll have the match call to handle the return of our insert as well as its error handling.
 
 ```rust
 match
@@ -197,7 +197,7 @@ match
       }
 ```
 
-Vamos chamar a nossa função dentro do nosso scope igual fizemos com o nosso healt_checker e é isso.
+Let's call our function inside our scope just like we did with our health_checker and that's it.
 
 ```rust
 pub fn config(conf: &mut ServiceConfig) {
@@ -209,7 +209,7 @@ pub fn config(conf: &mut ServiceConfig) {
 }
 ```
 
-O nosso arquivo inteiro fica assim:
+Our entire file looks like this:
 
 ```rust
 use crate::{ model::TaskModel, schema::CreateTaskSchema, AppState };
@@ -267,7 +267,7 @@ pub fn config(conf: &mut ServiceConfig) {
 }
 ```
 
-Para testar você pode usar o insomnia com o seguinte body json apontando para:
+To test, you can use insomnia with the following JSON body pointing to:
 `http://localhost:8080/api/task`
 
 ```json
@@ -277,7 +277,7 @@ Para testar você pode usar o insomnia com o seguinte body json apontando para:
 }
 ```
 
-Ou com curl e testando direto do seu terminal:
+Or with curl and testing directly from your terminal:
 
 ```
 curl --request POST \
@@ -289,7 +289,7 @@ curl --request POST \
 }'
 ```
 
-E se tudo deu certo você vai ter a seguinte mensagem:
+And if everything went right you'll get the following message:
 
 ```json
 {
@@ -305,4 +305,4 @@ E se tudo deu certo você vai ter a seguinte mensagem:
 }
 ```
 
-Ai por desencargo de consciência você pode olhar no banco de dados e ver se tudo saiu como o esperado, e é isso!
+Just to be sure, you can check the database and see if everything went as expected, and that's it!

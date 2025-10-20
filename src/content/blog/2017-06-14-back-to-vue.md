@@ -7,19 +7,19 @@ category: Javascript
 
 ![back](/back-to-back.png)
 
-Antes de mais nada eu tenho que pedir desculpa a vocês, estava em um processo de saída de uma empresa, e com um monte de teste e vários trabalhos que estava fazendo, organizar tudo estava complicado, estressante na real, e no fim eu passei mal para caramba, uma bruta enchaqueca, que me levou ao hospital, passados alguns dias eu voltei, e fui direto trabalhar, mas... eu queria continuar o nosso projeto com Vuejs, eu acho incrível, fácil e prático, a única coisa que eu estou achando complicado é a parte de testes unitários, entretanto eu vou continuar com nosso app.
+First of all, I have to apologize to you all. I was in the process of leaving a company, dealing with a bunch of tests and various jobs I was doing. Organizing everything was complicated, stressful actually, and in the end I felt really sick, a massive headache that took me to the hospital. After a few days I came back and went straight to work, but... I wanted to continue our Vuejs project. I think it's amazing, easy and practical. The only thing I'm finding complicated is the unit testing part, however I'm going to continue with our app.
 
-Nesse momento, eu quero somente trabalhar a parte com front-end, eu desenvolvi uma [API](https://github.com/IgorVieira/base-api) com tudo o que vamos precisar para desenvolver o restante da nossa aplicação no front, não é muito, mas suficiente para podermos trabalhar, a única coisa que precisamos é organizar o que temos junto ao nosso servidor.
+At this point, I only want to work on the front-end part. I developed an [API](https://github.com/IgorVieira/base-api) with everything we'll need to develop the rest of our front-end application. It's not much, but enough for us to work with. The only thing we need is to organize what we have with our server.
 
-Vamos por passos, agora nessa primeria etapa, vamos precisar de duas bibliotecas para melhorar o restante da nossa aplicação, o `vue-router` e o `vue-resource`, e vamos usar um pouco de bootstrap, para agilizar o processo, mas o foco é vue.
+Let's go step by step. Now in this first stage, we'll need two libraries to improve the rest of our application: `vue-router` and `vue-resource`, and we'll use a bit of bootstrap to speed up the process, but the focus is Vue.
 
-Step 1, vamos adicionar o `vue-resource` e `vue-router`
+Step 1, let's add `vue-resource` and `vue-router`
 
 ```
 sudo npm install vue-resource  vue-router
 ```
 
-Step 2, temos que modificar a nossa aplicação em algumas partes, vamos ao nosso app, e agora temos que criar um novo arquivo na raiz do nosso src.
+Step 2, we need to modify our application in some parts. Let's go to our app, and now we need to create a new file in the root of our src.
 
 ```
 ├── App.vue
@@ -29,7 +29,7 @@ Step 2, temos que modificar a nossa aplicação em algumas partes, vamos ao noss
 └── routes.js <= 'Here!'
 ```
 
-Esse arquivo vai fazer o gerenciamento das rotas da nossa aplicação e criaremos da seguinte forma:
+This file will manage the routes of our application and we'll create it as follows:
 
 ```
 
@@ -42,11 +42,11 @@ export const routes = [
 ]
 ```
 
-Esse path abaixo fala que qualquer rota fora do descrito, deve voltar para a rota principal, e renderizar o componente Home
+The path below says that any route outside what's described should return to the main route and render the Home component
 
 `{ path: '*', component: Home, menu: false }`
 
-Step 3, vamos ao nosso App.vue, lá faremos a seguinte alteração!
+Step 3, let's go to our App.vue, where we'll make the following change!
 
 ```
 <template>
@@ -81,7 +81,7 @@ export default {
 
 ```
 
-Nesse passo, vamos importar aqui a nossa route, ela fara todo o trabalho de filtrar as views que devem ser instanciadas, e deixar como default a nossa home, a baixo, vamos fazer uma pequena forma de transição!
+In this step, we'll import our route here. It will do all the work of filtering the views that should be instantiated and set our home as default. Below, we'll create a simple transition effect!
 
 ```
 <style>
@@ -95,11 +95,11 @@ Nesse passo, vamos importar aqui a nossa route, ela fara todo o trabalho de filt
 </style>
 ```
 
-Como temos uma tag chamada `<transition></transition>`, vamos adicionar somente um efeito a mesma que e ai quando mudarmos de view ela dará um efeito de opacidade entre uma view e outra com um certo delay, e é isso, segue o passeio.
+Since we have a tag called `<transition></transition>`, we'll just add an effect to it so that when we switch views it will give an opacity effect between one view and another with a certain delay, and that's it. Let's continue.
 
-Calma, que daqui em diante nada vai funcionar, mas segue os passos que vai dar tudo certo!
+Hold on, from here on nothing will work, but follow the steps and everything will be fine!
 
-Step 4, precisamos fazer alterações em nosso main.js, vamos adicionar alguns dos nossos novos módulos:
+Step 4, we need to make changes to our main.js, let's add some of our new modules:
 
 ```
 import Vue from 'vue'
@@ -131,12 +131,12 @@ new Vue({
 
 ```
 
-Eu vou explicar as alterações que fizemos, primeiro, eu adicionei os módulos vue-router e vue-resource, e a cada um deles eu tive que adicionar junto ao nosso Vue,
-`Vue.use(VueRouter)` + `Vue.use(VueResource)` para ele entender que temos novos módulos que estão sendo injetados e que podem ser usados em nossa aplicação, e abaixo temos router, que ali instanciamos para uso na nossa aplicação, e depois dizemos ao vue a onde ele deve criar as views, e que ele tem um processo de router para cada view que vai ser criada.
+I'll explain the changes we made. First, I added the vue-router and vue-resource modules, and for each of them I had to add to our Vue,
+`Vue.use(VueRouter)` + `Vue.use(VueResource)` so it understands that we have new modules being injected that can be used in our application. Below we have router, which we instantiate for use in our application, and then we tell Vue where it should create the views and that it has a router process for each view that will be created.
 
-Pronto!
+Done!
 
-Agora que já temos o nosso outro componente, Home.vue, criado em nosso folder de componentes, vamos ajudar algumas coisas no template dele!
+Now that we already have our other component, Home.vue, created in our components folder, let's adjust some things in its template!
 
 ```
 <template>
@@ -185,9 +185,9 @@ export default {
 </style>
 ```
 
-Acho que isso está mais simples, mesmo para quem for começar daqui, já começa bem pois está mais simples que os últimos exemplos, entretanto, antes de continuarmos, quero adicionar um pouco mais de estilo a nossa aplicação, vamos fazer uma alteração bem simples, é só adicionar os CDN's do bootstrap com algumas coisas do bootswatch a nossa aplicação, isso no nosso index.html, que está na raiz do nosso projeto!
+I think this is simpler, even for those starting from here - it's off to a good start because it's simpler than the last examples. However, before we continue, I want to add a bit more style to our application. We'll make a very simple change - just add Bootstrap CDN's with some Bootswatch stuff to our application, in our index.html, which is in the root of our project!
 
-E ficará assim:
+And it will look like this:
 
 ```
 <!DOCTYPE html>
@@ -215,9 +215,9 @@ E ficará assim:
 
 ```
 
-E vamos modificar tudo o que fizemos em temos de template, são só duas por enquanto, App.vue e Home.vue =]
+And we'll modify everything we did in terms of templates - there are only two for now, App.vue and Home.vue =]
 
-App.vue ficará assim:
+App.vue will look like this:
 
 ```
   <template>
@@ -283,7 +283,7 @@ export default {
 
 ```
 
-E Home.vue será finalizado assim, adicionando até um botão a mais, o de editar:
+And Home.vue will be finalized like this, even adding one more button - the edit button:
 
 ```
 <template>
@@ -397,9 +397,9 @@ export default {
 
 Step 5
 
-Bem, nos outros posts eu havia criado as nossas funções para poder trabalhar um simples CRUD...mas, elas só funcionam em certa parte, mas queremos fazer algo pensando em um servidor respondendo do lado, e como até agora, nada funciona, nada mesmo, vamos precisar antes de tudo, e eu peço que por favor, clone essa API aqui [Base API](https://github.com/IgorVieira/base-api), basicamente você vai entrar no diretório, dar um `npm install` e um `npm run dev`, e você precisará do [MongoDB](https://www.mongodb.com/download-center#community) instalado, e é isso, continuando...
+Well, in the other posts I had created our functions to work with a simple CRUD...but they only work to a certain extent. We want to do something thinking about a server responding on the other side, and since until now nothing works - nothing at all - we'll need first of all, and I ask you please, clone this API here [Base API](https://github.com/IgorVieira/base-api). Basically you'll enter the directory, run `npm install` and `npm run dev`, and you'll need [MongoDB](https://www.mongodb.com/download-center#community) installed, and that's it. Continuing...
 
-O próximo passo é montar um serviço que vai nos ajudar a conectar ao nosso servidor, para isso vamos criar um outro folder, ele se chama domain onde teremos vários outros serviços mais a frente, porém por enquanto vamos criar só mais um outro folder em domain, se chama task e vai ficar assim nossa árvore de diretórios:
+The next step is to build a service that will help us connect to our server. For this we'll create another folder called domain where we'll have several other services later on. But for now we'll just create one more folder inside domain called task, and our directory tree will look like this:
 
 ```
 ├── App.vue
@@ -414,7 +414,7 @@ O próximo passo é montar um serviço que vai nos ajudar a conectar ao nosso se
 └── routes.js
 ```
 
-Agora, vamos ao nosso arquivo TaskService.js, quero criar somente duas funções por hora, uma para listar e outra para criar itens para a nossa lista!
+Now, let's go to our TaskService.js file. I want to create only two functions for now, one to list and another to create items for our list!
 
 ```
 export default class TaskService{
@@ -427,7 +427,7 @@ export default class TaskService{
 }
 ```
 
-O que fizemos aqui? Nós criamos uma classe, exportamos ela com um construtor que recebe a parte referente a nossa api, observe isso `api/tasks{/id}`, ele recebe a url de forma que facilite o nosso trabalho de tratar o path, enfim, primeiro vamos criar o nosso método para poder listar as nossas tasks:
+What did we do here? We created a class and exported it with a constructor that receives the part referring to our API. Notice this `api/tasks{/id}` - it receives the URL in a way that makes it easier for us to handle the path. Anyway, first let's create our method to list our tasks:
 
 ```
 export default class TaskService{
@@ -447,7 +447,7 @@ export default class TaskService{
 }
 ```
 
-E vamos fazer mais outra alteração bem simples no nosso Home.vue, no nosso created():
+And we'll make another very simple change to our Home.vue, in our created():
 
 ```
 <script>
@@ -491,11 +491,11 @@ export default {
 </script>
 ```
 
-Primeiro, vamos instalar mais um módulo, `lodash`, e indicar o caminho relativo da nossa service!
+First, let's install one more module, `lodash`, and indicate the relative path of our service!
 
 `sudo npm install lodash --save`
 
-Olhe bem as chamdas do módulo e do nosso serviço!
+Look closely at the module and our service calls!
 
 ```
 <script>
@@ -504,7 +504,7 @@ import _ from 'lodash';
 import TaskService from '../../domain/task/TaskService'
 ```
 
-E no método created(), vamos chamar a nossa service e renderizar os valores vindos a partir do nosso objeto json que vem da nossa API e ficará assim:
+And in the created() method, we'll call our service and render the values coming from our JSON object that comes from our API, and it will look like this:
 
 ```
 created() {
@@ -521,31 +521,31 @@ created() {
 }
 ```
 
-O que fizemos foi instanciar a nossa service, chamando o nosso método listTask() que nos retorna uma promise, nessa promise tratamos o valor e passamos o mesmo para a nossa list que é um array `this.tasks = [];`, se quiser testar e tiver um conhecimento básico de MongoDB é bem simples simular um valor:
+What we did was instantiate our service, calling our listTask() method which returns a promise. In this promise we handle the value and pass it to our list which is an array `this.tasks = [];`. If you want to test it and have basic MongoDB knowledge, it's quite simple to simulate a value:
 
 ======
 
 Off-topic
 
-Inserindo um valor pelo shell do Mongo:
+Inserting a value through Mongo shell:
 
-Se você tem o mongo instalado, é só entrar nos seu shell `mongo` e digitar:
+If you have mongo installed, just enter your shell `mongo` and type:
 
 `use task_database`
 
-Depois digitar o seguinte comando:
+Then type the following command:
 
 `db.tasks.insert({activity:'Make a coffee', done:true})`
 
-E é isso, se você olhar agora a nossa aplicação, ela está funcionando e você verá a nossa primeira task!
+And that's it! If you look at our application now, it's working and you'll see our first task!
 
 ![todo1](https://github.com/IgorVieira/igorvieira.github.io/blob/master/_images/todo1.png?raw=true)
 
-Mas...vamos fazer mais uma outra modificação!
+But...let's make one more modification!
 
-Esse true ou false não fica legal, então vamos usar o v-if para mostrar se isso foi ou não realizado!
+This true or false doesn't look good, so let's use v-if to show whether this was completed or not!
 
-É só adicionar isso em frente a status, se task.done == true, ele mostra o icone de ok, e caso contrário, se for falso, ele mostra um item de remove, um x, e é isso
+Just add this in front of status - if task.done == true, it shows the ok icon, otherwise, if it's false, it shows a remove item, an x, and that's it
 
 ```
   Status: <div v-if="task.done == true">
@@ -557,11 +557,11 @@ Esse true ou false não fica legal, então vamos usar o v-if para mostrar se iss
 
 ```
 
-Agora ficou mais da hora:
+Now it's much cooler:
 
 ![todo2](https://github.com/IgorVieira/igorvieira.github.io/blob/master/_images/todo2.png?raw=true)
 
-E vamos para a última função desse post, vamos voltar para o nosso service TaskService.js
+And let's go to the last function of this post. Let's go back to our TaskService.js service
 
 ```
 /* Class TaskService */
@@ -578,7 +578,7 @@ E vamos para a última função desse post, vamos voltar para o nosso service Ta
 }
 ```
 
-Bem simples, nós chamaos o resource para lidar com isso, vamos fazer só uma pequena alteração, para quando fomos fazer update, e utilizarmos o id da task para poder atualizar a task em si e voltamos a nossa view para o nosso método:
+Very simple - we call the resource to handle this. We'll just make a small change for when we do an update, using the task's id to update the task itself, and we go back to our view for our method:
 
 ```
     /* Parte acima da aplicação */
@@ -601,6 +601,6 @@ Bem simples, nós chamaos o resource para lidar com isso, vamos fazer só uma pe
 
 ```
 
-Como a nossa serivce já foi instanciada, podemos só chamar a service e seus métodos para poder realizar a função, e é isso, bem simples! =]
+Since our service has already been instantiated, we can just call the service and its methods to perform the function, and that's it - very simple! =]
 
-Por hoje é só, eu continuo o restante da aplicação no próximo post, muito obrigado e até mais!
+That's all for today! I'll continue with the rest of the application in the next post. Thank you very much and see you later!

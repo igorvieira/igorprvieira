@@ -1,12 +1,12 @@
 ---
-title: Rust API - Criando a rota de delete by id com rust - Part VI
+title: Rust API - Creating the Delete by ID Route with Rust - Part VI
 pubDate: "Jun 10 2023"
 description: "Rust"
 category: rust
 heroImage: /new_delete_id_remove.jpg
 ---
 
-Igualmente fizemos em nosso get_task_by_id, iremos fazer basicamente o mesmo com a nossa função de delete, pois ela precisa deletar somente uma task por vez e precisamos chamar o nosso método delete do nosso actix_web
+Just as we did in our get_task_by_id, we'll do basically the same with our delete function, as it needs to delete only one task at a time and we need to call our delete method from our actix_web:
 
 ```rust
 use actix_web::{
@@ -26,7 +26,7 @@ use actix_web::{
 };
 ```
 
-E iremos escrever abaixo a nossa função, que se assemelha bastante com a nossa função de get by id:
+And we'll write our function below, which is quite similar to our get by id function:
 
 ```rust
 #[delete("/tasks/{id}")]
@@ -36,7 +36,7 @@ async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl
 
 ```
 
-Na nossa função, nós iremos verificar a nossa url em busca do uuid da nossa url:
+In our function, we'll check our URL looking for the uuid from our URL:
 
 ```rust
 
@@ -49,7 +49,7 @@ async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl
 
 ```
 
-Próximo ponto é fazer a nossa query e o tratamento de erro, observe que o return relacionado ao nosso ok return, é um NoContent, simplesmente finalizando o retorno da nossa request, é puramente isso.
+Next point is to make our query and error handling. Note that the return related to our ok return is a NoContent, simply finishing the return of our request, it's purely that.
 
 ```rust
 #[delete("/tasks/{id}")]
@@ -68,7 +68,7 @@ async fn delete_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl
 }
 ```
 
-Por fim, adicionar nossa nova função junto a nossa config
+Finally, add our new function to our config:
 
 ```rust
 pub fn config(conf: &mut ServiceConfig) {
@@ -83,7 +83,7 @@ pub fn config(conf: &mut ServiceConfig) {
 }
 ```
 
-O nosso arquivo no final fica assim:
+Our file in the end looks like this:
 
 ```
   src/services.rs
@@ -292,7 +292,7 @@ pub fn config(conf: &mut ServiceConfig) {
 
 ```
 
-Para testar, nós iremos criar uma nova task (again):
+To test, we'll create a new task (again):
 
 ```
 curl --request POST \
@@ -304,7 +304,7 @@ curl --request POST \
 }'
 ```
 
-Ele deve me gerar essa task onde eu irei pegar o nosso id:
+It should generate this task where I'll grab our id:
 
 ```json
 {
@@ -320,13 +320,13 @@ Ele deve me gerar essa task onde eu irei pegar o nosso id:
 }
 ```
 
-E podemos testar da seguinte forma:
+And we can test it as follows:
 
 ```
 curl --request DELETE \
   --url http://localhost:8080/api/tasks/4b4bab9e-4b79-4db0-be8d-2d29c0eb5c1a
 ```
 
-E ai não teremos necessariamente um retorno, mas pode verificar que o id que você usou para poder deletar, não existe mais.
+And we won't necessarily have a return, but you can verify that the id you used to delete no longer exists.
 
-E eu creio que por hoje é só! =]
+And I think that's it for today! =]

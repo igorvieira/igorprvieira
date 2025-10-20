@@ -1,18 +1,18 @@
 ---
-title: Rust API - Banco de dados e Migrations - Part II
+title: Rust API - Database and Migrations - Part II
 pubDate: "Apr 22 2023"
 description: "Rust"
 category: rust
 heroImage: /new_api.png
 ---
 
-Hoje vamos dar continuidade ao que fizemos com base no nosso healtchecker, vamos adicionar a nossa rota para criar uma nova task, antes de criarmos de fato a rota vamos adicionar algumas env's a nossa aplicação, pra isso é só rodar o comando dentro da raiz do nosso repositório.
+Today we'll continue what we did based on our healthchecker. We're going to add our route to create a new task. Before we actually create the route, let's add some environment variables to our application. To do this, just run the command in the root of our repository.
 
 ```bash
 touch .env
 ```
 
-E vamos adicionar algumas variáveis aqui:
+And let's add some variables here:
 
 ```bash
 POSTGRES_HOST=127.0.0.1
@@ -27,15 +27,15 @@ PGADMIN_DEFAULT_EMAIL=admin@admin.com
 PGADMIN_DEFAULT_PASSWORD=password123
 ```
 
-Essas variáveis serão as mesmas que iremos usar na construção da nossa aplicação, principalmente a criação e acesso ao banco de dados.
+These variables will be the same ones we'll use in building our application, especially for creating and accessing the database.
 
-No próximo momento, nós iremos criar um `docker-compose.yml` para criar o nosso banco postgres:
+Next, we'll create a `docker-compose.yml` to create our postgres database:
 
 ```bash
 touch docker-compose.yml
 ```
 
-Dentro do arquivo:
+Inside the file:
 
 ```docker
 version: '3'
@@ -60,12 +60,12 @@ volumes:
   progresDB:
 ```
 
-Nesse momento você já consegue rodar o comando de `docker-compose up -d ` e ter o seu banco rodando:
+At this point you can already run the `docker-compose up -d` command and have your database running:
 
-![imagem-do-banco-rodando](/public/rust-2-1.png)
+![image-of-database-running](/public/rust-2-1.png)
 
-Antes de começarmos, vou somente adicionar na nossa main o que iremos criar logo em seguida, o import do nosso
-schema e model:
+Before we start, I'll just add to our main what we'll create next, the import of our
+schema and model:
 
 `src/main.rs`
 
@@ -75,7 +75,7 @@ mod model;
 mod schema;
 ```
 
-Após isso iremos nós criar um novo arquivo chamado schema.rs onde teremos a base do nosso body para criar uma nova request
+After that we'll create a new file called schema.rs where we'll have the base of our body to create a new request:
 
 ```bash
 touch src/schema.rs
@@ -91,9 +91,9 @@ pub struct CreateTaskSchema {
 }
 ```
 
-Repare que nele eu estou fazendo o import do Deserialize, Serialize que ambos serão usados para definir que nosso struct terá um novo schema onde poderemos fazer a leitura dos dados de um body json.
+Note that in it I'm importing Deserialize and Serialize, both of which will be used to define that our struct will have a new schema where we can read data from a JSON body.
 
-Logo em seguida nós iremos definir a nossa model:
+Next, we'll define our model:
 
 ```bash
 touch src/model.rs
@@ -114,21 +114,21 @@ pub struct TaskModel {
 }
 ```
 
-Aqui vamos ter a definição de como será a nossa estrutura junto ao nosso banco de dados, você pode ver que temos para os nossos ids um uuid, title como string, content como string e usamos o NaiveDateTime importado do nosso chrono.
+Here we'll have the definition of what our structure will be like with our database. You can see that we have a uuid for our ids, title as string, content as string, and we use NaiveDateTime imported from our chrono.
 
-Bem, antes de continuarmos precisaremos instalar o sqlx-cli para os próximos passos:
+Well, before we continue we'll need to install sqlx-cli for the next steps:
 
 ```bash
 cargo install sqlx-cli
 ```
 
-Nesse momento, nós precisamos criar as nossas tables no nosso banco de dados, e a quanto a isso iremos nos utilizar do sqlx:
+At this moment, we need to create our tables in our database, and for this we'll use sqlx:
 
 ```bash
 sqlx migrate add -r init
 ```
 
-Esse comando irá nos gerar dois arquivos em uma nova pasta chamada migrate, nela adicionaremos duas queries em sql, uma para up:
+This command will generate two files for us in a new folder called migrate. In it we'll add two SQL queries, one for up:
 
 ```sql
 -- Add up migration script here
@@ -143,25 +143,25 @@ CREATE TABLE
       );
 ```
 
-E a de down para caso eventualmente queira dropar essa mesma tabela. (Por favor, cuidado em realizar o mesmo em produção).
+And the down one in case you eventually want to drop this same table. (Please be careful doing this in production).
 
 ```sql
 DROP TABLE tasks;
 ```
 
-Após isso é rodar o comando abaixo para criar as tabelas no nosso banco de dados:
+After that, run the command below to create the tables in our database:
 
 ```bash
 sqlx migrate run
 ```
 
-E você consegue ver que foi criada a nossa tabela:
+And you can see that our table was created:
 ![table-task](/public/rust-2-2.png)
 
-E se necessário for, rodar o outro comando abaixo para reverter as tabelas:
+And if necessary, run the other command below to revert the tables:
 
 ```bash
 sqlx migrate revert
 ```
 
-Creio que por hora é só, espero que tenha gostado e um grande abraço =]
+I think that's it for now, I hope you enjoyed it and a big hug =]

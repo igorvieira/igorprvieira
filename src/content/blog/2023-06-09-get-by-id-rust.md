@@ -1,12 +1,12 @@
 ---
-title: Rust API - Criando a rota de get by id com rust - Part V
+title: Rust API - Creating the Get by ID Route with Rust - Part V
 pubDate: "Jun 09 2023"
 description: "Rust"
 category: rust
 heroImage: /new_get_id_remove.jpg
 ---
 
-Primeiramente iremos lidar com o nosso arquivo de services, onde iremos importar o nosso Path, para fazer o recenhecimento a partir dele o id ou uuid no caso, que trabalharemos a nossa query de busca:
+First we'll deal with our services file, where we'll import our Path, to recognize from it the id or uuid in this case, which we'll work on our search query:
 
 ```rust
 use actix_web::{
@@ -25,7 +25,7 @@ use actix_web::{
 };
 ```
 
-E iremos escrever abaixo a nossa função:
+And we'll write our function below:
 
 ```rust
 #[get("/tasks/{id}")]
@@ -35,7 +35,7 @@ async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Re
 
 ```
 
-Dentro do escopo da nossa função, nós iremos começar a verificar a partir da nossa url o task_id, ou o uuid da nossa url:
+Inside the scope of our function, we'll start to verify from our URL the task_id, or the uuid from our URL:
 
 ```rust
 
@@ -48,7 +48,7 @@ async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Re
 
 ```
 
-Próximo ponto é fazer a nossa query e o tratamento de erro:
+Next point is to make our query and error handling:
 
 ```rust
 #[get("/tasks/{id}")]
@@ -83,7 +83,7 @@ async fn get_task_by_id(path: Path<uuid::Uuid>, data: Data<AppState>) -> impl Re
 }
 ```
 
-Por fim, adicionar ela junto a nossa config
+Finally, add it to our config:
 
 ```rust
 pub fn config(conf: &mut ServiceConfig) {
@@ -97,7 +97,7 @@ pub fn config(conf: &mut ServiceConfig) {
 }
 ```
 
-O nosso arquivo no final fica assim:
+Our file in the end looks like this:
 
 ```
   src/services.rs
@@ -248,7 +248,7 @@ pub fn config(conf: &mut ServiceConfig) {
 
 ```
 
-Para testar, nós iremos criar uma nova task:
+To test, we'll create a new task:
 
 ```
 curl --request POST \
@@ -260,7 +260,7 @@ curl --request POST \
 }'
 ```
 
-Ele deve me gerar essa task onde eu irei pegar o nosso id:
+It should generate this task where I'll grab our id:
 
 ```json
 {
@@ -274,14 +274,14 @@ Ele deve me gerar essa task onde eu irei pegar o nosso id:
 }
 ```
 
-E podemos testar da seguinte forma:
+And we can test it as follows:
 
 ```
 curl --request GET \
   --url http://localhost:8080/api/tasks/d6b52611-8117-43d3-a8f6-56732ac94bd5
 ```
 
-E ai temos o seguinte resultado:
+And we get the following result:
 
 ```
 {
@@ -295,4 +295,4 @@ E ai temos o seguinte resultado:
 }
 ```
 
-E bem, por hoje é só!
+And well, that's it for today!

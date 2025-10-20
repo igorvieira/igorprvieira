@@ -1,24 +1,24 @@
 ---
 title: Vite Setup Config - Part 1
 pubDate: "Mar 29 2023"
-description: "Vite setup com Eslint, Prettier, Storybook, Styled-components, Jest e Playwright"
+description: "Vite setup with Eslint, Prettier, Storybook, Styled-components, Jest and Playwright"
 category: Javascript
 heroImage: /vite-part1.png
 ---
 
-Bem, esse é um tutorial visando lembrar como configurar o Vite CLI e fazer funcionar com tudo o que uso atualmente no meu dia a dia (18/03/2023) passei um certo sufoco para fazer tudo bem feito, e não estou muito afim de repetir a dose de sufoco no futuro, então, vamos ao setup:
+Well, this is a tutorial aimed at remembering how to configure the Vite CLI and make it work with everything I currently use in my daily routine (03/18/2023). I went through some struggle to get everything working properly, and I don't feel like repeating that dose of struggle in the future, so let's get to the setup:
 
-Primeiro a minha config no vite cli é bem simples
+First, my config in vite cli is quite simple
 
 ```shell
 yarn create vite
 ```
 
-Nisso é escolher o template para React, Typescript+SWC (Speedy Web Compiler - this in Rust!!) e depois disso é acessar o diretório ou a pasta do seu projeto e rodar um yarn install.
+From there, choose the template for React, Typescript+SWC (Speedy Web Compiler - this in Rust!!) and after that, access the directory or folder of your project and run a yarn install.
 
-A primeira configuração nossa, é somente do path relativo das nossas pastas, porta, process e preview.
+Our first configuration is only for the relative path of our folders, port, process and preview.
 
-Para port e preview, é somente necessário adicionar as keys no nosso vite.config.ts e mudar a default para as nossas configs:
+For port and preview, you just need to add the keys in our vite.config.ts and change the default to our configs:
 
 ```typescript
 import { defineConfig } from "vite";
@@ -35,7 +35,7 @@ export default defineConfig({
 });
 ```
 
-Depois disso vamos para algumas configurações de process.env, o vite tem a sua forma de fazer leitura de variáveis de ambiente, nós iremos adicionar a nossa.
+After that, let's move on to some process.env configurations. Vite has its own way of reading environment variables, we'll add ours.
 
 ```typescript
 import { defineConfig } from "vite";
@@ -56,13 +56,13 @@ export default defineConfig({
 });
 ```
 
-Para isso precisamos adicionar uma nova biblioteca que é o @type/node e eu vou me ater a versão que estou usando "@types/node": "^18.14.2" e adicionar o -D para ficar nas nossas devDependecies.
+For this, we need to add a new library which is @type/node and I'll stick to the version I'm using "@types/node": "^18.14.2" and add the -D flag to keep it in our devDependencies.
 
 ```shell
   yarn add @type/node@18.14.2 -D
 ```
 
-Depois disso é somente importar o path no topo do arquivo e trocar o objeto aberto por process.env:
+After that, just import path at the top of the file and replace the empty object with process.env:
 
 ```typescript
 import { defineConfig } from "vite";
@@ -83,7 +83,7 @@ export default defineConfig({
 });
 ```
 
-Após isso a minha config com o process.env já deve funcionar normalmente. Meu próximo ponto é adicionar o alias para poder importar facilmente os meus components, assets e etc
+After this, my config with process.env should already work normally. My next point is to add the alias to be able to easily import my components, assets, etc.
 
 ```typescript
 import { defineConfig } from "vite";
@@ -113,7 +113,7 @@ export default defineConfig({
 });
 ```
 
-Uma outra configuração precisa ser feita no nosso tsconfig.json apenas essas duas linhas, uma para setar a base do diretório e outra para mostrar o encaminhamento dos arquivos:
+Another configuration needs to be done in our tsconfig.json with just these two lines, one to set the base directory and another to show the file routing:
 
 ```typescript
 {
@@ -130,11 +130,11 @@ Uma outra configuração precisa ser feita no nosso tsconfig.json apenas essas d
 
 ```
 
-Por fim, removi todos os assets, os arquivos css e criei um folder chamado components.
+Finally, I removed all the assets, the css files and created a folder called components.
 
 ![folder](/vite-part1-1.png)
 
-Removi os imports de css da main.tsx e do App.tsx:
+I removed the css imports from main.tsx and App.tsx:
 
 ```typescript
 import React from "react";
@@ -158,7 +158,7 @@ function App() {
 export default App;
 ```
 
-E como podem ver ele fez o import do meu counter, esse é o counter component.
+And as you can see, it imported my counter, this is the counter component.
 
 ```
 └── components
@@ -183,6 +183,6 @@ export const Counter = () => {
 };
 ```
 
-Bem, por hora é isso! Até mais! o/
+Well, that's it for now! See you later!
 
 Github: [Vite Setup](https://github.com/igorvieira/vite-setup)

@@ -1,14 +1,14 @@
 ---
-title: Rust API - Criando a rota de get all com rust - Part IV
+title: Rust API - Creating the Get All Route with Rust - Part IV
 pubDate: "Jun 08 2023"
 description: "Rust"
 category: rust
 heroImage: /new_get_all.jpg
 ---
 
-Bem, vamos continuar o nosso trabalho, creio que daqui pra frente vai ser mais tranquilo, nesse momento queremos adicionar a nossa rota de `get_all_tasks`, ela vai ser responsável por buscar todas as tasks que criamos com a nossa rota de `create_task`.
+Well, let's continue our work. I think from here on it will be smoother. At this point we want to add our `get_all_tasks` route, which will be responsible for fetching all the tasks we created with our `create_task` route.
 
-Para começar vamos adicionar no nosso `schema.rs` o nosso filter options, que vai ser responsável por no final podermos paginar a nossa aplicação:
+To start, let's add our filter options to our `schema.rs`, which will be responsible for allowing us to paginate our application in the end:
 
 ```rust
   #[derive(Deserialize, Debug)]
@@ -18,7 +18,7 @@ Para começar vamos adicionar no nosso `schema.rs` o nosso filter options, que v
   }
 ```
 
-Depois iremos para o nosso arquivo de service, services, onde iremos criar uma outra rota:
+Then we'll go to our service file, services, where we'll create another route:
 
 ```rust
   pub async fn get_all_tasks(
@@ -27,8 +27,8 @@ Depois iremos para o nosso arquivo de service, services, onde iremos criar uma o
   ) -> impl Responder {}
 ```
 
-Após isso vamos começar a trabalhar a nossa service, fazendo o import do nosso `FilterOptions` e
-chamar no nosso actix_web o nosso Query que vai ser usado para a parte do nosso select com options:
+After that let's start working on our service, importing our `FilterOptions` and
+calling our Query in our actix_web which will be used for the part of our select with options:
 
 ```rust
 use crate::{
@@ -53,7 +53,7 @@ use actix_web::{
 };
 ```
 
-a difinir o base do nosso limit e offset da nossa aplicação:
+And define the base of our limit and offset for our application:
 
 ```rust
   pub async fn get_all_tasks(
@@ -66,8 +66,8 @@ a difinir o base do nosso limit e offset da nossa aplicação:
   }
 ```
 
-O próximo passo é criar o nosso script de busca passando o nosso limit, offset e fazer o nosso
-SELECT com um tratamento da mensagem e do nosso erro:
+The next step is to create our search script passing our limit, offset and make our
+SELECT with message handling and error handling:
 
 ```rust
  match
@@ -100,7 +100,7 @@ SELECT com um tratamento da mensagem e do nosso erro:
     }
 ```
 
-A função toda fica assim:
+The entire function looks like this:
 
 ```rust
 #[get("/tasks")]
@@ -139,8 +139,8 @@ pub async fn get_all_tasks(opts: Query<FilterOptions>, data: Data<AppState>) -> 
 }
 ```
 
-No final do nosso arquivo, só precisamos adicionar a nossa rota a função pública que temos
-com as nossas configurações:
+At the end of our file, we just need to add our route to the public function we have
+with our configurations:
 
 ```rust
 pub fn config(conf: &mut ServiceConfig) {
@@ -153,7 +153,7 @@ pub fn config(conf: &mut ServiceConfig) {
 }
 ```
 
-No final o nosso schema.rs fica assim:
+In the end our schema.rs looks like this:
 
 ```shell
   src/schema.rs
@@ -175,7 +175,7 @@ pub struct FilterOptions {
 }
 ```
 
-E a nossa services.rs como um todo ficará assim:
+And our services.rs as a whole will look like this:
 
 ```shell
   src/services.rs
@@ -288,17 +288,17 @@ pub fn config(conf: &mut ServiceConfig) {
 }
 ```
 
-Testando, você pode usar o insomnia apontando para a seguinte rota:
+Testing, you can use insomnia pointing to the following route:
 `http://localhost:8080/api/tasks`
 
-Ou com curl, testando direto do seu terminal:
+Or with curl, testing directly from your terminal:
 
 ```
 curl --request GET \
   --url http://localhost:8080/api/tasks
 ```
 
-E se tudo deu certo você vai ter a seguinte mensagem:
+And if everything went right you'll get the following message:
 
 ```json
 {
@@ -321,5 +321,5 @@ E se tudo deu certo você vai ter a seguinte mensagem:
 }
 ```
 
-Próximo passo devemos criar uma nova rota para buscar uma task em específico e deletar a mesma,
-até mais!
+Next step we should create a new route to fetch a specific task and delete it.
+See you later!

@@ -1,12 +1,12 @@
 ---
-title: Vite Setup Eslint e Prettier - Part 2
+title: Vite Setup Eslint and Prettier - Part 2
 pubDate: "Mar 30 2023"
-description: "Como configurar o Eslint e Prettier?"
+description: "How to configure Eslint and Prettier?"
 category: Javascript
 heroImage: /vite-part2.png
 ---
 
-Para começar, quanto ao Eslint e Prettier, eu tenho uma configuração inteira do .eslintrc.json que funciona bem para os meus projetos 😅 e aí vou deixar a config e os plugins aqui abaixo:
+To start, regarding Eslint and Prettier, I have a complete .eslintrc.json configuration that works well for my projects and I'll leave the config and plugins here below:
 
 ```json
 {
@@ -52,7 +52,7 @@ Para começar, quanto ao Eslint e Prettier, eu tenho uma configuração inteira 
           [
             "/^components/",
             "/^types/"
-            // tu pode colocar todos os seus folders aqui
+            // you can put all your folders here
           ],
           "/styles.*/",
           ["parent", "sibling", "index"],
@@ -78,7 +78,7 @@ Para começar, quanto ao Eslint e Prettier, eu tenho uma configuração inteira 
 }
 ```
 
-Adicionei aqui o .eslintignore para excluir da nossa visualização o .storybook e .jest:
+I added the .eslintignore here to exclude .storybook and .jest from our view:
 
 ```shell
 !.storybook
@@ -86,11 +86,11 @@ Adicionei aqui o .eslintignore para excluir da nossa visualização o .storybook
 
 ```
 
-No nosso package.json iremos adicioanr alguns modulos novos:
+In our package.json we'll add some new modules:
 
 ```json
 {
-  //outros packages
+  //other packages
   "@typescript-eslint/eslint-plugin": "^5.55.0",
   "@typescript-eslint/parser": "^5.55.0",
   "eslint": "^8.11.0",
@@ -101,14 +101,14 @@ No nosso package.json iremos adicioanr alguns modulos novos:
 }
 ```
 
-E agora vamos adicionar a pasta .vscode que ficará na raiz com o arquivo settings.json, isso servirá para que force para que todos que estiverem naquele projeto possam ter de fato o mesmo comportamento vindo do linter, garantindo assim a consistência do código.
+And now let's add the .vscode folder that will be at the root with the settings.json file. This will force everyone working on that project to have the same behavior from the linter, thus ensuring code consistency.
 
 ```
 └── .vscode
   └── settings.json
 ```
 
-dentro do settings.json:
+inside settings.json:
 
 ```json
 {
@@ -119,7 +119,7 @@ dentro do settings.json:
 }
 ```
 
-Após isso vamos começar a nossa configuração do prettier, o nosso prettier é bem simples nesse sentido, vai ter somente a configuração abaixo:
+After that, let's start our prettier configuration. Our prettier is quite simple in this sense, it will only have the configuration below:
 
 ```json
 {
@@ -129,29 +129,29 @@ Após isso vamos começar a nossa configuração do prettier, o nosso prettier �
 }
 ```
 
-E adicionando o .prettierignore na raiz, bem semelhante ao nosso .eslintignore:
+And adding .prettierignore at the root, very similar to our .eslintignore:
 
 ```shell
   !.storybook
   !.jest
 ```
 
-E vamos adicionando essas três outras libs ao nosso package.json:
+And let's add these three other libs to our package.json:
 
 ```json
 {
-  //demais outros packages
+  //other packages
   "eslint-config-prettier": "^8.5.0",
   "eslint-plugin-prettier": "^4.0.0",
   "prettier": "^2.8.4"
 }
 ```
 
-Por fim, é só adicionar no nosso .eslintconfig.json o plugin do prettier:
+Finally, just add the prettier plugin to our .eslintconfig.json:
 
 ```json
 {
-  // demais outras configs
+  // other configs
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -159,11 +159,11 @@ Por fim, é só adicionar no nosso .eslintconfig.json o plugin do prettier:
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ]
-  // demais outras configs
+  // other configs
 }
 ```
 
-E por último vamos adicionar dois comandos de lint para verificar o estilo de código e para reparar o código se necessário:
+And lastly, let's add two lint commands to check code style and to fix the code if necessary:
 
 ```json
 {
@@ -177,10 +177,10 @@ E por último vamos adicionar dois comandos de lint para verificar o estilo de c
 }
 ```
 
-Ai você pode ver resultados assim:
+Then you can see results like this:
 
 ![Vite2-1](/vite-part2-1.png)
 
-E eu acredito que é isso!
+And I believe that's it!
 
 Github: [Vite Setup](https://github.com/igorvieira/vite-setup)
