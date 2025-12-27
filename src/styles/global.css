@@ -1,5 +1,6 @@
 html {
   background-color: #f0eee6;
+  min-height: 100%;
 }
 
 body {
@@ -12,6 +13,13 @@ body {
   overflow-wrap: break-word;
   line-height: 1.5;
   font-size: 14px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 a {

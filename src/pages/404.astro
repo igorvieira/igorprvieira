@@ -1,0 +1,73 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "../consts";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={`404 - ${SITE_TITLE}`} description="Page not found" />
+    <style>
+      .error-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 50vh;
+        text-align: center;
+      }
+
+      .error-code {
+        font-size: 6rem;
+        font-weight: bold;
+        margin: 0;
+        line-height: 1;
+      }
+
+      .error-message {
+        font-size: 1.2rem;
+        margin: 1rem 0 2rem;
+        color: #666;
+      }
+
+      .dark .error-message {
+        color: #999;
+      }
+
+      .back-link {
+        padding: 10px 20px;
+        background: #1a1a1a;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+
+      .back-link:hover {
+        background: #333;
+      }
+
+      .dark .back-link {
+        background: #e2e9f6;
+        color: #1a1a1a;
+      }
+
+      .dark .back-link:hover {
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
+    <main>
+      <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Oops! This page doesn't exist.</p>
+        <a href="/" class="back-link">Back to home</a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
