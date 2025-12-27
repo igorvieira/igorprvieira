@@ -64,6 +64,13 @@ code {
 
 pre {
   padding: 1rem;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
 }
 
 pre>code {
@@ -94,6 +101,11 @@ html.dark {
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+.article-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
 }
 
 .nav-content {
