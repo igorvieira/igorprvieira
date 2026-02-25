@@ -6,7 +6,8 @@ body {
   font-family: Menlo, monospace;
   margin: 0 auto;
   padding: 20px;
-  max-width: 65ch;
+  width: 100%;
+  max-width: 638px;
   text-align: left;
   word-wrap: break-word;
   overflow-wrap: break-word;
