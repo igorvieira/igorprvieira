@@ -6,11 +6,10 @@
     const articleContent = document.querySelector('.article-content');
     if (!articleContent) return;
 
-    const elements = articleContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6, ul, ol, pre, blockquote, img, table');
+    const elements = articleContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6, ul, ol, pre, blockquote, img, table, hr');
 
-    elements.forEach((el, index) => {
+    elements.forEach((el) => {
       el.classList.add('scroll-animate');
-      (el as HTMLElement).style.transitionDelay = `${index * 0.02}s`;
     });
 
     const observer = new IntersectionObserver(
