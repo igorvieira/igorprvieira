@@ -51,6 +51,10 @@ const structuredData = {
   <head>
     <BaseHead title={title} description={description} image={imageUrl} />
 
+    {heroImage && (
+      <link rel="preload" as="image" href={heroImage} />
+    )}
+
     <!-- Structured Data for SEO -->
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
@@ -79,6 +83,13 @@ const structuredData = {
         object-fit: cover;
         border-radius: 3px;
         margin-bottom: 1.5rem;
+        background-color: #e0e0e0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .hero-image.loaded {
+        opacity: 1;
       }
 
       .post-meta {
@@ -111,8 +122,10 @@ const structuredData = {
             class="hero-image"
             src={heroImage}
             alt={title}
-            loading="lazy"
+            loading="eager"
             decoding="async"
+            fetchpriority="high"
+            onload="this.classList.add('loaded')"
           />
         )}
         <h1 class="title">{title}</h1>
