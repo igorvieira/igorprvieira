@@ -21,5 +21,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: yarn --frozen-lockfile
-      - run: yarn build
+      - name: Install bun
+        uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+      - run: bun run build
