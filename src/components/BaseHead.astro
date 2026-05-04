@@ -38,3 +38,22 @@ const { title, description, image = "https://res.cloudinary.com/dje6m1lab/image/
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={image} />
 
+<script is:inline>
+  (function () {
+    const stored = localStorage.getItem("theme");
+    const theme =
+      stored ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+    document.documentElement.classList.add("no-theme-transition");
+    if (theme === "dark") document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", theme);
+    window.addEventListener("load", () => {
+      requestAnimationFrame(() =>
+        document.documentElement.classList.remove("no-theme-transition"),
+      );
+    });
+  })();
+</script>
+
