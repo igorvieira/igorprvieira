@@ -16,8 +16,9 @@
   #themeToggle {
     --track-w: 44px;
     --track-h: 22px;
-    --pad: 3px;
-    --thumb: calc(var(--track-h) - var(--pad) * 2);
+    --border: 1.5px;
+    --pad: 2px;
+    --thumb: 14px;
     border: 0;
     background: none;
     padding: 0;
@@ -32,20 +33,21 @@
     height: var(--track-h);
     border-radius: 999px;
     background: transparent;
-    border: 1.5px solid #1a1a1a;
+    border: var(--border) solid #1a1a1a;
     transition: background 0.25s ease, border-color 0.25s ease;
     box-sizing: border-box;
   }
 
   .thumb {
     position: absolute;
-    top: var(--pad);
+    top: 50%;
     left: var(--pad);
     width: var(--thumb);
     height: var(--thumb);
     border-radius: 50%;
     background: #1a1a1a;
-    transition: transform 0.25s ease, background 0.25s ease;
+    transform: translateY(-50%);
+    transition: left 0.25s ease, background 0.25s ease;
   }
 
   :global(.dark) .track {
@@ -53,7 +55,7 @@
   }
   :global(.dark) .thumb {
     background: #f5f5f5;
-    transform: translateX(calc(var(--track-w) - var(--thumb) - var(--pad) * 2 - 1.5px * 2));
+    left: calc(var(--track-w) - var(--thumb) - var(--border) * 2 - var(--pad));
   }
 </style>
 
