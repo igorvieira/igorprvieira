@@ -12,7 +12,7 @@ export async function GET(context) {
       "https://res.cloudinary.com/dje6m1lab/image/upload/fl_preserve_transparency/v1748400386/LGqg2kBR_400x400_dnljod.jpg",
     items: posts.map((post) => ({
       ...post.data,
-      link: `/blog/${post.slug}/`,
+      link: `/blog/${post.id}/`,
     })),
   });
 }
