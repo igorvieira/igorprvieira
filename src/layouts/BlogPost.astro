@@ -14,7 +14,7 @@ type Props = CollectionEntry<"blog">["data"] & {
   wordCount?: number;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, heroCredit, heroCreditUrl, lang, category, slug, readingTime, wordCount } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroCredit, heroCreditUrl, lang, category, summary, slug, readingTime, wordCount } = Astro.props;
 
 // Get absolute image URL for meta tags
 // Social networks don't render SVG, so posts without a cover fall back to BaseHead's default image
@@ -29,6 +29,7 @@ const structuredData = {
   "@type": "BlogPosting",
   "headline": title,
   "description": description,
+  "abstract": summary,
   "image": imageUrl,
   "inLanguage": lang,
   "keywords": category,
@@ -123,6 +124,12 @@ const breadcrumbs = {
         color: #666;
       }
 
+      .summary {
+        border-left: 3px solid #ddd;
+        padding-left: 1rem;
+        color: #555;
+      }
+
       .post-meta {
         display: flex;
         align-items: center;
@@ -178,6 +185,7 @@ const breadcrumbs = {
             </div>
           )
         }
+        {summary && <p class="summary">{summary}</p>}
         <hr />
         <slot />
       </article>
