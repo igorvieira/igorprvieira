@@ -13,10 +13,11 @@ type Props = CollectionEntry<"blog">["data"] & {
   readingTime?: number;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, slug, readingTime } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroCredit, heroCreditUrl, lang, slug, readingTime } = Astro.props;
 
 // Get absolute image URL for meta tags
-const imageUrl = heroImage ? getAbsoluteImageUrl(heroImage, SITE_URL) : getAbsoluteImageUrl("/placeholder-blog.svg", SITE_URL);
+// Social networks don't render SVG, so posts without a cover fall back to BaseHead's default image
+const imageUrl = heroImage ? getAbsoluteImageUrl(heroImage, SITE_URL) : undefined;
 
 // Generate canonical URL
 const canonicalURL = slug ? `${SITE_URL}/blog/${slug}/` : Astro.url.toString();
@@ -28,6 +29,7 @@ const structuredData = {
   "headline": title,
   "description": description,
   "image": imageUrl,
+  "inLanguage": lang,
   "datePublished": pubDate.toISOString(),
   "dateModified": updatedDate ? updatedDate.toISOString() : pubDate.toISOString(),
   "author": {
@@ -47,9 +49,16 @@ const structuredData = {
 };
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
-    <BaseHead title={title} description={description} image={imageUrl} />
+    <BaseHead
+      title={title}
+      description={description}
+      image={imageUrl}
+      type="article"
+      publishedTime={pubDate}
+      modifiedTime={updatedDate}
+    />
 
     {heroImage && (
       <link rel="preload" as="image" href={heroImage} />
@@ -92,6 +101,12 @@ const structuredData = {
         opacity: 1;
       }
 
+      .hero-credit {
+        margin: -1rem 0 1.5rem;
+        font-size: 0.8rem;
+        color: #666;
+      }
+
       .post-meta {
         display: flex;
         align-items: center;
@@ -127,6 +142,11 @@ const structuredData = {
             fetchpriority="high"
             onload="this.classList.add('loaded')"
           />
+        )}
+        {heroCredit && (
+          <p class="hero-credit">
+            Photo by <a href={heroCreditUrl}>{heroCredit}</a> on <a href="https://unsplash.com/?utm_source=igorprvieira&utm_medium=referral">Unsplash</a>
+          </p>
         )}
         <h1 class="title">{title}</h1>
         <div class="post-meta">

@@ -1,14 +1,22 @@
 ---
 import "../styles/global.css";
+import { SITE_TITLE, AUTHOR_NAME, AUTHOR_TWITTER } from "../consts";
 
 export interface Props {
   title: string;
   description: string;
   image?: string;
+  type?: "website" | "article";
+  publishedTime?: Date;
+  modifiedTime?: Date;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = "https://res.cloudinary.com/dje6m1lab/image/upload/fl_preserve_transparency/v1748400386/LGqg2kBR_400x400_dnljod.jpg" } = Astro.props;
+const DEFAULT_IMAGE = "https://res.cloudinary.com/dje6m1lab/image/upload/fl_preserve_transparency/v1748400386/LGqg2kBR_400x400_dnljod.jpg";
+const { title, description, image, type = "website", publishedTime, modifiedTime } = Astro.props;
+// The default image is a square avatar, so it gets the small card instead of a stretched large one
+const ogImage = image ?? DEFAULT_IMAGE;
+const twitterCard = image ? "summary_large_image" : "summary";
 ---
 
 <!-- Global Metadata -->
@@ -18,6 +26,8 @@ const { title, description, image = "https://res.cloudinary.com/dje6m1lab/image/
 
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={canonicalURL.toString()} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={new URL("rss.xml", Astro.site)} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -25,18 +35,24 @@ const { title, description, image = "https://res.cloudinary.com/dje6m1lab/image/
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url.toString()} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:url" content={canonicalURL.toString()} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={image} />
+<meta property="og:image" content={ogImage} />
+{publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+{type === "article" && <meta property="article:author" content={AUTHOR_NAME} />}
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content={Astro.url.toString()} />
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:site" content={AUTHOR_TWITTER} />
+<meta name="twitter:creator" content={AUTHOR_TWITTER} />
+<meta name="twitter:url" content={canonicalURL.toString()} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={ogImage} />
 
 <script is:inline>
   (function () {

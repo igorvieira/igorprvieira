@@ -18,6 +18,10 @@ const blog = defineCollection({
       .optional()
       .transform((str) => (str ? new Date(str) : undefined)),
     heroImage: z.string().optional(),
+    // Unsplash requires crediting the photographer
+    heroCredit: z.string().optional(),
+    heroCreditUrl: z.string().url().optional(),
+    lang: z.string().default("en"),
     category: z.string().optional(),
   }),
 });

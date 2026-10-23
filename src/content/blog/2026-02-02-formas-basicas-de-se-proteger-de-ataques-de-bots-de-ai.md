@@ -4,6 +4,7 @@ pubDate: "Jan 03 2026"
 description: "Um relato real e um guia prático, em camadas, para reduzir riscos frente a ataques automatizados cada vez mais sofisticados impulsionados por AI."
 heroImage: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0"
 category: "security, ai, web"
+lang: "pt-BR"
 ---
 
 ## Disclaimer
