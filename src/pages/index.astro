@@ -8,14 +8,33 @@ import BitcoinWallet from "../components/BitcoinWallet.astro";
 import { Github, Youtube, Linkedin, X} from "iconoir-react";
 import { SITE_URL, AUTHOR_NAME, AUTHOR_PROFILES } from "../consts";
 
-// Ties the site to the author's profiles so search engines and LLMs attribute the posts
+// Ties the site to the author's profiles and expertise so search engines and LLMs attribute the posts
 const person = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: AUTHOR_NAME,
-  url: SITE_URL,
-  jobTitle: "Software Engineer",
-  sameAs: AUTHOR_PROFILES,
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: AUTHOR_NAME,
+    url: SITE_URL,
+    jobTitle: "Software Engineer",
+    description:
+      "Software engineer from Brazil with 13 years of experience building web products, from frontend architecture to backend reliability, now focused on building products with AI.",
+    nationality: "Brazil",
+    knowsAbout: [
+      "Product engineering",
+      "Software architecture",
+      "TypeScript",
+      "React",
+      "Vue.js",
+      "Node.js",
+      "Rust",
+      "Frontend performance",
+      "Distributed systems reliability",
+      "AI-assisted software development",
+      "AI agents",
+    ],
+    sameAs: AUTHOR_PROFILES,
+  },
 };
 
 ---
