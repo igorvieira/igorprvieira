@@ -1,9 +1,10 @@
 ---
 title: Rust API - Adding Task Creation Route - Part III
 pubDate: "May 31 2023"
-description: "Rust"
+description: "Connect an Actix Web API to Postgres with a SQLx PgPool and add a POST /api/task route that inserts a task. Part III of the Rust API series."
 category: rust
 heroImage: /new_task.jpg
+summary: "This part creates a SQLx Postgres pool shared with every handler through an AppState passed to app_data. It then adds POST /api/task, which inserts a task with INSERT ... RETURNING * and returns it as JSON."
 ---
 
 The next step is to work on our main. We'll import our schema and our model, and we'll call our web lib that will be used in setting the Data of our application. For now we'll just call it, we'll also call our dotenv to read our .env which has all our database secrets without actually showing the database data in the code. Then we'll call our lib to read the database, sqlx where we'll import our PgPoolOptions, Pool and Postgres struct and thus create our database state structure that will be passed to our services.

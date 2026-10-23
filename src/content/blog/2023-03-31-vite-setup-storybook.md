@@ -1,9 +1,10 @@
 ---
 title: Vite Setup with Storybook - Part 3
 pubDate: "Mar 31 2023"
-description: "Storybook!"
+description: "Add Storybook to a Vite React TypeScript project with the Vite builder, a stories.tsx file per component and path aliases in viteFinal. Part 3."
 category: Javascript
 heroImage: /vite-part3.png
+summary: "This part adds Storybook with the Vite builder and a stories.tsx file next to each component. The project's path aliases are repeated in viteFinal with mergeConfig so imports resolve."
 ---
 
 Storybook is something relatively simple to configure, at least a good part comes straight from its website for a very simple and comprehensive setup:

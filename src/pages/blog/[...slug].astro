@@ -17,8 +17,9 @@ const post = Astro.props;
 const { Content } = await render(post);
 
 const readingTime = estimateReadingTime(post.body);
+const wordCount = post.body.trim().split(/\s+/).length;
 ---
 
-<BlogPost {...post.data} slug={post.id} readingTime={readingTime}>
+<BlogPost {...post.data} slug={post.id} readingTime={readingTime} wordCount={wordCount}>
   <Content />
 </BlogPost>

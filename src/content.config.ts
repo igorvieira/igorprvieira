@@ -23,6 +23,8 @@ const blog = defineCollection({
     heroCreditUrl: z.string().url().optional(),
     lang: z.string().default("en"),
     category: z.string().optional(),
+    // 2-3 sentences answering what the post is about; shown at the top and quoted by AI answers
+    summary: z.string().optional(),
   }),
 });
 

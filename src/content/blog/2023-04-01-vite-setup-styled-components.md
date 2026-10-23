@@ -1,9 +1,10 @@
 ---
 title: Vite Setup with Styled-Components - Part 4
 pubDate: "Apr 01 2023"
-description: "Styled-components!"
+description: "Add styled-components to a Vite React TypeScript app with a global reset, a typed theme and a Storybook ThemeProvider decorator. Part 4."
 category: Javascript
 heroImage: /vite-part4.png
+summary: "This part adds styled-components with a global reset and a theme wrapped in ThemeProvider. A declaration file types the theme, and Storybook gets the same provider through a decorator."
 ---
 
 You can skip this one if you want, I'm only doing it because I prefer styled components much more than other things like Tailwind...(please don't!). To start, let's just add styled-components to our project.

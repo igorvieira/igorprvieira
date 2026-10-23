@@ -1,9 +1,10 @@
 ---
 title: Vite Setup with Jest - Part 5
 pubDate: "Apr 02 2023"
-description: "Why not Jest?"
+description: "Configure Jest and React Testing Library in a Vite React TypeScript project with Babel, jsdom and a styled-components test wrapper. Part 5."
 category: Javascript
 heroImage: /vite-part5.png
+summary: "This part sets up Jest instead of Vitest in a Vite React TypeScript project, with jsdom, jest-dom, jest-styled-components and a Babel config. A custom render wraps components in the styled-components ThemeProvider."
 ---
 
 I don't know how highly recommended this is, since there are projects like vitest, but as a matter of personal choice I preferred to have jest in my toolkit.

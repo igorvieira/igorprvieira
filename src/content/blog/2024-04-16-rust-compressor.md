@@ -1,8 +1,9 @@
 ---
-title: Rust compressor
+title: "Zipping a Directory in Rust with the zip and walkdir Crates"
 pubDate: "Apr 16 2024"
-description: "Building a rust compressor"
+description: "A small Rust CLI that asks for a folder path and output name, walks the directory with walkdir and writes every file into a ZIP archive."
 category: youtube, rust
+summary: "This Rust CLI reads an output name and a folder path, walks the folder with walkdir and writes each file into a ZIP archive with zip::ZipWriter, keeping paths relative to the input folder. Errors propagate with ? from a main that returns io::Result."
 ---
 
 <iframe width="100%" height="375" src="https://www.youtube.com/embed/0kKJUoY_ePs?si=7NPmx1XJaeggZdzA" frameborder="0" allowfullscreen></iframe>

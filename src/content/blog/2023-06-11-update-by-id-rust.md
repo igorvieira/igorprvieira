@@ -1,9 +1,10 @@
 ---
 title: Rust API - Creating the Update by ID Route with Rust - Part VII
 pubDate: "Jun 11 2023"
-description: "Rust"
+description: "Add a PATCH /api/tasks/{id} route to an Actix Web and SQLx API, updating only the fields sent in the body. Part VII of the Rust API series."
 category: rust
 heroImage: /new_update_id.jpg
+summary: "The PATCH /api/tasks/{id} handler loads the task with SQLx, returns 404 if it's missing, and runs UPDATE ... RETURNING * keeping any field not sent in the body. Title and content are Option<String> in the update schema."
 ---
 
 Let's not waste time. In our schema.rs, let's write the UpdateSchema of our application to work on our update. Ours will be called UpdateTaskSchema:

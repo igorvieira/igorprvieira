@@ -1,9 +1,10 @@
 ---
 title: Make Peace with My Bias Against AI
 pubDate: "Oct 14 2025"
-description: ""
+description: "A skeptic's notes on becoming a heavy user of AI tools at work and on Solo, and using the saved time for Rust, math, reading and family."
 heroImage: "https://plus.unsplash.com/premium_photo-1674931348749-d22ce850b4cb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2340"
 category: saas, ai, rust, learn
+summary: "I was skeptical of AI hype and now use AI agents heavily, at work and on Solo, my open source HTTP client. What changed my view was spending the time they save on studying Rust and math, reading and my family, while still investing in my own knowledge in case the tools go away."
 ---
 
 Ever since the topic of AI grew beyond technical debates, mostly in academic circles, my skepticism toward several aspects of it has increased. At the same time, I never stopped following the field or trying to understand certain details. I actually believe there are some areas that aren’t widely explored but deserve my attention over the next year or so, especially when it comes to math itself (algebra, calculus, statistics, discrete math, etc).

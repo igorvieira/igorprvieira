@@ -1,9 +1,10 @@
 ---
 title: "Basic ways to protect yourself from AI bot attacks"
-pubDate: "Jan 03 2026"
+pubDate: "Feb 02 2026"
 description: "A real-world account and a practical, layered guide to reducing risks against increasingly sophisticated automated attacks powered by AI."
 heroImage: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0"
 category: "security, ai, web"
+summary: "I opened a site shared by acquaintances inside an isolated VM and watched it try to read the browser's password manager and fill every field on the page, so I shut the VM down and reset my computer. This post turns that incident into a three-layer checklist, from password managers and app-based MFA to disposable VMs, filtering DNS, least privilege, offline backups and an incident response plan."
 ---
 
 ## Disclaimer

@@ -1,9 +1,10 @@
 ---
 title: How to deploy pocketbase with Fly.io
 pubDate: "Apr 04 2023"
-description: "Pocketbase"
+description: "Run PocketBase in Docker, then deploy it to Fly.io with fly launch, a persistent pb_data volume and fly deploy."
 category: pocketbase
 heroImage: /pocketbase.png
+summary: "PocketBase runs from a small Alpine Dockerfile that can be tested locally with docker build and run. On Fly.io, fly launch generates fly.toml, a mount keeps pb_data on a 1 GB volume in the app's region, and fly deploy publishes it with the admin at /_/."
 ---
 
 

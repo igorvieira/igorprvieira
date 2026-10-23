@@ -1,8 +1,9 @@
 ---
-title: "Back to Back! - Part III "
+title: "Connecting a Vue.js To-Do App to a REST API with vue-router and vue-resource - Part III"
 pubDate: "Jun 14, 2017"
-description: "Vue project"
+description: "Add vue-router and vue-resource to a Vue.js to-do app, create a TaskService class, and list and save tasks from a Node and MongoDB API. Part III."
 category: Javascript
+summary: "This part moves the Vue.js to-do app from local data to a Node and MongoDB REST API. It adds vue-router and a TaskService over vue-resource that lists and saves tasks."
 ---
 
 ![back](/back-to-back.png)

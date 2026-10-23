@@ -1,9 +1,10 @@
 ---
 title: Rust API - Database and Migrations - Part II
 pubDate: "Apr 22 2023"
-description: "Rust"
+description: "Run Postgres and pgAdmin with Docker Compose and create a tasks table with sqlx-cli migrations for a Rust API. Part II of the Rust API series."
 category: rust
 heroImage: /new_api.png
+summary: "This part runs Postgres and pgAdmin with Docker Compose and defines the task structs with serde and SQLx FromRow. It creates a reversible tasks migration with sqlx-cli and applies or reverts it with sqlx migrate run and revert."
 ---
 
 Today we'll continue what we did based on our healthchecker. We're going to add our route to create a new task. Before we actually create the route, let's add some environment variables to our application. To do this, just run the command in the root of our repository.

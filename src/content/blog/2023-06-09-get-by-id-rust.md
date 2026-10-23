@@ -1,9 +1,10 @@
 ---
 title: Rust API - Creating the Get by ID Route with Rust - Part V
 pubDate: "Jun 09 2023"
-description: "Rust"
+description: "Add a GET /api/tasks/{id} route to an Actix Web API that reads a UUID from the path and fetches one task with SQLx. Part V of the Rust API series."
 category: rust
 heroImage: /new_get_id_remove.jpg
+summary: "The GET /api/tasks/{id} handler extracts the UUID with Path<Uuid> and fetches the task with SQLx query_as! into TaskModel. It returns the task as JSON or a JSON error."
 ---
 
 First we'll deal with our services file, where we'll import our Path, to recognize from it the id or uuid in this case, which we'll work on our search query:

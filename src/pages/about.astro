@@ -1,0 +1,82 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_URL, AUTHOR_NAME, AUTHOR_PROFILES } from "../consts";
+
+const description =
+  "Igor Vieira is a software engineer from Brazil with 13 years of experience building web products, from frontend architecture to backend reliability, now focused on building products with AI.";
+
+// Same Person as the home page, plus what search engines and LLMs use to judge expertise
+const profile = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: AUTHOR_NAME,
+    url: `${SITE_URL}/about/`,
+    jobTitle: "Software Engineer",
+    description,
+    nationality: "Brazil",
+    knowsAbout: [
+      "Product engineering",
+      "Software architecture",
+      "TypeScript",
+      "React",
+      "Vue.js",
+      "Node.js",
+      "Rust",
+      "Frontend performance",
+      "Distributed systems reliability",
+      "AI-assisted software development",
+      "AI agents",
+    ],
+    sameAs: AUTHOR_PROFILES,
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`About | ${SITE_TITLE}`} description={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(profile)} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>About</h1>
+      <p>
+        I'm Igor Vieira, a software engineer from Brazil. I've been building web
+        products for 13 years, across frontend architecture, backend services and
+        the parts in between that keep a product reliable for the people using it.
+      </p>
+      <p>
+        Most of my recent work is about building products with AI: using coding
+        agents day to day, designing how agents get access to a product, and
+        keeping the engineering standards that make the result safe to ship. I
+        believe writing code got cheap, and that product thinking, architecture
+        and distribution are where the real work is now.
+      </p>
+      <p>
+        I write here about TypeScript, React, Vue, Node.js and Rust, frontend
+        performance, systems that need to stay consistent under failure, and what
+        I learn building with AI.
+      </p>
+
+      <h2>projects</h2>
+      <ul>
+        <li><a href="https://github.com/igorvieira/maverick">Maverick</a>: my personal harness for AI-assisted development</li>
+        <li><a href="https://github.com/sreq-inc/solo">Solo</a>: an HTTP client built with Rust and Vite</li>
+      </ul>
+
+      <h2>elsewhere</h2>
+      <ul>
+        <li><a href="https://x.com/igorprvieira">X</a></li>
+        <li><a href="https://www.linkedin.com/in/igor-vieira-6b05a185/">LinkedIn</a></li>
+        <li><a href="https://github.com/igorvieira">GitHub</a></li>
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>

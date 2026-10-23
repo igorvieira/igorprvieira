@@ -1,9 +1,10 @@
 ---
 title: Rust API - Creating the Delete by ID Route with Rust - Part VI
 pubDate: "Jun 10 2023"
-description: "Rust"
+description: "Add a DELETE /api/tasks/{id} route to an Actix Web and SQLx API that returns 204 No Content. Part VI of the Rust API series."
 category: rust
 heroImage: /new_delete_id_remove.jpg
+summary: "The DELETE /api/tasks/{id} handler reads the UUID with Path<Uuid> and deletes the row with SQLx. It returns 204 No Content on success and a JSON error otherwise."
 ---
 
 Just as we did in our get_task_by_id, we'll do basically the same with our delete function, as it needs to delete only one task at a time and we need to call our delete method from our actix_web:

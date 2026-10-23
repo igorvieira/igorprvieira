@@ -1,0 +1,22 @@
+name: indexnow
+
+# After each production deploy, tell Bing (and other IndexNow engines) which URLs exist,
+# so new posts reach Bing, ChatGPT Search and Copilot in hours instead of weeks.
+on:
+  deployment_status:
+
+jobs:
+  ping:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    env:
+      SITE: https://igorprvieira.com
+      KEY: f9652cd86ae37964827239419e20b17d
+    steps:
+      - name: Submit sitemap URLs
+        run: |
+          urls=$(curl -sf "$SITE/sitemap-0.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -s .)
+          jq -n --argjson urls "$urls" --arg key "$KEY" --arg host "igorprvieira.com" --arg loc "$SITE/$KEY.txt" \
+            '{host: $host, key: $key, keyLocation: $loc, urlList: $urls}' > body.json
+          curl -sf -o /dev/null -w "IndexNow %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
+            -H "Content-Type: application/json; charset=utf-8" --data @body.json

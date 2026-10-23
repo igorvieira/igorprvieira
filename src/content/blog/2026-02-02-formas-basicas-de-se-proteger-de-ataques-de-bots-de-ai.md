@@ -1,10 +1,11 @@
 ---
 title: "[pt-BR] - Formas básicas de se proteger de ataques de bots de AI"
-pubDate: "Jan 03 2026"
+pubDate: "Feb 02 2026"
 description: "Um relato real e um guia prático, em camadas, para reduzir riscos frente a ataques automatizados cada vez mais sofisticados impulsionados por AI."
 heroImage: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0"
 category: "security, ai, web"
 lang: "pt-BR"
+summary: "Abri em uma VM isolada um site compartilhado por conhecidos e vi ele tentar ler o gerenciador de senhas do navegador e preencher todos os campos da página, então desliguei a VM e resetei o computador. Este texto transforma esse incidente em um checklist em três camadas, de gerenciador de senhas e MFA por app até VMs descartáveis, DNS com bloqueio, menor privilégio, backups offline e plano de resposta a incidentes."
 ---
 
 ## Disclaimer

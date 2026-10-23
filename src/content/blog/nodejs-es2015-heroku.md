@@ -1,7 +1,8 @@
 ---
 pubDate: "Nov 22, 2016"
-title: "NodeJS(ES2015) + Heroku  "
-description: "How to deploy a Node.js application"
+title: "Deploying a Node.js ES2015 App with Babel and Express to Heroku"
+description: "Write an Express app with ES2015 imports, run it with babel-node, and deploy it to Heroku with a Procfile and git push heroku master."
+summary: "This post builds a minimal Express app with ES2015 imports and runs it with babel-node, since Node didn't support import at the time. It then deploys to Heroku with a Procfile and git push."
 ---
 
 First, "why Heroku?" The idea is actually to start with something simpler that everyone can use. Since I believe this platform is really more practical, it becomes perfect for our approach. In terms related to work itself, Heroku is a bit more expensive, a bit, but it compensates for its practicality. In the end, you have a cloud that serves you well, provides you with add-ons that are useful for your projects, and you can even get free SSL! Which is very good. In any case, Heroku is great both for simpler projects like what we're going to do now, and for more elaborate projects, real projects. And with that, let's go to another question: how to create a Node.js application with ES2015 that works perfectly with Heroku?! =]
@@ -229,7 +230,7 @@ So far our files look like this:
 # app.js
 
 import express from 'express';
-const. app = express();
+const app = express();
 app.route('/') .get((req, res)=>res.end('Hello World'))
 app.set('port', (process.env.PORT || 3000))
 
@@ -282,7 +283,7 @@ Let's add the Procfile to our repository. It's just a file without extension cal
 # Procfile
 
 
-web: ./node modules/.bin/babel-node server.js
+web: ./node_modules/.bin/babel-node server.js
 
 ```
 

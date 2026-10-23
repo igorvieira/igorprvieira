@@ -1,9 +1,10 @@
 ---
 title: Vite Setup with Playwright - Part 6
 pubDate: "Apr 03 2023"
-description: "Playwright"
+description: "Add Playwright end-to-end tests to a Vite React app and organize them with a page object class. Part 6 of the Vite setup series."
 category: Javascript
 heroImage: /vite-part6.png
+summary: "This part adds Playwright to a Vite React TypeScript project with a baseURL and webServer on port 3000 and a test that clicks a counter. The selectors and steps then move into a CounterPage page object."
 ---
 
 Playwright
