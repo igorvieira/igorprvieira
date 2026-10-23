@@ -2,9 +2,10 @@
 
 title: "Responsive Container Heights: Why max() Beats calc() for Scroll Control" 
 pubDate: "Dec 29 2025"
-description: "Practical UX improvements for tables and tabs on small screens"
+description: "Why min-height: max(100vh, 1030px) beats calc(100vh + 300px) for pages with absolutely positioned content: scroll on small screens, none on large ones."
 heroImage: "https://images.unsplash.com/photo-1766445318570-1dc4bf3f5d79?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 category: css, html
+summary: "calc(100vh + 300px) always adds 300px, so tall screens get empty scroll, while max(100vh, 1030px) uses whichever value is larger and only scrolls when the content needs it. The fixed value comes from measuring the lowest absolutely positioned element, and in Tailwind it's min-h-[max(100vh,1030px)]."
 ---
 
 

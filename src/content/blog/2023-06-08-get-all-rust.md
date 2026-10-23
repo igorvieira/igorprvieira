@@ -1,9 +1,10 @@
 ---
 title: Rust API - Creating the Get All Route with Rust - Part IV
 pubDate: "Jun 08 2023"
-description: "Rust"
+description: "Add a paginated GET /api/tasks route to an Actix Web and SQLx API using page and limit query parameters. Part IV of the Rust API series."
 category: rust
 heroImage: /new_get_all.jpg
+summary: "GET /api/tasks reads optional page and limit query parameters, defaulting to 10 items on page 1, and computes the offset as (page - 1) * limit. It returns the count and the tasks as JSON."
 ---
 
 Well, let's continue our work. I think from here on it will be smoother. At this point we want to add our `get_all_tasks` route, which will be responsible for fetching all the tasks we created with our `create_task` route.

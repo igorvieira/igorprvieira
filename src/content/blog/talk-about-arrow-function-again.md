@@ -1,8 +1,9 @@
 ---
 pubDate: "May 10, 2015"
-title: Talk about arrow functions again!
-description: Write more with less
+title: "JavaScript Arrow Functions: Implicit Return and the Undefined Trap"
+description: "How JavaScript arrow functions return values: one-line implicit return, why a block body without return gives undefined, and arrow methods in objects."
 category: Javascript
+summary: "A one-line arrow function returns its expression implicitly, but wrapping the body in braces removes that and the function returns undefined unless you write return. The post compares this with a regular function and shows arrow methods in an object."
 ---
 
 Why will you talk about arrow function? Everybody knows about this, everbody knows in this way is more simple to write a function, but somepeople don't know how powerfull write and use arrow functions, we go to first example

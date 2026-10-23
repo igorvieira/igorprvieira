@@ -1,9 +1,10 @@
 ---
 title: Rust API - Health Checker - Part I
 pubDate: "Apr 14 2023"
-description: "Rust"
+description: "Start a Rust REST API with Cargo and Actix Web: SQLx, serde and chrono dependencies and a GET /api/healthchecker route. Part I of the Rust API series."
 category: rust
 heroImage: /ferris.png
+summary: "Part I of a task CRUD API in Rust sets up Cargo with actix-web, SQLx, serde, chrono, dotenv and uuid. It adds a GET /api/healthchecker route under /api and runs the server on port 8080."
 ---
 
 Well, the goal here is not to make a Hello World, but to build a well-structured CRUD with Rust, helping to establish a foundation for a web application with the language and its tools. This is not about discussing the basic concepts of the language (mutability, borrow, ownership, etc.), but rather about applying them practically. For basic concepts, check out this playlist:

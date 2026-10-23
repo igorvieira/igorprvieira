@@ -1,8 +1,9 @@
 ---
 title: QRCode Generator in Rust
 pubDate: "Apr 02 2024"
-description: "Personal project"
+description: "Build a terminal QR code generator in Rust with the qrcode crate: read text from stdin, confirm, and render the code as Unicode characters."
 category: youtube
+summary: "This Rust program reads text from stdin, asks for confirmation and prints a QR code in the terminal with the qrcode crate rendered as Unicode Dense1x2. The post covers the Cargo dependency, the input handling and the full main.rs."
 ---
 
 <iframe width="100%" height="375" src="https://www.youtube.com/embed/XJ1Hvxuqg8g" frameborder="0" allowfullscreen></iframe>

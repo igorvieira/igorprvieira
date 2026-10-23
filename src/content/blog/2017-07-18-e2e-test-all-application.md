@@ -1,8 +1,9 @@
 ---
-title: "E2E Tests to Verify Our Application - Part VII "
+title: "E2E Tests to Verify Our Application - Part VII"
 pubDate: "Jul 18, 2017"
-description: "Vuejs Application"
+description: "Nightwatch end-to-end tests for a Vue.js to-do app: one spec that adds a task and one that edits it. Part VII of the Vue.js series."
 category: Javascript, Vuejs
+summary: "The last part of the Vue.js to-do series writes two Nightwatch specs, one that adds a task and one that edits it. Name attributes on the inputs keep the selectors stable."
 ---
 
 ![checklist](https://github.com/IgorVieira/igorvieira.github.io/blob/master/_images/checklist.jpg?raw=true)

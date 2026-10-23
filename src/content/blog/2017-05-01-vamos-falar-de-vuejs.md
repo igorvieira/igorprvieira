@@ -1,8 +1,9 @@
 ---
-title: Let's Talk About Vue.js - Part I
+title: "Building a To-Do List with Vue.js and vue-cli - Part I"
 pubDate: "Apr 30 2017"
-description: "Vuejs"
+description: "Start a Vue.js to-do list with vue-cli and webpack: render tasks with v-for, add them with v-model and @submit.prevent, remove them with splice."
 category: Javascript
+summary: "Part I of a series that builds a to-do list with Vue.js 2 starts a project with vue-cli and explains data, methods and the single-root template. Tasks are rendered with v-for, added through a v-model form and removed with splice."
 ---
 
 ![Vuejs](/vuejs.jpeg)

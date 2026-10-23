@@ -5,6 +5,7 @@ pubDate: "Dec 26 2025"
 description: "Practical UX improvements for tables and tabs on small screens"
 heroImage: "https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 category: react, javascript, tailwind, typescript
+summary: "I built a small useDragScroll React hook so wide tables and tab bars can be scrolled horizontally by click and drag, tracking the drag outside React state to avoid re-rendering on every mousemove. Hidden scrollbars, nowrap action buttons, w-max tab lists and an accessible scroll region with an aria-label complete the mobile layout."
 ---
 
 A few days ago, I ran into a problem that looks simple at first: what do you do when a data table’s action buttons no longer fit and everything starts to break?

@@ -2,9 +2,10 @@
 
 title: "Thinking in match: Applying Rust’s Type-Driven Branching Model in TypeScript" 
 pubDate: "Jan 03 2026"
-description: ""
+description: "How to get Rust match-style exhaustive branching in TypeScript with union types, Record maps, switch with a never check, and discriminated unions."
 heroImage: https://images.unsplash.com/photo-1766369849724-a3fad7e199a7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 category: typescript, rust
+summary: "TypeScript has no native match, but union types with a Record map, a switch with a never exhaustiveness check, and discriminated unions make the compiler fail when a new state isn't handled. The gain is maintainability in domains with a closed set of states, not performance, and it doesn't replace runtime input validation."
 ---
 
 
@@ -145,7 +146,7 @@ As with most design decisions, the value lies in calibration. This model works b
 
 ## Where the analogy intentionally breaks
 
-This comparison is conceptual rather than literal. Rust enforces its guarantees at runtime and offers native pattern matching over complex data structures. TypeScript approximates similar behavior through composition of simpler constructs and can only enforce correctness at compile time.
+This comparison is conceptual rather than literal. Rust checks exhaustiveness at compile time and offers native pattern matching over complex data structures. TypeScript approximates similar behavior through composition of simpler constructs, and its checks disappear at runtime, so external input still needs validation.
 
 These differences matter. The goal is not to pretend the languages offer the same guarantees, but to apply proven design principles where they fit.
 

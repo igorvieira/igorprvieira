@@ -1,8 +1,9 @@
 ---
 pubDate: "May 01 2017"
 title: "Simple e2e Testing in Vue.js - Part II"
-description: "Vuejs app"
+description: "Write a first end-to-end test for a Vue.js to-do list with Nightwatch and Selenium: check the title, add a task and remove it. Part II."
 category: Javascript
+summary: "This part writes a first end-to-end test with the Nightwatch and Selenium setup that vue-cli generates. The test checks the title, adds a task and removes it while counting list items."
 ---
 
 ![night](/nightwatch.png)

@@ -1,8 +1,9 @@
 ---
-title: "Back to basics"
+title: "Back to Basics: Testing a React To-Do List with React Testing Library"
 pubDate: "Mar 10, 2021"
-description: "How to make simple tests with testing library"
+description: "Three simple React Testing Library tests for a to-do list: adding items, counting list items and removing an item, using data-testid and user-event."
 category: Javascript
+summary: "This post tests a small React to-do list with React Testing Library and user-event, using helpers that find elements by data-testid. Three tests cover adding items, counting the list and removing an item."
 ---
 
 Back to basics

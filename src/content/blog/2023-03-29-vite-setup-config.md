@@ -4,6 +4,7 @@ pubDate: "Mar 29 2023"
 description: "Vite setup with Eslint, Prettier, Storybook, Styled-components, Jest and Playwright"
 category: Javascript
 heroImage: /vite-part1.png
+summary: "Part 1 of a series on setting up Vite with React, TypeScript and SWC, written so I wouldn't have to work out the same config again. It sets the dev port, exposes process.env through define and adds path aliases in vite.config.ts and tsconfig.json."
 ---
 
 Well, this is a tutorial aimed at remembering how to configure the Vite CLI and make it work with everything I currently use in my daily routine (03/18/2023). I went through some struggle to get everything working properly, and I don't feel like repeating that dose of struggle in the future, so let's get to the setup:

@@ -1,9 +1,10 @@
 ---
-title: Okay, I was wrong
+title: "Okay, I Was Wrong: Rethinking How I Use AI on Complex Tasks"
 pubDate: "Oct 20 2025"
-description: "I hate wasting time"
+description: "Notes after spending 14 hours on refactoring tasks I expected to be simple, and the questions it raised about AI tools, real productivity and cost."
 heroImage: "https://images.unsplash.com/photo-1572280135715-edc1567580aa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2200" 
 category: saas, ai, rust, learn
+summary: "I spent about 14 hours on refactoring tasks I expected to be quick and then finished the same work in 4 hours after changing approach. My conclusion is that the problem was how I was using AI: it saves minutes on simple tasks, but on old or poorly documented code it adds uncertainty."
 ---
 
 Last week I thought to myself: "Well, I have a few tasks. Most of them are just simple refactorings, so I shouldn’t spend too much time thinking beyond the scope of my tasks." They were relatively well-written, and I only needed to make a few changes to adjust them as necessary. This was on Thursday. I spent another 10 hours on Friday, and on Saturday morning, I still had to work. But before wasting another 10 hours, within the first 30 minutes, I realized that nothing would get resolved there.

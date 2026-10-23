@@ -1,8 +1,9 @@
 ---
-title: "Nearing the End - Part IV "
+title: "Deleting and Editing Tasks in a Vue.js App with vue-router - Part IV"
 pubDate: "Jun 15, 2017"
-description: "Vuejs application"
+description: "Add delete and edit to a Vue.js to-do app: a deleteTask service call, an Info view on /info/:id, getTaskById and an update form. Part IV."
 category: Javascript, Vuejs
+summary: "This part adds deleteTask and getTaskById to the task service and removes deleted tasks from the local list. An Info view on /info/:id loads the task into a form and saves the changes."
 ---
 
 ![ohyeah](https://github.com/IgorVieira/igorvieira.github.io/blob/master/_images/ohyeah.jpg?raw=true)

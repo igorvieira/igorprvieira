@@ -1,9 +1,10 @@
 ---
 title: Vite Setup Eslint and Prettier - Part 2
 pubDate: "Mar 30 2023"
-description: "How to configure Eslint and Prettier?"
+description: "ESLint and Prettier config for a Vite React TypeScript project: React Hooks rules, import ordering, VS Code fix on save and lint scripts. Part 2."
 category: Javascript
 heroImage: /vite-part2.png
+summary: "A complete ESLint config for Vite, React and TypeScript with React Hooks rules and import ordering, plus Prettier through plugin:prettier/recommended. VS Code fixes lint errors on save and the project gets lint and lint:fix scripts."
 ---
 
 To start, regarding Eslint and Prettier, I have a complete .eslintrc.json configuration that works well for my projects and I'll leave the config and plugins here below:

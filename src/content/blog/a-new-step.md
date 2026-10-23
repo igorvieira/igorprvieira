@@ -1,12 +1,13 @@
 ---
 pubDate: "May 10, 2015"
-title: A new Step - Variables!
-description: How to work with variables in javascript
+title: "var, let and const in JavaScript: Scope and Reassignment with Examples"
+description: "The difference between var, let and const in JavaScript, with examples of block scope, a ReferenceError, and why a const array can still change."
+summary: "let is limited to its block, var to its function, and const can't be reassigned. A const array can still change with push and splice; only assigning a new value throws."
 ---
 
 Today I proposed my self study JS, again, but I proposed to use the new features just like let, const, arrow function, template string, class, map, filter and other awesome functions and it's not new, I use, but some people dont and is not a problem, but I have a problem in seeing simple applications, like baby steps for you to see in "real life" and more, why you need to use these new features, for example, var is different from let and cont
 
-var is a global variable
+var is function-scoped, and global when declared outside a function
 let specified a scope
 And const normally use for a situation is no have a change of you have
 but is possible use you have for other stuff's
@@ -52,7 +53,7 @@ console.log(hey)
 
 ```
 
-So Let belongs to a scope, var is now global and const is for a specific variable where i receive a value and i no have possibilities to change this value but is possible work in this value, var is terrible variable if you stop for think, is possible manipulated in all part in script and change your value, horever let your have warranty about value inside in your variable is possible work inside a function and return in a const function for exemplo.
+So Let belongs to a scope, var is function-scoped and const is for a specific variable where i receive a value and i no have possibilities to change this value but is possible work in this value, var is terrible variable if you stop for think, is possible manipulated in all part in script and change your value, horever let your have warranty about value inside in your variable is possible work inside a function and return in a const function for exemplo.
 
 I see greats changes for work now:
 
