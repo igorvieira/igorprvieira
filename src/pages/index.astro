@@ -6,7 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import BuyMeACoffe from "../components/BuyMeACoffe.astro";
 import BitcoinWallet from "../components/BitcoinWallet.astro";
 import { Github, Youtube, Linkedin, X} from "iconoir-react";
-import { SITE_URL, AUTHOR_NAME } from "../consts";
+import { SITE_URL, AUTHOR_NAME, AUTHOR_PROFILES } from "../consts";
 
 // Ties the site to the author's profiles so search engines and LLMs attribute the posts
 const person = {
@@ -15,12 +15,7 @@ const person = {
   name: AUTHOR_NAME,
   url: SITE_URL,
   jobTitle: "Software Engineer",
-  sameAs: [
-    "https://x.com/igorprvieira",
-    "https://www.linkedin.com/in/igor-vieira-6b05a185/",
-    "https://github.com/igorvieira",
-    "https://www.youtube.com/channel/UCZ1cXK9h6_uZt14Jf3gNziQ",
-  ],
+  sameAs: AUTHOR_PROFILES,
 };
 
 ---
