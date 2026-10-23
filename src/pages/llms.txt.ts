@@ -18,7 +18,6 @@ Igor Vieira is a software engineer from Brazil writing about product engineering
 - X: https://x.com/igorprvieira
 - LinkedIn: https://www.linkedin.com/in/igor-vieira-6b05a185/
 - GitHub: https://github.com/igorvieira
-- About: ${new URL("about/", site)}
 - RSS: ${new URL("rss.xml", site)}
 - Full text of every post: ${new URL("llms-full.txt", site)}
 

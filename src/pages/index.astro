@@ -8,14 +8,33 @@ import BitcoinWallet from "../components/BitcoinWallet.astro";
 import { Github, Youtube, Linkedin, X} from "iconoir-react";
 import { SITE_URL, AUTHOR_NAME, AUTHOR_PROFILES } from "../consts";
 
-// Ties the site to the author's profiles so search engines and LLMs attribute the posts
+// Ties the site to the author's profiles and expertise so search engines and LLMs attribute the posts
 const person = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: AUTHOR_NAME,
-  url: SITE_URL,
-  jobTitle: "Software Engineer",
-  sameAs: AUTHOR_PROFILES,
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: AUTHOR_NAME,
+    url: SITE_URL,
+    jobTitle: "Software Engineer",
+    description:
+      "Software engineer from Brazil with 13 years of experience building web products, from frontend architecture to backend reliability, now focused on building products with AI.",
+    nationality: "Brazil",
+    knowsAbout: [
+      "Product engineering",
+      "Software architecture",
+      "TypeScript",
+      "React",
+      "Vue.js",
+      "Node.js",
+      "Rust",
+      "Frontend performance",
+      "Distributed systems reliability",
+      "AI-assisted software development",
+      "AI agents",
+    ],
+    sameAs: AUTHOR_PROFILES,
+  },
 };
 
 ---
@@ -32,6 +51,9 @@ const person = {
       <h1>Hey! 🍋</h1>
       <p>
         My name is Igor Vieira, and I'm a Software Developer from Brazil. This is where I share my thoughts, craft my projects, and write about my experiences.
+      </p>
+      <p>
+        I've been building web products for 13 years, across frontend architecture, backend services and the parts in between that keep a product reliable. Lately most of my work is about building products with AI: coding agents day to day, how agents get access to a product, and the engineering standards that make the result safe to ship.
       </p>
 
       <h2>social networks</h2>
